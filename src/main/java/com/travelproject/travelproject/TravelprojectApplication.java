@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TravelprojectApplication {
 
 	// 주석 aaaaa
+	// aaaaa
 	public static void main(String[] args) {
 		SpringApplication.run(TravelprojectApplication.class, args);
 	}
