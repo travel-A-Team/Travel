@@ -53,7 +53,7 @@ public class WebSecurityConfig {
             .httpBasic().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeHttpRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/**", "/WriteTravelImageFile/**").permitAll()
             .anyRequest().authenticated().and()
             
             //@ ↓ 위에서 만든 FailedAuthenticationEntryPoint클래스를 넣어주면 됨

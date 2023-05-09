@@ -25,6 +25,5 @@ public class PostBoardRequestDto {
     @NotBlank
     private Integer plannerMoney;
     @NotBlank
-    private List<PlannerDailyTravelDateListEntity> plannerDailyTravelDate;
-
+    private List<PlannerDailyTravelDateListEntity> plannerDailyTravelDate;    
 }
