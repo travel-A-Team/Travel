@@ -8,7 +8,7 @@ import com.travelproject.travelproject.dto.response.ResponseDto;
 
 public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> SUCCESS 
-    = ResponseEntity.status(HttpStatus.OK).body(new ResponseDto("SU", "SUCCES"));
+    = ResponseEntity.status(HttpStatus.OK).body(new ResponseDto("SU", "SUCCESS"));
 
     public static final ResponseEntity<ResponseDto> VAILDATION_FAILED 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("VF", "Request Parameter Validation Failed"));
