@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostBoardRequestDto {
+public class PostPlannerBoardRequestDto {
     @NotBlank
     @Email
     private String plannerUserEmail;
