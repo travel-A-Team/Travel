@@ -1,5 +1,5 @@
 package com.travelproject.travelproject.controller.user.planner;
 
-public class plannerController {
+public class PlannerController {
     
 }
