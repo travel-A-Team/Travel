@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.service.Implement;
+package com.travelproject.travelproject.service.Implement.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,11 +10,11 @@ import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.request.adminMain.SignInRequestDto;
 import com.travelproject.travelproject.dto.response.adminMain.SignInResponseDto;
 import com.travelproject.travelproject.provider.JwtTokenProvider;
-import com.travelproject.travelproject.service.AdminMainService;
+import com.travelproject.travelproject.service.admin.MainService;
 
 
 @Service
-public class AdminMainServiceImplement implements AdminMainService {
+public class MainServiceImplement implements MainService {
     
     @Value("${admin.email}")
     String email;
@@ -24,12 +24,14 @@ public class AdminMainServiceImplement implements AdminMainService {
     private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public AdminMainServiceImplement(JwtTokenProvider jwtTokenProvider) {
+    public MainServiceImplement(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    //* 관리자 로그인
     @Override
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
+
         SignInResponseDto body = null;
         String adminEamil = dto.getAdminEmail();
         String adminPassword = dto.getAdminPassword();

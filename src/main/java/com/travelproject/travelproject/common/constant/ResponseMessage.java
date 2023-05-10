@@ -16,6 +16,9 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NB", "Non-Existent Board Number"));
 
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NN", "Non-Existent Notice Board Number"));
+
     public static final ResponseEntity<ResponseDto> SIGN_IN_FAILED
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("SF", "Sign In Failed"));
 
