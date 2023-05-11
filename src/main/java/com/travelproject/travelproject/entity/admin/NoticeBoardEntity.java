@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.travelproject.travelproject.dto.request.adminNoticeBoard.PatchNoticeBoardRequestDto;
 import com.travelproject.travelproject.dto.request.adminNoticeBoard.PostNoticeBoardRequestDto;
 
 import lombok.AllArgsConstructor;
