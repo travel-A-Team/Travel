@@ -20,7 +20,7 @@ public interface NoticeBoardRepository  extends JpaRepository<NoticeBoardEntity,
         "notice_board_title," +
         "notice_board_content," +
         "notice_board_write_date " +
-        "FROM  Noticeboard " +
+        "FROM Noticeboard " +
         "ORDER BY notice_board_write_date DESC, notice_board_number DESC",
         nativeQuery = true
     )

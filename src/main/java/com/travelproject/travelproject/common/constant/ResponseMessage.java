@@ -13,6 +13,9 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> VAILDATION_FAILED 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("VF", "Request Parameter Validation Failed"));
 
+    public static final ResponseEntity<ResponseDto> EXIST_WRITE_TOURIST_SPOT_ADDRESS
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("EA", "Existent Tourist Spot Address"));
+
     public static final ResponseEntity<ResponseDto> NOT_EXIST_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NB", "Non-Existent Board Number"));
 
@@ -30,5 +33,8 @@ public interface ResponseMessage {
 
     public static final ResponseEntity<ResponseDto> DATABASE_ERROR 
     = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto("DE", "Database Error"));
+
+    public static final ResponseEntity<ResponseDto> FILE_UPLOAD_ERROR 
+    = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto("FE", "File Upload Error"));
     
 }
