@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.questionBoardListEntity.QuestionListResultSet;
+import com.travelproject.travelproject.entity.listEntity.QuestionListResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,16 +41,14 @@ class QuestionBoardList {
     private int questionBoardNumber;
     private String questionBoardTitle;
     private String questionBoardWriterEmail;
-    private String questionWriterName;
     private String questionBoardDate;
-    private boolean answerStatus;
+    // private boolean answerStatus;
 
     public QuestionBoardList(QuestionListResultSet resultSet) {
         this.questionBoardNumber=resultSet.getQuestionBoardNumber();
         this.questionBoardTitle=resultSet.getQuestionBoardTitle();
         this.questionBoardWriterEmail=resultSet.getQuestionBoardWriterEmail();
-        this.questionWriterName=resultSet.getQuestionWriterName();
         this.questionBoardDate=resultSet.getQuestionBoardDate();
-        this.answerStatus=resultSet.getIsAnswerStatus();
+        // this.answerStatus=resultSet.getAnswerStatus();
     }
 }

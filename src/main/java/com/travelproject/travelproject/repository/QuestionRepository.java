@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.travelproject.travelproject.entity.QuestionBoardEntity;
-import com.travelproject.travelproject.entity.questionBoardListEntity.QuestionListResultSet;
+import com.travelproject.travelproject.entity.listEntity.QuestionListResultSet;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<QuestionBoardEntity, Integer>{
@@ -21,15 +21,12 @@ public interface QuestionRepository extends JpaRepository<QuestionBoardEntity, I
         "Q.question_board_writer_email AS questionBoardWriterEmail," +
         "Q.question_board_title AS questionBoardTitle," +
         "Q.question_board_date AS questionBoardDate," +
-        "Q.answer_status AS anwerStatus," +
-        "U.name AS questionWriterName " +
-        "FROM QuestionBoard Q, User U " +
-        "WHERE Q.question_board_writer_email = U.email " +
-        "GROUP BY Q.question_board_writer_email " +
-        "ORDER BY questionBoardDate DESC;",
+        "Q.answer_status AS answerStatus " +
+        "FROM Questionboard Q " +
+        "GROUP BY questionBoardNumber " +
+        "ORDER BY questionBoardDate DESC, questionBoardNumber DESC;",
         nativeQuery = true
     )
-
     public List<QuestionListResultSet> getQuestionList();
 
 }

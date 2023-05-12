@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.questionBoardListEntity;
+package com.travelproject.travelproject.entity.listEntity;
 
 public interface QuestionListResultSet {
     
@@ -7,6 +7,6 @@ public interface QuestionListResultSet {
     public String getQuestionBoardWriterEmail();
     public String getQuestionWriterName();
     public String getQuestionBoardDate();
-    public boolean getIsAnswerStatus();
+    // public boolean getAnswerStatus();
     
 }

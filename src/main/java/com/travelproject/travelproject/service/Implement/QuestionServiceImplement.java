@@ -15,7 +15,7 @@ import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionLis
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionResponseDto;
 import com.travelproject.travelproject.entity.CommentEntity;
 import com.travelproject.travelproject.entity.QuestionBoardEntity;
-import com.travelproject.travelproject.entity.questionBoardListEntity.QuestionListResultSet;
+import com.travelproject.travelproject.entity.listEntity.QuestionListResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.CommentRepository;
 import com.travelproject.travelproject.repository.QuestionRepository;
@@ -75,6 +75,7 @@ public class QuestionServiceImplement implements QuestionService {
         try {
             List<QuestionListResultSet> resultSet = questionRepository.getQuestionList();
             body = new GetQuestionListResponseDto(resultSet);
+            
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseMessage.DATABASE_ERROR;
@@ -168,6 +169,7 @@ public class QuestionServiceImplement implements QuestionService {
 
             commentRepository.deleteByQuestionBoardNumber(questionBoardNumber);
             questionRepository.delete(questionBoardEntity);
+            
 
         } catch (Exception exception) {
             exception.printStackTrace();

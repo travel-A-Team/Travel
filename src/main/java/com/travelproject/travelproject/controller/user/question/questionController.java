@@ -47,8 +47,7 @@ public class QuestionController {
     //# 문의사항 목록 조회
     @GetMapping("/list")
     public ResponseEntity<? super GetQuestionListResponseDto> getQuestionBoardList() {
-        ResponseEntity<? super GetQuestionListResponseDto> response =
-            questionService.getQuestionBoardList();
+        ResponseEntity<? super GetQuestionListResponseDto> response = questionService.getQuestionBoardList();
         return response;
     }
 
@@ -62,7 +61,7 @@ public class QuestionController {
         return response;
     }
 
-    //# 특정 문의사항 수정
+    //# 문의사항 수정
     @PatchMapping("")
     public ResponseEntity<ResponseDto> patchQuestionBoard(
         @AuthenticationPrincipal UserToken userToken,
@@ -73,7 +72,7 @@ public class QuestionController {
         return response;
     }
 
-    //# 특정 문의사항 삭제
+    //# 문의사항 삭제
     @DeleteMapping("/{questionBoardNumber}")
     public ResponseEntity<ResponseDto> deleteQuestionBoard(
         @AuthenticationPrincipal UserToken userToken,
