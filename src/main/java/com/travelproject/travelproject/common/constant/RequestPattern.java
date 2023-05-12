@@ -7,5 +7,6 @@ public interface RequestPattern {
     public static final String ADMIN_FILE_API = "api/v1/admin/file";
     public static final String QUESTION_API = "api/v1/question-board";
 
+    public static final String PLANNER_API = "api/v1/planner";
 }
 
