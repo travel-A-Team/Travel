@@ -2,7 +2,6 @@ package com.travelproject.travelproject.dto.response.adminFile;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

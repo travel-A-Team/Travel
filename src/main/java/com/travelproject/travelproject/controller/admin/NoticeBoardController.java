@@ -55,7 +55,6 @@ public class NoticeBoardController {
         @AuthenticationPrincipal UserToken userToken
     ) {
         ResponseEntity<? super GetNoticeBoardListResponseDto> response = adminNoticeBoardService.getNoticBoardList(userToken);
-
         return response;
     }
 
@@ -76,9 +75,8 @@ public class NoticeBoardController {
         @AuthenticationPrincipal UserToken userToken,
         @Valid @RequestBody PatchNoticeBoardRequestDto request
    ) {
-    ResponseEntity<ResponseDto> response = adminNoticeBoardService.patchNoticBoard(userToken, request);
-
-    return response;
+        ResponseEntity<ResponseDto> response = adminNoticeBoardService.patchNoticBoard(userToken, request);
+        return response;
    }    
 
    //* 특정 공지사항 게시물 삭제
@@ -88,7 +86,6 @@ public class NoticeBoardController {
         @PathVariable("noticeBoardNumber") Integer noticeBoardNumber
    ) {
         ResponseEntity<ResponseDto> response = adminNoticeBoardService.deleteNoticBoard(userToken, noticeBoardNumber);
-
         return response;
    }
 

@@ -1,7 +1,12 @@
 package com.travelproject.travelproject.controller.admin;
 
+import javax.validation.Valid;
+
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +30,15 @@ public class FileController {
         this.fileService = fileService;
     }
 
+    //* 파일 업로드
     @PostMapping(UPLOAD_URL)
     public ResponseEntity<? super FileUploadResponseDto> uploadFile(
         @AuthenticationPrincipal UserToken userToken,
         @RequestParam("file") MultipartFile file
     ) {
         ResponseEntity<? super FileUploadResponseDto> response = fileService.upload(userToken, file);
-
         return response;
     }
+
+
 }

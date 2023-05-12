@@ -1,6 +1,7 @@
 package com.travelproject.travelproject.dto.request.adminTouristSpot;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +16,11 @@ public class PostTouristSpotRequestDto {
     @NotBlank
     private String writeTouristSpotName;
     @NotBlank
-    private String writeIamgeUrl;
+    private String writeImageUrl;
     @NotBlank
     private String writeTouristSpotAddress;   
+    @NotNull
+    private Double latitude;
+    @NotNull
+    private Double longitude;
 }

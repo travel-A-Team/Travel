@@ -22,6 +22,9 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NN", "Non-Existent Notice Board Number"));
 
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_REGION_NAME 
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NR", "Non-Existent Region Name"));
+
     public static final ResponseEntity<ResponseDto> SIGN_IN_FAILED
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("SF", "Sign In Failed"));
 
@@ -36,5 +39,5 @@ public interface ResponseMessage {
 
     public static final ResponseEntity<ResponseDto> FILE_UPLOAD_ERROR 
     = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto("FE", "File Upload Error"));
-    
+
 }
