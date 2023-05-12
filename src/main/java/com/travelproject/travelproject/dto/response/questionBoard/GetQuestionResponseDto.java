@@ -27,7 +27,7 @@ public class GetQuestionResponseDto extends ResponseDto {
     public GetQuestionResponseDto(
         QuestionBoardEntity questionBoardEntity, List<CommentEntity> commentEntities) {
 
-            super("SU", "SUCESS");
+            super("SU", "SUCCESS");
             
             this.questionBoardNumber=questionBoardEntity.getQuestionBoardNumber();
             this.questionBoardTitle=questionBoardEntity.getQuestionBoardTitle();
@@ -43,7 +43,6 @@ public class GetQuestionResponseDto extends ResponseDto {
 @NoArgsConstructor
 @AllArgsConstructor
 class Comment {
-    private int commentNumber;
     private int questionBoardNumber;
     private String commentUserName;
     private String commentEmail;
@@ -51,7 +50,6 @@ class Comment {
     private String commentWriteTime;
 
     Comment(CommentEntity commentEntity) {
-        this.commentNumber=commentEntity.getCommentNumber();
         this.questionBoardNumber=commentEntity.getQuestionBoardNumber();
         this.commentUserName=commentEntity.getWriteUserName();
         this.commentEmail=commentEntity.getWriteUserEmail();

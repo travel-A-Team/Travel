@@ -52,7 +52,7 @@ public class QuestionController {
         return response;
     }
 
-    //# 특정 문의사항 상세조회
+    //# 문의사항 상세조회
     @GetMapping("/{questionBoardNumber}")
     public ResponseEntity<? super GetQuestionResponseDto> getQuestionBoard(
         @PathVariable("questionBoardNumber") Integer questionBoardNumber

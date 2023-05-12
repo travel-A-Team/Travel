@@ -6,6 +6,6 @@ import com.travelproject.travelproject.entity.UserEntity;
 
 public interface UserRepository extends JpaRepository<UserEntity, String>{
     
-    public boolean existsByEmail(String questionBoardWriterEmail);
+    public boolean existsByEmail(String email);
 
 }

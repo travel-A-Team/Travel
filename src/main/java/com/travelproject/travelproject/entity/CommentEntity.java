@@ -20,10 +20,9 @@ import lombok.NoArgsConstructor;
 public class CommentEntity {
     
     @Id
-    private int commentNumber;
+    private int questionBoardNumber;
     @Id
     private String writeUserEmail;
-    private int questionBoardNumber;
     private String commentContent;
     private String writeUserName;
     private String commentWriteTime;

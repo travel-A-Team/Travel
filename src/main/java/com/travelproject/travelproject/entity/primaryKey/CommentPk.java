@@ -6,8 +6,8 @@ import javax.persistence.Column;
 
 public class CommentPk implements Serializable {
     
-    @Column(name = "comment_number")
-    private int commentNumber;
+    @Column(name = "question_board_number")
+    private int questionBoardNumber;
     @Column(name = "write_user_email")
     private String writeUserEmail;
 
