@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "PlannerDailyTravelDate")
-@Table(name = "PlannerDailyTravelDate")
+@Entity(name = "Plannerdailytraveldate")
+@Table(name = "Plannerdailytraveldate")
 public class PlannerDailyTravelDateListEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

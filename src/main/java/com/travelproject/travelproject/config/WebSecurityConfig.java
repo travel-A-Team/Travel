@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -54,6 +55,7 @@ public class WebSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeHttpRequests()
             .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/sign-in").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/v1/question-board/**").permitAll()
             .anyRequest().authenticated().and()
             
             //@ ↓ 위에서 만든 FailedAuthenticationEntryPoint클래스를 넣어주면 됨
