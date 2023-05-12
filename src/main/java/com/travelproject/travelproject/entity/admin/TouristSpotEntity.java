@@ -26,18 +26,26 @@ public class TouristSpotEntity {
     private int touristSpotNumber;
     private String writeTouristSpotAddress;
     private String writeImageUrl;
-    private String writeTourstSpotName;
+    private String writeTouristSpotName;
     private String writeRegion;
     private double latitude;
     private double longitude;
     private String writeTouristSpotDate;
 
-    public TouristSpotEntity(PostTouristSpotRequestDto dto) {
+    public TouristSpotEntity(String writeRegion, PostTouristSpotRequestDto dto) {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String writeTouristSpotDate = simpleDateFormat.format(now);
 
         this.writeTouristSpotAddress = dto.getWriteTouristSpotAddress();
-        this.writeImageUrl = dto.getWriteIamgeUrl();
+        this.writeImageUrl = dto.getWriteImageUrl();
+        this.writeTouristSpotName = dto.getWriteTouristSpotName();
+        this.writeRegion = writeRegion;
+        this.latitude = dto.getLatitude();
+        this.longitude = dto.getLongitude();
+        this.writeTouristSpotDate = writeTouristSpotDate;
     }
+
+
+    
 }
