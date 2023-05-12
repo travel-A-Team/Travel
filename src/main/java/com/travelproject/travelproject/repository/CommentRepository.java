@@ -13,7 +13,6 @@ import com.travelproject.travelproject.entity.primaryKey.CommentPk;
 public interface CommentRepository extends JpaRepository<CommentEntity, CommentPk>{
     
     List<CommentEntity> findByQuestionBoardNumber(int questionBoardNumber);
-    // 만약 commentNumber로 했을시
 
     @Transactional
     void deleteByQuestionBoardNumber(int questionBoardNumber);

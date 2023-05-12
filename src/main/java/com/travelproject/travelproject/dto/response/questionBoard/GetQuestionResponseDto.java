@@ -21,7 +21,7 @@ public class GetQuestionResponseDto extends ResponseDto {
     private String questionBoardTitle;
     private String questionBoardContent;
     private String questionBoardDate;
-    private boolean questionAnswerStatus;
+    // private boolean questionAnswerStatus;
     private List<Comment> commentList;
 
     public GetQuestionResponseDto(
@@ -33,7 +33,7 @@ public class GetQuestionResponseDto extends ResponseDto {
             this.questionBoardTitle=questionBoardEntity.getQuestionBoardTitle();
             this.questionBoardContent=questionBoardEntity.getQuestionBoardContent();
             this.questionBoardDate=questionBoardEntity.getQuestionBoardDate();
-            this.questionAnswerStatus=questionBoardEntity.isAnswerStatus();
+            // this.questionAnswerStatus=questionBoardEntity.isAnswerStatus();
             this.commentList=Comment.createList(commentEntities);
     }
 }
