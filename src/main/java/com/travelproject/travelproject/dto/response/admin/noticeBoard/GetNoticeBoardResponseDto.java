@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.dto.response.adminNoticeBoard;
+package com.travelproject.travelproject.dto.response.admin.noticeBoard;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.admin.NoticeBoardEntity;

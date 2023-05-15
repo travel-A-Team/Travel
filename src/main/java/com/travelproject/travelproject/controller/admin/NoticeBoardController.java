@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
-import com.travelproject.travelproject.dto.request.adminNoticeBoard.PatchNoticeBoardRequestDto;
-import com.travelproject.travelproject.dto.request.adminNoticeBoard.PostNoticeBoardRequestDto;
+import com.travelproject.travelproject.dto.request.admin.noticeBoard.PatchNoticeBoardRequestDto;
+import com.travelproject.travelproject.dto.request.admin.noticeBoard.PostNoticeBoardRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.dto.response.adminNoticeBoard.GetNoticeBoardListResponseDto;
-import com.travelproject.travelproject.dto.response.adminNoticeBoard.GetNoticeBoardResponseDto;
+import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardListResponseDto;
+import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardResponseDto;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.service.admin.NoticeBoardService;
 

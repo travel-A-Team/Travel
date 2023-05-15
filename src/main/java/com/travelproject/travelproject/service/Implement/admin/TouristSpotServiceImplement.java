@@ -1,16 +1,11 @@
 package com.travelproject.travelproject.service.Implement.admin;
 
-import java.io.File;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
-import com.travelproject.travelproject.dto.request.adminTouristSpot.PostTouristSpotRequestDto;
+import com.travelproject.travelproject.dto.request.admin.touristSpot.PostTouristSpotRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.admin.TouristSpotEntity;
@@ -19,8 +14,6 @@ import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.service.admin.TouristSpotService;
 import com.travelproject.travelproject.util.FindRegion;
-
-import lombok.Data;
 
 @Service
 public class TouristSpotServiceImplement  implements TouristSpotService{

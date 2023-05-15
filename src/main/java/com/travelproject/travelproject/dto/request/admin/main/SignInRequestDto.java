@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.dto.request.adminMain;
+package com.travelproject.travelproject.dto.request.admin.main;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

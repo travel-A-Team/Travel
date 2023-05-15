@@ -1,9 +1,8 @@
-package com.travelproject.travelproject.dto.request.adminTouristSpot;
+package com.travelproject.travelproject.dto.request.admin.touristSpot;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

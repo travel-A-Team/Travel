@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
-import com.travelproject.travelproject.dto.request.adminTouristSpot.PostTouristSpotRequestDto;
+import com.travelproject.travelproject.dto.request.admin.touristSpot.PostTouristSpotRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.service.admin.TouristSpotService;

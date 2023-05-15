@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
-import com.travelproject.travelproject.dto.request.adminMain.SignInRequestDto;
-import com.travelproject.travelproject.dto.response.adminMain.SignInResponseDto;
+import com.travelproject.travelproject.dto.request.admin.main.SignInRequestDto;
+import com.travelproject.travelproject.dto.response.admin.main.SignInResponseDto;
 import com.travelproject.travelproject.service.admin.MainService;
 
 

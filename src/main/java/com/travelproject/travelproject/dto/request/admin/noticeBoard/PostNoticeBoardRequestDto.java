@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.dto.request.adminNoticeBoard;
+package com.travelproject.travelproject.dto.request.admin.noticeBoard;
 
 import javax.validation.constraints.NotBlank;
 
