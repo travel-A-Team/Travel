@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
-import com.travelproject.travelproject.dto.response.adminFile.FileUploadResponseDto;
+import com.travelproject.travelproject.dto.response.admin.file.FileUploadResponseDto;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.service.admin.FileService;
 

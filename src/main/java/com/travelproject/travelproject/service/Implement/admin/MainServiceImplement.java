@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
-import com.travelproject.travelproject.dto.request.adminMain.SignInRequestDto;
-import com.travelproject.travelproject.dto.response.adminMain.SignInResponseDto;
+import com.travelproject.travelproject.dto.request.admin.main.SignInRequestDto;
+import com.travelproject.travelproject.dto.response.admin.main.SignInResponseDto;
 import com.travelproject.travelproject.provider.JwtTokenProvider;
 import com.travelproject.travelproject.service.admin.MainService;
 

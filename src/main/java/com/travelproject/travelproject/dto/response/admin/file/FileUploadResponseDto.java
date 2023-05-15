@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.dto.response.adminFile;
+package com.travelproject.travelproject.dto.response.admin.file;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 

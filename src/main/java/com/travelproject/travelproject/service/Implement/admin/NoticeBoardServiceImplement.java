@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
-import com.travelproject.travelproject.dto.request.adminNoticeBoard.PatchNoticeBoardRequestDto;
-import com.travelproject.travelproject.dto.request.adminNoticeBoard.PostNoticeBoardRequestDto;
+import com.travelproject.travelproject.dto.request.admin.noticeBoard.PatchNoticeBoardRequestDto;
+import com.travelproject.travelproject.dto.request.admin.noticeBoard.PostNoticeBoardRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.dto.response.adminNoticeBoard.GetNoticeBoardListResponseDto;
-import com.travelproject.travelproject.dto.response.adminNoticeBoard.GetNoticeBoardResponseDto;
+import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardListResponseDto;
+import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardResponseDto;
 import com.travelproject.travelproject.entity.admin.NoticeBoardEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.NoticeBoardRepository;

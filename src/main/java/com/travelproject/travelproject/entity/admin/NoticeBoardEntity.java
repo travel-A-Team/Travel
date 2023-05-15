@@ -3,14 +3,13 @@ package com.travelproject.travelproject.entity.admin;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.travelproject.travelproject.dto.request.adminNoticeBoard.PostNoticeBoardRequestDto;
+import com.travelproject.travelproject.dto.request.admin.noticeBoard.PostNoticeBoardRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

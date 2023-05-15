@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.dto.response.adminNoticeBoard;
+package com.travelproject.travelproject.dto.response.admin.noticeBoard;
 
 import java.util.ArrayList;
 import java.util.List;
