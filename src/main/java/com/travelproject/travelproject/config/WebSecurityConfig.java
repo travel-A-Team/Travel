@@ -55,6 +55,7 @@ public class WebSecurityConfig {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeHttpRequests()
             .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/sign-in").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/main/**").permitAll()
             .antMatchers(HttpMethod.GET,"/api/v1/question-board/**").permitAll()
             .antMatchers(HttpMethod.PATCH,"/api/v1/question-board/**").permitAll()
             .antMatchers(HttpMethod.DELETE,"/api/v1/question-board/**").permitAll()
