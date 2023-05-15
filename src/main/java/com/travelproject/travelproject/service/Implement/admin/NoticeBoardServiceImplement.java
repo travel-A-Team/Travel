@@ -15,7 +15,7 @@ import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeB
 import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardResponseDto;
 import com.travelproject.travelproject.entity.admin.NoticeBoardEntity;
 import com.travelproject.travelproject.provider.UserToken;
-import com.travelproject.travelproject.repository.NoticeBoardRepository;
+import com.travelproject.travelproject.repository.admin.NoticeBoardRepository;
 import com.travelproject.travelproject.service.admin.NoticeBoardService;
 
 @Service
@@ -55,8 +55,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
         GetNoticeBoardListResponseDto body =null;
         try {
-            List<NoticeBoardEntity> resultSetList = noticeBoardRepository.getList();
-            body = new GetNoticeBoardListResponseDto(resultSetList); 
+            List<NoticeBoardEntity> noticeBoardEntities = noticeBoardRepository.getList();
+            body = new GetNoticeBoardListResponseDto(noticeBoardEntities); 
         } catch (Exception exception) {
             exception.printStackTrace();
         }

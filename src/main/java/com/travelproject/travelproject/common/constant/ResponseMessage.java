@@ -22,6 +22,9 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NN", "Non-Existent Notice Board Number"));
 
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER 
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NW", "Non-Existent Write TouristSpot Number"));
+
     public static final ResponseEntity<ResponseDto> NOT_EXIST_REGION_NAME 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NR", "Non-Existent Region Name"));
 

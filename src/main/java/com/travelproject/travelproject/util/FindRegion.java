@@ -9,6 +9,7 @@ public class FindRegion {
         boolean includGyeongNam =writeRegion.contains("경") && writeRegion.contains("남");
         boolean includJeonBuk = writeRegion.contains("전") && writeRegion.contains("북");
         boolean includJeonNam = writeRegion.contains("전") && writeRegion.contains("남");
+
         
         if (includChungBuk) return writeRegion = "충청북도";
         if (includChungNam) return writeRegion = "충청남도";

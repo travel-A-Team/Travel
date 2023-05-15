@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 public class GetNoticeBoardListResponseDto extends ResponseDto{
     List<NoticeBoard> noticeBoardList;
 
-    public GetNoticeBoardListResponseDto(List<NoticeBoardEntity> resultSetList) {
+    public GetNoticeBoardListResponseDto(List<NoticeBoardEntity> noticeBoardEntities) {
         super("SU", "Success");
 
         List<NoticeBoard> noticeBoardList = new ArrayList<NoticeBoard>();
 
-        for(NoticeBoardEntity resultSet: resultSetList) {
-            NoticeBoard noticeBoard = new NoticeBoard(resultSet);
+        for(NoticeBoardEntity noticeBoardEntity: noticeBoardEntities) {
+            NoticeBoard noticeBoard = new NoticeBoard(noticeBoardEntity);
             noticeBoardList.add(noticeBoard);
         }
         
@@ -37,10 +37,10 @@ class NoticeBoard {
     private String noticeBoardTitle;
     private String noticeBoardWriteDate;
 
-    public NoticeBoard(NoticeBoardEntity resultSet) {
-        this.noticeBoardNumber = resultSet.getNoticeBoardNumber();
-        this.noticeBoardTitle = resultSet.getNoticeBoardTitle();
-        this.noticeBoardWriteDate = resultSet.getNoticeBoardWriteDate();
+    public NoticeBoard(NoticeBoardEntity noticeBoardEntity) {
+        this.noticeBoardNumber = noticeBoardEntity.getNoticeBoardNumber();
+        this.noticeBoardTitle = noticeBoardEntity.getNoticeBoardTitle();
+        this.noticeBoardWriteDate = noticeBoardEntity.getNoticeBoardWriteDate();
     }
 }
 
