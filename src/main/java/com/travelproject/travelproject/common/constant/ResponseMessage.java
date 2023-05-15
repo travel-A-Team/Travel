@@ -16,8 +16,8 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> EXIST_WRITE_TOURIST_SPOT_ADDRESS
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("EA", "Existent Tourist Spot Address"));
 
-    public static final ResponseEntity<ResponseDto> NOT_EXIST_BOARD_NUMBER 
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NB", "Non-Existent Board Number"));
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_QUESTION_BOARD_NUMBER 
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NQ", "Non-Existent Question Board Number"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NN", "Non-Existent Notice Board Number"));

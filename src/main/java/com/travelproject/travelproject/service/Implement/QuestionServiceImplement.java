@@ -93,7 +93,7 @@ public class QuestionServiceImplement implements QuestionService {
         try {
             //# 존재하지 않는 게시물 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
-            if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_BOARD_NUMBER;
+            if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
 
             List<CommentEntity> commentEntities = commentRepository.findByQuestionBoardNumber(questionBoardNumber);
 
@@ -125,7 +125,7 @@ public class QuestionServiceImplement implements QuestionService {
 
             //# 존재하지 않는 문의사항 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
-            if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_BOARD_NUMBER;
+            if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
             
             //# 존재하지 않는 유저 이메일
             boolean existedUserEmail = userRepository.existsByEmail(questionBoardWriterEmail);
@@ -157,7 +157,7 @@ public class QuestionServiceImplement implements QuestionService {
         try {
             //# 1. 존재하지 않는 문의사항 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
-            if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_BOARD_NUMBER;
+            if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
 
             //# 2. 존재하지 않는 유저 이메일
             boolean existedUserEmail = userRepository.existsByEmail(questionBoardWriterEmail);

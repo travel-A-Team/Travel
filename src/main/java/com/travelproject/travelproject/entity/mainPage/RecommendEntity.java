@@ -20,8 +20,8 @@ public class RecommendEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int touristSpotNumber;
-    private String recommendTouristSpotImageUrl;
-    private String touristSpotName;
+    private String recommendTouristSpotImageUrl; 
+    private String touristSpotName; // 여행지 추천 제목
     private String content;
     private String touristSpotAddress;
     private String touristSpotUseTime;
