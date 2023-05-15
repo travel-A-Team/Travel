@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.repository;
+package com.travelproject.travelproject.repository.admin;
 
 import java.util.List;
 
