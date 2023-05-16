@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.mainPage;
+package com.travelproject.travelproject.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name = "Recommendationtouristspot")
 @Table(name = "Recommendationtouristspot")
-public class RecommendEntity {
+public class RecommendationTouristSpotEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

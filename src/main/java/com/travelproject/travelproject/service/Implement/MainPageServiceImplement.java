@@ -14,23 +14,22 @@ import com.travelproject.travelproject.entity.LikeyEntity;
 import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
 import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
 import com.travelproject.travelproject.repository.LikeyRepository;
-import com.travelproject.travelproject.repository.mainPage.ProductRepository;
-import com.travelproject.travelproject.repository.mainPage.RecommendRepository;
+import com.travelproject.travelproject.repository.RecommendationTouristSpotRepositroy;
+import com.travelproject.travelproject.repository.TouristProductRepository;
 import com.travelproject.travelproject.service.MainPageService;
 
 @Service
 public class MainPageServiceImplement implements MainPageService {
 
-    private ProductRepository productRepository;
-    private RecommendRepository recommendRepository;
+    private TouristProductRepository touristProductRepository;
+    private RecommendationTouristSpotRepositroy recommendationTouristSpotRepositroy;
     private LikeyRepository likeyRepository;
 
     @Autowired
-    public MainPageServiceImplement(ProductRepository productRepository, RecommendRepository recommendRepository,
-            LikeyRepository likeyRepository) {
-        this.productRepository = productRepository;
-        this.recommendRepository = recommendRepository;
-        this.likeyRepository = likeyRepository;
+    public MainPageServiceImplement(TouristProductRepository touristProductRepository, RecommendationTouristSpotRepositroy recommendationTouristSpotRepositroy, LikeyRepository likeyRepository) {
+        this.touristProductRepository=touristProductRepository;
+        this.recommendationTouristSpotRepositroy=recommendationTouristSpotRepositroy;
+        this.likeyRepository=likeyRepository;
     }
 
     // ! Top3 조회
@@ -40,7 +39,7 @@ public class MainPageServiceImplement implements MainPageService {
 
         try {
             List<LikeyEntity> likeyEntities = null;
-            List<ProductResultSet> productResultSet = productRepository.getProductTop3();
+            List<ProductResultSet> productResultSet = touristProductRepository.getProductTop3();
 
             for (int count = 0; count < productResultSet.size(); count++) {
                 int likeyProduct = productResultSet.get(count).getProductNumber();
@@ -65,7 +64,7 @@ public class MainPageServiceImplement implements MainPageService {
         GetMainPageRecommendDto body = null;
 
         try {
-            List<RecommendResultSet> recommendResultSet = recommendRepository.getRecommendList3();
+            List<RecommendResultSet> recommendResultSet = recommendationTouristSpotRepositroy.getRecommendList3();
             body = new GetMainPageRecommendDto(recommendResultSet);
             // 최근 추천 여행지 3개 response 값들 받아서 body에 담아주면 됨
 
