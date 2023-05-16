@@ -13,8 +13,8 @@ import com.travelproject.travelproject.dto.request.questionBoard.PostQuestionBoa
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionListResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionResponseDto;
-import com.travelproject.travelproject.entity.CommentEntity;
 import com.travelproject.travelproject.entity.QuestionBoardEntity;
+import com.travelproject.travelproject.entity.CommentEntity;
 import com.travelproject.travelproject.entity.listEntity.QuestionListResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.CommentRepository;
@@ -91,7 +91,7 @@ public class QuestionServiceImplement implements QuestionService {
         GetQuestionResponseDto body = null;
 
         try {
-            //# 존재하지 않는 게시물 번호
+            //# 존재하지 않는 문의사항 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
             if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
 

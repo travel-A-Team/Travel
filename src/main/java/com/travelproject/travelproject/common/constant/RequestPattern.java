@@ -10,6 +10,10 @@ public interface RequestPattern {
 
     public static final String QUESTION_API = "api/v1/question-board";
 
+    public static final String NOTICE_API = "api/v1/notice-board";
+
     public static final String PLANNER_API = "api/v1/planner";
+
+    public static final String PRODUCT_API = "api/v1/product-board";
 }
 

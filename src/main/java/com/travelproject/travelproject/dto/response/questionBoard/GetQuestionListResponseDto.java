@@ -19,7 +19,7 @@ public class GetQuestionListResponseDto extends ResponseDto {
     private List<QuestionBoardList> questionList;
 
     public GetQuestionListResponseDto(List<QuestionListResultSet> resultSet) {
-        super("SU", "Success");
+        super("SU", "SUCCESS");
 
         List<QuestionBoardList> questionList = new ArrayList<>();
 
