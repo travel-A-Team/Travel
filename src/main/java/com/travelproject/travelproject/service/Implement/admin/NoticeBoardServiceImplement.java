@@ -71,10 +71,10 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
     @Override
     public ResponseEntity<? super GetNoticeBoardResponseDto> getNoticBoard(UserToken userToken, Integer noticeBoardNumber) {
 
-        if (noticeBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
-
         boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
         if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if (noticeBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
         GetNoticeBoardResponseDto body = null;
 

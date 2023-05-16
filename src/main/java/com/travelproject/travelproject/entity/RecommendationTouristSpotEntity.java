@@ -1,5 +1,8 @@
 package com.travelproject.travelproject.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +34,18 @@ public class RecommendationTouristSpotEntity {
     private String recommendTouristSpotWriteDate;
     private String recommendTouristRegion;
 
-    public RecommendationTouristSpotEntity(PostRecommendationTouristSpotRequestDto dto) {
+    public RecommendationTouristSpotEntity(String recommendTouristRegion, PostRecommendationTouristSpotRequestDto dto) {
+        Date now = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String recommendTouristSpotWriteDate = simpleDateFormat.format(now);
+
         this.recommendTouristSpotImageUrl = dto.getRecommendTouristImageUrl();
         this.touristSpotTitle = dto.getRecommendTouristSpotTitle();
+        this.content = dto.getContent();
+        this.touristSpotAddress = dto.getRecommendTouristAddress();
+        this.touristSpotUseTime = dto.getRecommendTouristUseTime();
+        this.touristSpotInformation = dto.getRecommendTouristInformation();
+        this.recommendTouristSpotWriteDate = recommendTouristSpotWriteDate;
+        this.recommendTouristRegion = recommendTouristRegion;
     }
 }
