@@ -51,11 +51,8 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
-            int writeRegionIndex = writeTouristSpotAddress.indexOf(" ");
-            String removeRegion = writeTouristSpotAddress.substring(writeRegionIndex);
-            String writeRegion = writeTouristSpotAddress.replaceAll(removeRegion,"");
+            String writeRegion = findRegionInAddress(writeTouristSpotAddress); 
 
-            writeRegion = FindRegion.findRegion(writeRegion);
             RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
@@ -89,7 +86,7 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             //* 존재하지 않는 여행지 게시물 번호
             TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(writeTouristSpotNumber);
             if (touristSpotEntity == null) return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
-
+            
             body = new GetTouristSpotResponseDto(touristSpotEntity);
 
         } catch (Exception exception) {
@@ -105,8 +102,8 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
     //* 여행지 목록 조회
     @Override
     public ResponseEntity<? super GetTouristSpotListResponseDto> getTouristSpotList(UserToken userToken) {
-        String role = userToken.getRole();
-        if (!role.equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
 
         GetTouristSpotListResponseDto body = null;
 
@@ -138,17 +135,13 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(writeTouristSpotNumber);
             if (touristSpotEntity == null) return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
 
-            //TODO: 존재하는 여행지 주소 반환
+            //* 존재하는 여행지 주소 반환
+            boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByWriteTouristSpotAddress(writeTouristSpotAddress);
+            if (existedWriteTouristSpotAddress) return ResponseMessage.EXIST_WRITE_TOURIST_SPOT_ADDRESS;
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
-            int writeRegionIndex = writeTouristSpotAddress.indexOf(" ");
-            System.out.println("writeRegionIndex"+ writeRegionIndex);
-            String removeRegion = writeTouristSpotAddress.substring(writeRegionIndex);
-            System.out.println("removeRegion"+ removeRegion);
-            String writeRegion = writeTouristSpotAddress.replaceAll(removeRegion,"");
-            System.out.println("writeRegion " + writeRegion);
+            String writeRegion = findRegionInAddress(writeTouristSpotAddress); 
 
-            writeRegion = FindRegion.findRegion(writeRegion);
             RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
@@ -172,7 +165,37 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
     
     
+    public String findRegionInAddress(String writeTouristSpotAddress) {
+        int writeRegionIndex = writeTouristSpotAddress.indexOf(" ");
 
+        String removeAddress = writeTouristSpotAddress.substring(writeRegionIndex);
+        String blank = "";
+        String writeRegion = writeTouristSpotAddress.replace(removeAddress, blank);
+        String writeRegionResult= FindRegion.findRegion(writeRegion);
+
+        return writeRegionResult;
+    }
+
+    //* 특정 여행지 삭제
+    @Override
+    public ResponseEntity<ResponseDto> deleteTouristSpot(UserToken userToken, Integer writeTouristSpotNumber) {
+        if (writeTouristSpotNumber == null) return ResponseMessage.VAILDATION_FAILED;
+
+        try {
+            TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(writeTouristSpotNumber);
+            if (touristSpotEntity == null) return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
+
+            touristSpotRepository.delete(touristSpotEntity);
+        
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseMessage.SUCCESS;
+
+    }
 
 
 

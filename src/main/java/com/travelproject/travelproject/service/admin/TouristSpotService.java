@@ -14,4 +14,5 @@ public interface TouristSpotService {
     public ResponseEntity<? super GetTouristSpotResponseDto> getTouristSpot(UserToken userToken, Integer writeTouristSpotNumber);
     public ResponseEntity<? super GetTouristSpotListResponseDto> getTouristSpotList(UserToken userToken);
     public ResponseEntity<ResponseDto> pacthTouristSpot(UserToken userToken, PacthTouristSpotRequestDto dto);
+    public ResponseEntity<ResponseDto> deleteTouristSpot(UserToken userToken, Integer writeTouristSpotNumber);
 }

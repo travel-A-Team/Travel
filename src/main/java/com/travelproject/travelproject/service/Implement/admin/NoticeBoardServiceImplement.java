@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
+import com.travelproject.travelproject.common.util.UserTokenAdminRoleValidation;
 import com.travelproject.travelproject.dto.request.admin.noticeBoard.PatchNoticeBoardRequestDto;
 import com.travelproject.travelproject.dto.request.admin.noticeBoard.PostNoticeBoardRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
@@ -30,7 +31,10 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
     //* 공지사항 게시물 작성
     @Override
-    public ResponseEntity<ResponseDto> postNoticBoard(PostNoticeBoardRequestDto dto) {
+    public ResponseEntity<ResponseDto> postNoticBoard(UserToken userToken, PostNoticeBoardRequestDto dto) {
+        
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
 
         try {
             NoticeBoardEntity noticeBoardEntity = new NoticeBoardEntity(dto);
@@ -48,9 +52,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
     @Override
     public ResponseEntity<? super GetNoticeBoardListResponseDto> getNoticBoardList(UserToken userToken) {
 
-        String role = userToken.getRole();
-
-        if (!role.equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
         
 
         GetNoticeBoardListResponseDto body =null;
@@ -70,9 +73,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
         if (noticeBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
-        String role = userToken.getRole();
-
-        if (!role.equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
 
         GetNoticeBoardResponseDto body = null;
 
@@ -92,12 +94,14 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
+
     //* 특정 공지사항 게시물 수정
     @Override
     public ResponseEntity<ResponseDto> patchNoticBoard(UserToken userToken, PatchNoticeBoardRequestDto dto) {
-        String role = userToken.getRole();
 
-        if(!role.equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
         int noticeBoardNumber = dto.getNoticeBoardNumber();
         String noticeBoardTitle = dto.getNoticeBoardTitle();
         String noticeBoardContent = dto.getNoticeBoardContent();
@@ -122,8 +126,9 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
     @Override
     public ResponseEntity<ResponseDto> deleteNoticBoard(UserToken userToken, Integer noticeBoardNumber) {
-        String role = userToken.getRole();
-        if (!role.equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+        
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
 
         if (noticeBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
