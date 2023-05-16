@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.repository.mainPage;
+package com.travelproject.travelproject.repository;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
-import com.travelproject.travelproject.entity.mainPage.ProductEntity;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductEntity, Integer>{
+public interface TouristProductRepository extends JpaRepository<TouristProductEntity, Integer>{
     
     // 상품 관련 쿼리문 적어야 됨
     // 여행지 코스는 필요없을거 같아서 일단 뺐음

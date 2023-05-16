@@ -1,7 +1,7 @@
 package com.travelproject.travelproject.dto.response.admin.noticeBoard;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.admin.NoticeBoardEntity;
+import com.travelproject.travelproject.entity.NoticeBoardEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

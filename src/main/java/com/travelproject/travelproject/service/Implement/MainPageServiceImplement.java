@@ -12,18 +12,18 @@ import com.travelproject.travelproject.dto.response.mainPage.GetMainPageProductD
 import com.travelproject.travelproject.dto.response.mainPage.GetMainPageRecommendDto;
 import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
 import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
-import com.travelproject.travelproject.repository.mainPage.ProductRepository;
-import com.travelproject.travelproject.repository.mainPage.RecommendRepository;
+import com.travelproject.travelproject.repository.TouristProductRepository;
+import com.travelproject.travelproject.repository.RecommendationTouristSpotRepositroy;
 import com.travelproject.travelproject.service.MainPageService;
 
 @Service
 public class MainPageServiceImplement implements MainPageService {
 
-    private ProductRepository productRepository;
-    private RecommendRepository recommendRepository;
+    private TouristProductRepository productRepository;
+    private RecommendationTouristSpotRepositroy recommendRepository;
 
     @Autowired
-    public MainPageServiceImplement(ProductRepository productRepository, RecommendRepository recommendRepository) {
+    public MainPageServiceImplement(TouristProductRepository productRepository, RecommendationTouristSpotRepositroy recommendRepository) {
         this.productRepository=productRepository;
         this.recommendRepository=recommendRepository;
     }
