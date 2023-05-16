@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
+import com.travelproject.travelproject.common.util.FindRegionInAddress;
 import com.travelproject.travelproject.common.util.UserTokenAdminRoleValidation;
 import com.travelproject.travelproject.dto.request.admin.touristSpot.PacthTouristSpotRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristSpot.PostTouristSpotRequestDto;
@@ -51,7 +52,7 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
-            String writeRegion = findRegionInAddress(writeTouristSpotAddress); 
+            String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 
 
             RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
@@ -140,7 +141,7 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             if (existedWriteTouristSpotAddress) return ResponseMessage.EXIST_WRITE_TOURIST_SPOT_ADDRESS;
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
-            String writeRegion = findRegionInAddress(writeTouristSpotAddress); 
+            String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 
 
             RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
@@ -163,18 +164,6 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
         return ResponseMessage.SUCCESS;
     }
 
-    
-    
-    public String findRegionInAddress(String writeTouristSpotAddress) {
-        int writeRegionIndex = writeTouristSpotAddress.indexOf(" ");
-
-        String removeAddress = writeTouristSpotAddress.substring(writeRegionIndex);
-        String blank = "";
-        String writeRegion = writeTouristSpotAddress.replace(removeAddress, blank);
-        String writeRegionResult= FindRegion.findRegion(writeRegion);
-
-        return writeRegionResult;
-    }
 
     //* 특정 여행지 삭제
     @Override
