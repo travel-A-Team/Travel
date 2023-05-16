@@ -25,7 +25,7 @@ import com.travelproject.travelproject.service.admin.TouristSpotService;
 
 @RestController
 @RequestMapping(RequestPattern.ADMIN_TOURIST_SPOT_API)
-public class TouristSpotControlle {
+public class TouristSpotController {
 
     private TouristSpotService touristSpotService;
     private final String POST_TOURIST_SPOT = "";
@@ -35,7 +35,7 @@ public class TouristSpotControlle {
     private final String DELETE_TOURIST_SPOT = "/{writeTouristSpotNumber}";
 
     @Autowired
-    public TouristSpotControlle(TouristSpotService touristSpotService) {
+    public TouristSpotController(TouristSpotService touristSpotService) {
         this.touristSpotService = touristSpotService;
     }
 
