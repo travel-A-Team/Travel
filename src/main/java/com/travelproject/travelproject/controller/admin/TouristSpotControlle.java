@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,8 @@ public class TouristSpotControlle {
     private final String GET_TOURIST_SPOT = "/{writeTouristSpotNumber}";
     private final String GET_TOURIST_SPOT_LIST = "list";
     private final String PACTH_TOURIST_SPOT = "";
+    private final String DELETE_TOURIST_SPOT = "/{writeTouristSpotNumber}";
+
     @Autowired
     public TouristSpotControlle(TouristSpotService touristSpotService) {
         this.touristSpotService = touristSpotService;
@@ -73,6 +76,16 @@ public class TouristSpotControlle {
         @RequestBody PacthTouristSpotRequestDto request 
     ) {
         ResponseEntity<ResponseDto> response = touristSpotService.pacthTouristSpot(userToken, request);
+        return response;
+    }
+
+    //* 특정 여행지 삭제
+    @DeleteMapping(DELETE_TOURIST_SPOT)
+    public ResponseEntity<ResponseDto> deleteTouristSpot(
+        @AuthenticationPrincipal UserToken userToken,
+        @PathVariable("writeTouristSpotNumber") Integer writeTouristSpotNumber
+    ) {
+        ResponseEntity<ResponseDto> response = touristSpotService.deleteTouristSpot(userToken, writeTouristSpotNumber);
         return response;
     }
 

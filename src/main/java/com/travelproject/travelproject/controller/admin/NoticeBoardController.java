@@ -43,9 +43,10 @@ public class NoticeBoardController {
     //* 공지사항 게시물 작성
     @PostMapping(POST_NOTICE_BOARD)
     public ResponseEntity<ResponseDto> postNoticeBoard(
+        @AuthenticationPrincipal UserToken userToken,
        @Valid @RequestBody PostNoticeBoardRequestDto request
     ) {
-        ResponseEntity<ResponseDto> response = adminNoticeBoardService.postNoticBoard(request);
+        ResponseEntity<ResponseDto> response = adminNoticeBoardService.postNoticBoard(userToken, request);
         return response;
     }
 

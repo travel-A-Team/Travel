@@ -18,6 +18,13 @@ public class FindRegion {
         if (includJeonBuk) return writeRegion = "전라북도";
         if (includJeonNam) return writeRegion = "전라남도";
 
+
+        if (writeRegion.length() != 2)  {
+            int startIndex = 0;
+            int lastIndex = 2;
+            writeRegion = writeRegion.substring(startIndex, lastIndex);
+        }
+
         return writeRegion;
     }
 }

@@ -38,10 +38,10 @@ public class MainServiceImplement implements MainService {
 
             // TODO: 로그인 실패 반환 (이메일X)
             if (!adminEamil.equals(email)) return ResponseMessage.SIGN_IN_FAILED;
-
+            System.out.println("email"+email);
             // TODO: 로그인 실패 반환 (패스워드X)
-            if (!adminPassword.equals(adminPassword)) return ResponseMessage.SIGN_IN_FAILED;
-
+            if (!adminPassword.equals(password)) return ResponseMessage.SIGN_IN_FAILED;
+            
             // TODO: 토큰 생성
             String role = "admin";
             String jwt = jwtTokenProvider.create(adminEamil, role);

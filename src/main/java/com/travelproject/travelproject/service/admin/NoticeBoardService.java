@@ -10,7 +10,7 @@ import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeB
 import com.travelproject.travelproject.provider.UserToken;
 
 public interface NoticeBoardService {
-    public ResponseEntity<ResponseDto> postNoticBoard(PostNoticeBoardRequestDto dto);
+    public ResponseEntity<ResponseDto> postNoticBoard(UserToken userToken, PostNoticeBoardRequestDto dto);
     public ResponseEntity<? super GetNoticeBoardListResponseDto> getNoticBoardList(UserToken userToken);
     public ResponseEntity<? super GetNoticeBoardResponseDto> getNoticBoard(UserToken userToken, Integer noticeBoardNumber);
     public ResponseEntity<ResponseDto> patchNoticBoard(UserToken userToken, PatchNoticeBoardRequestDto dto);
