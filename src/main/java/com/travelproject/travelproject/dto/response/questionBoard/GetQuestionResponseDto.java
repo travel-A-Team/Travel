@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.CommentEntity;
 import com.travelproject.travelproject.entity.QuestionBoardEntity;
+import com.travelproject.travelproject.entity.CommentEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,14 +44,12 @@ public class GetQuestionResponseDto extends ResponseDto {
 @AllArgsConstructor
 class Comment {
     private int questionBoardNumber;
-    private String commentUserName;
     private String commentEmail;
     private String commentContent;
     private String commentWriteTime;
 
     Comment(CommentEntity commentEntity) {
         this.questionBoardNumber=commentEntity.getQuestionBoardNumber();
-        this.commentUserName=commentEntity.getWriteUserName();
         this.commentEmail=commentEntity.getWriteUserEmail();
         this.commentContent=commentEntity.getCommentContent();
         this.commentWriteTime=commentEntity.getCommentWriteTime();

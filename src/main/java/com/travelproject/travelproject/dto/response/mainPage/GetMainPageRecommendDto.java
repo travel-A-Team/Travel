@@ -35,12 +35,12 @@ public class GetMainPageRecommendDto extends ResponseDto {
 @NoArgsConstructor
 @AllArgsConstructor
 class RecommendTourspotTopList {
-    private String touristSpotTitle;
+    private String touristSpotName;
     private String recommendTouristSpotImageUrl;
     private String content;
 
     public RecommendTourspotTopList(RecommendResultSet recommendResultSet) {
-        this.touristSpotTitle=recommendResultSet.getTouristSpotTitle();
+        this.touristSpotName=recommendResultSet.getTouristSpotName();
         this.recommendTouristSpotImageUrl=recommendResultSet.getRecommendTouristSpotImageUrl();
         this.content=recommendResultSet.getContent();
     }
