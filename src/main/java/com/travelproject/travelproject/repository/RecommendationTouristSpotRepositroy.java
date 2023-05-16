@@ -16,7 +16,7 @@ public interface RecommendationTouristSpotRepositroy extends JpaRepository<Recom
     @Query(
         value = 
         "SELECT " +
-        "R.tourist_spot_name AS touristSpotName," +
+        "R.tourist_spot_title AS touristSpotTitle," +
         "R.recommend_tourist_spot_image_url AS recommendTouristSpotImageUrl," +
         "R.content " +
         "FROM Recommendationtouristspot R " +
