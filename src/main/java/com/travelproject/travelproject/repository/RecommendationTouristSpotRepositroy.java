@@ -21,7 +21,7 @@ public interface RecommendationTouristSpotRepositroy extends JpaRepository<Recom
         "R.content " +
         "FROM Recommendationtouristspot R " +
         "ORDER BY R.tourist_spot_number DESC " + 
-        "LIMIT 3",
+        "LIMIT 3;",
         nativeQuery = true
     )
     

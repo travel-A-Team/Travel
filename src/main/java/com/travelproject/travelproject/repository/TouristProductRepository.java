@@ -18,6 +18,7 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
     @Query(
         value = 
         "SELECT " +
+        "T.product_number AS productNumber," +
         "T.product_title AS productTitle," +
         "T.product_image_url AS productImageUrl," +
         "T.product_money AS productMoney," +
@@ -26,7 +27,8 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         "WHERE T.product_number = L.likey_product " +
         "AND L.likey_user_email = U.email " +
         "GROUP BY T.product_number " +
-        "LIMIT 3",
+        "ORDER BY productNumber DESC " +
+        "LIMIT 3;",
         nativeQuery = true  
     )
 

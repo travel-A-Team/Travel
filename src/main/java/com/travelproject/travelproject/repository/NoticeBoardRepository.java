@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.travelproject.travelproject.entity.NoticeBoardEntity;
 
 @Repository
-public interface NoticeBoardRepository  extends JpaRepository<NoticeBoardEntity, Integer>{
-    
+public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, Integer>{
     @Query(
         value = 
         "SELECT " +
@@ -24,6 +23,7 @@ public interface NoticeBoardRepository  extends JpaRepository<NoticeBoardEntity,
     )
     public List<NoticeBoardEntity> getList();
 
+    //! 공지사항 상세 조회때 필요
     public NoticeBoardEntity findByNoticeBoardNumber(int noticeBoardNumber);
 
 }

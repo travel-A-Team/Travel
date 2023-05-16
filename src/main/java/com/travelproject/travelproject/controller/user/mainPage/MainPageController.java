@@ -27,16 +27,14 @@ public class MainPageController {
     //# Top 3 여행지코스 상품 목록 조회
     @GetMapping("/product-board-top3")
     public ResponseEntity<? super GetMainPageProductDto> getProductBoardListTop3() {
-        ResponseEntity<? super GetMainPageProductDto> response =
-            mainPageService.getProductBoardListTop3();
+        ResponseEntity<? super GetMainPageProductDto> response = mainPageService.getProductBoardListTop3();
         return response;
     }
 
     //# 최근 추천 여행지 목록 3개 조회
     @GetMapping("/recommend-tourlist-spot-top3")
     public ResponseEntity<? super GetMainPageRecommendDto> getRecommendList3() {
-        ResponseEntity<? super GetMainPageRecommendDto> response =
-            mainPageService.getRecommendList3();
+        ResponseEntity<? super GetMainPageRecommendDto> response = mainPageService.getRecommendList3();
         return response;
     }
 

@@ -14,9 +14,9 @@ import com.travelproject.travelproject.dto.request.admin.noticeBoard.PostNoticeB
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardListResponseDto;
 import com.travelproject.travelproject.dto.response.admin.noticeBoard.GetNoticeBoardResponseDto;
-import com.travelproject.travelproject.entity.admin.NoticeBoardEntity;
+import com.travelproject.travelproject.entity.NoticeBoardEntity;
 import com.travelproject.travelproject.provider.UserToken;
-import com.travelproject.travelproject.repository.admin.NoticeBoardRepository;
+import com.travelproject.travelproject.repository.NoticeBoardRepository;
 import com.travelproject.travelproject.service.admin.NoticeBoardService;
 
 @Service
