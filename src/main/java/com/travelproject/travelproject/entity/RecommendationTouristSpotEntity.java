@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.travelproject.travelproject.dto.request.admin.recommendationTouristSpot.PostRecommendationTouristSpotRequestDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,7 @@ public class RecommendationTouristSpotEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int touristSpotNumber;
     private String recommendTouristSpotImageUrl; 
-    private String touristSpotName; // 여행지 추천 제목
+    private String touristSpotTitle;
     private String content;
     private String touristSpotAddress;
     private String touristSpotUseTime;
@@ -29,4 +31,8 @@ public class RecommendationTouristSpotEntity {
     private String recommendTouristSpotWriteDate;
     private String recommendTouristRegion;
 
+    public RecommendationTouristSpotEntity(PostRecommendationTouristSpotRequestDto dto) {
+        this.recommendTouristSpotImageUrl = dto.getRecommendTouristImageUrl();
+        this.touristSpotTitle = dto.getRecommendTouristSpotTitle();
+    }
 }

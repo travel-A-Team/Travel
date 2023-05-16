@@ -75,10 +75,10 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
     @Override
     public ResponseEntity<? super GetTouristSpotResponseDto> getTouristSpot(UserToken userToken, Integer writeTouristSpotNumber) {
 
-        if (writeTouristSpotNumber == null) return ResponseMessage.VAILDATION_FAILED;
-
         boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
         if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if (writeTouristSpotNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
         GetTouristSpotResponseDto body = null;
 
@@ -179,6 +179,10 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
     //* 특정 여행지 삭제
     @Override
     public ResponseEntity<ResponseDto> deleteTouristSpot(UserToken userToken, Integer writeTouristSpotNumber) {
+
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
         if (writeTouristSpotNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
         try {

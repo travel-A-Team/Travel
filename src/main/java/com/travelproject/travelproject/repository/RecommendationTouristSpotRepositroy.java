@@ -26,4 +26,6 @@ public interface RecommendationTouristSpotRepositroy extends JpaRepository<Recom
     )
     
     public List<RecommendResultSet> getRecommendList3();
+
+    public boolean existsByTouristSpotAddress(String recommendTouristAddress);
 }
