@@ -23,7 +23,7 @@ public class RecommendationTouristSpotEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int touristSpotNumber;
     private String recommendTouristSpotImageUrl; 
-    private String touristSpotTitle;
+    private String touristSpotTitle; // 여행지 추천 제목
     private String content;
     private String touristSpotAddress;
     private String touristSpotUseTime;

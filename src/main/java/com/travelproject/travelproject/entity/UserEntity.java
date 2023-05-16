@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity(name = "User")
 @Table(name = "User")
 public class UserEntity {
-    
+
     @Id
     private String email;
     private String name;

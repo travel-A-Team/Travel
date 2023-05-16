@@ -29,41 +29,45 @@ class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write("{\"code\": \"AF\", \"message\": \"Authentication Failed\"}");
-        //@ "를 문자열로 인식하기 위해
+        // @ "를 문자열로 인식하기 위해
     }
-    
+
 }
 
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig {
-    
+
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
     public WebSecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
-        this.jwtAuthenticationFilter=jwtAuthenticationFilter;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
     @Bean
-    protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception{
+    protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity
-            .cors().and()
-            .csrf().disable()
-            .httpBasic().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeHttpRequests()
-            .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/sign-in").permitAll()
-            .antMatchers
-            (HttpMethod.GET,"/api/v1/notice-board/**", "/api/v1/main/**", 
-            "/api/v1/question-board/**", "/api/v1/product-board/**").permitAll()
-            .antMatchers(HttpMethod.PATCH,"/api/v1/question-board/**").permitAll()
-            .antMatchers(HttpMethod.DELETE,"/api/v1/question-board/**").permitAll()
-            .anyRequest().authenticated().and()
-            
-            //@ ↓ 위에서 만든 FailedAuthenticationEntryPoint클래스를 넣어주면 됨
-            .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
+                .cors().and()
+                .csrf().disable()
+                .httpBasic().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeHttpRequests()
+                .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/sign-in").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/notice-board/**", "/api/v1/main/**",
+                        "/api/v1/question-board/**", "/api/v1/product-board/**")
+                .permitAll()
+                .antMatchers(HttpMethod.PATCH, "/api/v1/question-board/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/question-board/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/planner/planner-form").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/planner/**").permitAll()
+                .antMatchers(HttpMethod.PATCH, "/api/v1/planner/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/planner/**").permitAll()
+                .anyRequest().authenticated().and()
+
+                // @ ↓ 위에서 만든 FailedAuthenticationEntryPoint클래스를 넣어주면 됨
+                .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

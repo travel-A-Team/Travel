@@ -15,5 +15,5 @@ public interface RequestPattern {
     public static final String PLANNER_API = "api/v1/planner";
 
     public static final String PRODUCT_API = "api/v1/product-board";
-}
 
+}
