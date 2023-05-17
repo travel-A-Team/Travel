@@ -15,14 +15,14 @@ import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerListResponseDto;
 import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerResponseDto;
 import com.travelproject.travelproject.entity.PlannerDailyTravelDateEntity;
-import com.travelproject.travelproject.entity.admin.TouristSpotEntity;
+import com.travelproject.travelproject.entity.TouristSpotEntity;
 import com.travelproject.travelproject.entity.planner.PlannerEntity;
 import com.travelproject.travelproject.entity.resultSet.PlannerBoardResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.PlannerBoardRepository;
 import com.travelproject.travelproject.repository.PlannerDailyTravelDateRepository;
+import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.repository.UserRepository;
-import com.travelproject.travelproject.repository.admin.TouristSpotRepository;
 import com.travelproject.travelproject.service.PlannerService;
 
 @Service

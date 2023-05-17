@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.repository.admin;
+package com.travelproject.travelproject.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.travelproject.travelproject.entity.admin.TouristSpotEntity;
+import com.travelproject.travelproject.entity.TouristSpotEntity;
 
 @Repository
 public interface TouristSpotRepository extends JpaRepository<TouristSpotEntity, Integer> {

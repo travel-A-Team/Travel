@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.travelproject.travelproject.dto.request.plannerBoard.PostPlannerBoardRequestDto;
-import com.travelproject.travelproject.entity.admin.TouristSpotEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
