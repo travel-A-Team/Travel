@@ -2,19 +2,19 @@ package com.travelproject.travelproject.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.travelproject.travelproject.dto.response.tourCourse.GetTourCourseListResponseDto;
-import com.travelproject.travelproject.dto.response.tourCourse.GetTourCourseResponseDto;
-import com.travelproject.travelproject.dto.response.tourCourse.GetTourCourseWriteResponseDto;
+import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductListResponseDto;
+import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductResponseDto;
+import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductWriteResponseDto;
 
 public interface TourCourseService {
     
     //! 상품 목록 조회
-    public ResponseEntity<? super GetTourCourseListResponseDto> getTourCourseList();
+    public ResponseEntity<? super GetTouristProductListResponseDto> getTourCourseList();
     
     //! 상품 상세 조회
-    public ResponseEntity<? super GetTourCourseResponseDto> getTourCourse();
+    public ResponseEntity<? super GetTouristProductResponseDto> getTourCourse(Integer productBoardNumber);
     
     //! 지역, 이름 기준 상품 목록 조회
-    public ResponseEntity<? super GetTourCourseWriteResponseDto> getTourCourseWrite();
+    public ResponseEntity<? super GetTouristProductWriteResponseDto> getTourCourseWriteList(String writeRegion, String writeTouristSpotName);
     
 }

@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.travelproject.travelproject.entity.listEntity.PlannerBoardResultSet;
 import com.travelproject.travelproject.entity.planner.PlannerEntity;
-import com.travelproject.travelproject.entity.resultSet.PlannerBoardResultSet;
 
 @Repository
 public interface PlannerBoardRepository extends JpaRepository<PlannerEntity, Integer> {

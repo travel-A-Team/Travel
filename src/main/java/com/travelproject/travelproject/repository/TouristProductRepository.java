@@ -11,6 +11,8 @@ import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
 
 @Repository
 public interface TouristProductRepository extends JpaRepository<TouristProductEntity, Integer>{
+
+    public TouristProductEntity findByProductNumber(int productNumber);
     
     // 상품 관련 쿼리문 적어야 됨
     // 여행지 코스는 필요없을거 같아서 일단 뺐음
@@ -31,7 +33,26 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         "LIMIT 3;",
         nativeQuery = true  
     )
-
     public List<ProductResultSet> getProductTop3();
+    
+    @Query(
+        value = 
+        "SELECT " +
+        "T.product_title AS productTitle," +
+        "T.product_image_url AS productImageUrl," +
+        "T.product_money AS productMoney," +
+        "T.product_tour_route AS productTourRoute " +
+        "FROM Touristproduct T;",
+        nativeQuery = true
+    )
+    public List<ProductResultSet> getTourCourseList();
 
+    @Query(
+        value = 
+        "SELECT " +
+        "count(DISTINCT L.likey_user_email) AS likeyCount " +
+        "FROM Likey L;",
+        nativeQuery = true
+    )
+    public ProductResultSet getLikeyCount();
 }
