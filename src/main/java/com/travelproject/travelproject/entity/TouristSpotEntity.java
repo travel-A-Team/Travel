@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.admin;
+package com.travelproject.travelproject.entity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

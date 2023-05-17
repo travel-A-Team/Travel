@@ -16,10 +16,10 @@ import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.admin.touristSpot.GetTouristSpotListResponseDto;
 import com.travelproject.travelproject.dto.response.admin.touristSpot.GetTouristSpotResponseDto;
 import com.travelproject.travelproject.entity.RegionEntity;
-import com.travelproject.travelproject.entity.admin.TouristSpotEntity;
+import com.travelproject.travelproject.entity.TouristSpotEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.RegionRepository;
-import com.travelproject.travelproject.repository.admin.TouristSpotRepository;
+import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.service.admin.TouristSpotService;
 import com.travelproject.travelproject.util.FindRegion;
 
