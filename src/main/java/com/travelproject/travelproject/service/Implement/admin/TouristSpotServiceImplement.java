@@ -137,8 +137,16 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             if (touristSpotEntity == null) return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
 
             //* 존재하는 여행지 주소 반환
-            boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByWriteTouristSpotAddress(writeTouristSpotAddress);
-            if (existedWriteTouristSpotAddress) return ResponseMessage.EXIST_WRITE_TOURIST_SPOT_ADDRESS;
+            
+            String touristSpotAddress = touristSpotEntity.getWriteTouristSpotAddress();
+            boolean equalWriteTouristSpotAddress = writeTouristSpotAddress.equals(touristSpotAddress);
+
+            if(!equalWriteTouristSpotAddress) {
+                boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByWriteTouristSpotAddress(writeTouristSpotAddress);
+                if (existedWriteTouristSpotAddress) return ResponseMessage.EXIST_WRITE_TOURIST_SPOT_ADDRESS;
+            }
+
+
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
             String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 

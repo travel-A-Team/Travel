@@ -73,7 +73,7 @@ public class TouristSpotController {
     @PatchMapping(PACTH_TOURIST_SPOT)
     public ResponseEntity<ResponseDto> patchTouristSpot(
         @AuthenticationPrincipal UserToken userToken,
-        @RequestBody PacthTouristSpotRequestDto request 
+        @Valid @RequestBody PacthTouristSpotRequestDto request 
     ) {
         ResponseEntity<ResponseDto> response = touristSpotService.pacthTouristSpot(userToken, request);
         return response;
