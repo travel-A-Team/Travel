@@ -16,7 +16,7 @@ public interface ResponseMessage {
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("EA", "Existent Tourist Spot Address"));
 
     public static final ResponseEntity<ResponseDto> EXIST_RECOMMENDATION_TOURIST_SPOT_ADDRESS
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("ER", "Existent Recommendation Tourist Spot Address"));
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("ERA", "Existent Recommendation Tourist Spot Address"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_QUESTION_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NQ", "Non-Existent Question Board Number"));
@@ -34,7 +34,7 @@ public interface ResponseMessage {
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NRN", "Non-Existent Recommendation Tourist Spot Number"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_REGION_NAME 
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NR", "Non-Existent Region Name"));
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NRN", "Non-Existent Region Name"));
 
     public static final ResponseEntity<ResponseDto> SIGN_IN_FAILED 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("SF", "Sign In Failed"));

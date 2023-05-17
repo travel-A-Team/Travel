@@ -41,7 +41,7 @@ public class RecommendationTouristSpotEntity {
 
         this.recommendTouristSpotImageUrl = dto.getRecommendTouristImageUrl();
         this.touristSpotTitle = dto.getRecommendTouristSpotTitle();
-        this.content = dto.getContent();
+        this.content = dto.getRecommendTouristContent();
         this.touristSpotAddress = dto.getRecommendTouristAddress();
         this.touristSpotUseTime = dto.getRecommendTouristUseTime();
         this.touristSpotInformation = dto.getRecommendTouristInformation();
