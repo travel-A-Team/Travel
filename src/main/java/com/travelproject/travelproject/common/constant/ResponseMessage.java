@@ -18,8 +18,8 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> EXIST_RECOMMENDATION_TOURIST_SPOT_ADDRESS
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("ERA", "Existent Recommendation Tourist Spot Address"));
 
-    public static final ResponseEntity<ResponseDto> NOT_EXIST_QUESTION_BOARD_NUMBER 
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NQ", "Non-Existent Question Board Number"));
+        public static final ResponseEntity<ResponseDto> NOT_EXIST_QUESTION_BOARD_NUMBER = ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NQ", "Non-Existent Question Board Number"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_PLANNER_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NPB", "Non-Existent Planner Board Number"));
@@ -27,8 +27,11 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NNN", "Non-Existent Notice Board Number"));
 
-    public static final ResponseEntity<ResponseDto> NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER 
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NTN", "Non-Existent Write TouristSpot Number"));
+        public static final ResponseEntity<ResponseDto> NOT_EXIST_PRODUCT_BOARD_NUMBER = ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NPN", "Non-Existent Product Board Number"));
+
+        public static final ResponseEntity<ResponseDto> NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER = ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NW", "Non-Existent Write TouristSpot Number"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_RECOMMENDATION_TOURIST_SPOT_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NRN", "Non-Existent Recommendation Tourist Spot Number"));

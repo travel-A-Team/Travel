@@ -49,6 +49,7 @@ class TouristProductTopList {
 
     static List<TouristProductTopList> createList(List<ProductResultSet> productResultSet) {
         List<TouristProductTopList> productTop3List = new ArrayList<>();
+        
         for (ProductResultSet result : productResultSet) {
             TouristProductTopList touristProductTopList = new TouristProductTopList(result);
             productTop3List.add(touristProductTopList);

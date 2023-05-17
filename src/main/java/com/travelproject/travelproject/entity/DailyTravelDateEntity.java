@@ -11,20 +11,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "Touristproduct")
-@Table(name = "Touristproduct") 
-public class TouristProductEntity {
-
+@AllArgsConstructor
+@Entity(name = "Dailytraveldate")
+@Table(name = "Dailytraveldate")
+public class DailyTravelDateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int dailyTravelNumber;
+    private int touristSpotNumber;
     private int productNumber;
-    private String productImageUrl;
-    private String productTitle;
-    private String productTourRoute;
-    private int productMoney;
-    private String productTotalSchedule;
-    private String productWriteDate;
-
+    private String dailyTravelDate;
+    private String writeImageUrl;
+    private String writeTouristSpotName;
+    private String writeProductAddress;
 }

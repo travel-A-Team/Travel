@@ -16,8 +16,8 @@ import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerListR
 import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerResponseDto;
 import com.travelproject.travelproject.entity.PlannerDailyTravelDateEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
+import com.travelproject.travelproject.entity.listEntity.PlannerBoardResultSet;
 import com.travelproject.travelproject.entity.planner.PlannerEntity;
-import com.travelproject.travelproject.entity.resultSet.PlannerBoardResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.PlannerBoardRepository;
 import com.travelproject.travelproject.repository.PlannerDailyTravelDateRepository;
