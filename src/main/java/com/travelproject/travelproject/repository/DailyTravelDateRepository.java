@@ -33,7 +33,6 @@ public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDat
     public boolean existsByTouristSpotNumber(int touristSpotNumber);
 
 
-    
     public List<DailyResultSet> findByProductNumber(int productNumber);
 
 }

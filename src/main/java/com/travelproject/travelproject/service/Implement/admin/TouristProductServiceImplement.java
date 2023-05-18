@@ -12,10 +12,15 @@ import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTour
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.admin.touristProduct.GetTouristProductFormResponseDto;
+import com.travelproject.travelproject.dto.response.admin.touristProduct.GetTouristProductListResponseDto;
+import com.travelproject.travelproject.dto.response.admin.touristProduct.GetTouristProductResponseDto;
 import com.travelproject.travelproject.entity.DailyTravelDateEntity;
 import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
+import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
+import com.travelproject.travelproject.entity.listEntity.TouristProductListResultSet;
+import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.DailyTravelDateRepository;
 import com.travelproject.travelproject.repository.RegionRepository;
@@ -102,6 +107,57 @@ public class TouristProductServiceImplement implements TouristProductService {
         }
 
         return ResponseMessage.SUCCESS;
+    }
+
+
+
+    @Override
+    public ResponseEntity<? super GetTouristProductResponseDto> getTouristProduct(UserToken userToken, Integer productNumber) {
+
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if (productNumber == null) return ResponseMessage.VAILDATION_FAILED;
+
+        GetTouristProductResponseDto body = null;
+
+        try {
+            TouristProductResultSet touristProductResultSet = touristProductRepository.getTouristProduct(productNumber);
+            if (touristProductResultSet == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
+
+            List<DailyResultSet> dailyResultSetList = dailyTravelDateRepository.findByProductNumber(productNumber);
+
+            body = new GetTouristProductResponseDto(touristProductResultSet, dailyResultSetList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+
+
+    @Override
+    public ResponseEntity<? super GetTouristProductListResponseDto> getTouristProductList(UserToken userToken) {
+        
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        GetTouristProductListResponseDto body = null;
+
+        try {
+
+            List<TouristProductListResultSet> touristProductListResultSetList = touristProductRepository.getTouristProductList();
+            body = new GetTouristProductListResponseDto(touristProductListResultSetList);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
     }
     
 }

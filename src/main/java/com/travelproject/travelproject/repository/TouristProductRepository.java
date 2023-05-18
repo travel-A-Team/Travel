@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
+import com.travelproject.travelproject.entity.listEntity.TouristProductListResultSet;
+import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
 
 @Repository
 public interface TouristProductRepository extends JpaRepository<TouristProductEntity, Integer>{
@@ -55,4 +57,47 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         nativeQuery = true
     )
     public ProductResultSet getLikeyCount();
+
+
+
+
+    @Query (
+        value = 
+        "SELECT " +
+        "t.product_number AS productNumber," +
+        "t.product_title AS productTitle," +
+        "t.product_total_schedule AS productTotalSchedule," +
+        "t.product_tour_route AS productTourRoute," +
+        "t.product_money AS productMoney," +
+        "count(l.likey_user_email) AS likeCount " +
+        "FROM Touristproduct AS t " +
+        "LEFT JOIN Likey AS l " +
+        "ON t.product_number = l.likey_product " +
+        "WHERE t.product_number = ? " +
+        "GROUP BY t.product_number",
+        nativeQuery = true
+        )
+    public TouristProductResultSet getTouristProduct(int productNumber);
+
+
+
+    @Query(
+        value = 
+        "SELECT " +
+        "t.product_number AS productNumber," +
+        "t.product_image_url AS productImageUrl," +
+        "t.product_title AS productTitle," +
+        "t.product_total_schedule AS productTotalSchedule," +
+        "t.product_tour_route AS productTourRoute," +
+        "t.product_money AS productMoney," +
+        "count(l.likey_user_email) AS likeCount," +
+        "t.product_write_date AS productWriteDate " +
+        "FROM Touristproduct AS t " +
+        "LEFT JOIN Likey AS l " +
+        "ON t.product_number = l.likey_product " +
+        "GROUP BY t.product_number " +
+        "ORDER BY t.product_write_date, t.product_number DESC",
+        nativeQuery = true
+        )
+    public List<TouristProductListResultSet> getTouristProductList();
 }

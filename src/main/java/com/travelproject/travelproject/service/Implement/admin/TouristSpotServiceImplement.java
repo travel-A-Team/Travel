@@ -19,10 +19,10 @@ import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.DailyTravelDateRepository;
+import com.travelproject.travelproject.repository.PlannerDailyTravelDateRepository;
 import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.service.admin.TouristSpotService;
-import com.travelproject.travelproject.util.FindRegion;
 
 @Service
 public class TouristSpotServiceImplement  implements TouristSpotService{
@@ -30,12 +30,14 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
     private TouristSpotRepository touristSpotRepository;
     private RegionRepository regionRepository;
     private DailyTravelDateRepository dailyTravelDateRepository;
+    private PlannerDailyTravelDateRepository plannerDailyTravelDateRepository;
 
     @Autowired
-    public TouristSpotServiceImplement(TouristSpotRepository touristSpotRepository, RegionRepository regionRepository, DailyTravelDateRepository dailyTravelDateRepository) {
+    public TouristSpotServiceImplement(TouristSpotRepository touristSpotRepository, RegionRepository regionRepository, DailyTravelDateRepository dailyTravelDateRepository, PlannerDailyTravelDateRepository plannerDailyTravelDateRepository) {
         this.touristSpotRepository = touristSpotRepository;
         this.regionRepository = regionRepository;
         this.dailyTravelDateRepository = dailyTravelDateRepository;
+        this.plannerDailyTravelDateRepository = plannerDailyTravelDateRepository;
     }
 
     //* 여행지 작성
@@ -167,10 +169,16 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             
             touristSpotRepository.save(touristSpotEntity);
 
-            boolean existedTouristSpotNumber = dailyTravelDateRepository.existsByTouristSpotNumber(writeTouristSpotNumber);
-            if (existedTouristSpotNumber) {
-                dailyTravelDateRepository.updateTouristSpot(writeImageUrl, writeTouristSpotName, writeRegion, writeTouristSpotNumber);
+            boolean existedDailyTouristSpotNumber = dailyTravelDateRepository.existsByTouristSpotNumber(writeTouristSpotNumber);
+            if (existedDailyTouristSpotNumber) {
+                dailyTravelDateRepository.updateTouristSpot(writeImageUrl, writeTouristSpotName, writeTouristSpotAddress, writeTouristSpotNumber);
             }
+
+            boolean existedPlannerTouristSpotNumber = plannerDailyTravelDateRepository.existsByTouristSpotWriteTouristSpotNumber(writeTouristSpotNumber);
+            if (existedPlannerTouristSpotNumber) {
+                plannerDailyTravelDateRepository.updateTouristSpot(writeImageUrl, writeTouristSpotName, writeTouristSpotAddress, writeTouristSpotNumber);
+            }
+ 
 
         } catch (Exception exception) {
             exception.printStackTrace();
