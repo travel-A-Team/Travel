@@ -1,14 +1,16 @@
 package com.travelproject.travelproject.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.travelproject.travelproject.entity.DailyTravelDateEntity;
+import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
 
 @Repository
 public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDateEntity, Integer>{
@@ -30,4 +32,10 @@ public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDat
 
     public boolean existsByTouristSpotNumber(int touristSpotNumber);
 
+
+    
+    public List<DailyResultSet> findByProductNumber(int productNumber);
+
 }
+    
+

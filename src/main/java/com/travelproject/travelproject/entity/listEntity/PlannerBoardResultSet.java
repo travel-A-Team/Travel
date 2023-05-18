@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.resultSet;
+package com.travelproject.travelproject.entity.listEntity;
 
 public interface PlannerBoardResultSet {
     public int getPlannerNumber();

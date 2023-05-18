@@ -8,9 +8,13 @@ import javax.persistence.Table;
 
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductDaliyTravelDateRequestDto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "Dailytraveldate")
 @Table(name = "Dailytraveldate")
 public class DailyTravelDateEntity {
