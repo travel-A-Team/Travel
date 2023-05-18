@@ -18,6 +18,7 @@ import com.travelproject.travelproject.dto.response.admin.touristSpot.GetTourist
 import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
 import com.travelproject.travelproject.provider.UserToken;
+import com.travelproject.travelproject.repository.DailyTravelDateRepository;
 import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.service.admin.TouristSpotService;
@@ -28,11 +29,13 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
     private TouristSpotRepository touristSpotRepository;
     private RegionRepository regionRepository;
+    private DailyTravelDateRepository dailyTravelDateRepository;
 
     @Autowired
-    public TouristSpotServiceImplement(TouristSpotRepository touristSpotRepository, RegionRepository regionRepository) {
+    public TouristSpotServiceImplement(TouristSpotRepository touristSpotRepository, RegionRepository regionRepository, DailyTravelDateRepository dailyTravelDateRepository) {
         this.touristSpotRepository = touristSpotRepository;
         this.regionRepository = regionRepository;
+        this.dailyTravelDateRepository = dailyTravelDateRepository;
     }
 
     //* 여행지 작성
@@ -163,6 +166,11 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
             
             touristSpotRepository.save(touristSpotEntity);
+
+            boolean existedTouristSpotNumber = dailyTravelDateRepository.existsByTouristSpotNumber(writeTouristSpotNumber);
+            if (existedTouristSpotNumber) {
+                dailyTravelDateRepository.updateTouristSpot(writeImageUrl, writeTouristSpotName, writeRegion, writeTouristSpotNumber);
+            }
 
         } catch (Exception exception) {
             exception.printStackTrace();
