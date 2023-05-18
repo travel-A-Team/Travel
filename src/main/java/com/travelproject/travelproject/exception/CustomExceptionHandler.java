@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 @RestControllerAdvice
 public class CustomExceptionHandler {
     
@@ -21,6 +23,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto> HandlerMethodArgumentNotValidExceptio(MethodArgumentNotValidException exception) {
         return ResponseMessage.VAILDATION_FAILED;
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ResponseDto> ExpiredJwtException(ExpiredJwtException exception) {
+        return ResponseMessage.EXPIRED_JWT;
     }
 
 }

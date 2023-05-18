@@ -42,6 +42,9 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_USER_EMAIL 
     = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDto("NU", "Non-Existent User Email"));
 
+    public static final ResponseEntity<ResponseDto> EXPIRED_JWT 
+    = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDto("ET", "Expired Jwt"));
+
     public static final ResponseEntity<ResponseDto> NO_PERMISSIONS 
     = ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResponseDto("NP", "No Permissions"));
 
