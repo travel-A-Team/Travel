@@ -27,7 +27,8 @@ public class PlannerDailyTravelDateEntity {
     private String writeImageUrl;
     private String writeTouristSpotName;
     private String writePlannerAddress;
-
+    private int sequence;
+    
     public PlannerDailyTravelDateEntity(int plannerNumber, String plannerTravelDate,
             TouristSpotEntity touristSpotWriteEntity, PostPlannerBoardRequestDto dto) {
         this.plannerPlannerNumber = plannerNumber;
