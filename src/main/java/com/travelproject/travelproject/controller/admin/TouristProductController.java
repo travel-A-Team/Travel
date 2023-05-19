@@ -78,7 +78,7 @@ public class TouristProductController {
     public ResponseEntity<ResponseDto> patchTouristProduct (
         @AuthenticationPrincipal UserToken userToken,
         @RequestBody PatchTouristProductRequestDto patchRequest,
-        @RequestBody PatchDailyTravelNumberRequestDto deleteRequest
+        @RequestBody PatchDailyTravelNumberRequestDto deleteRequest // RequestBody는 한 개만 존재해야 함
     ) {
         ResponseEntity<ResponseDto> response = touristProductService.patchTouristProduct(userToken, patchRequest, deleteRequest);
         return response;
