@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.common.util.UserTokenAdminRoleValidation;
+import com.travelproject.travelproject.dto.request.admin.touristProduct.DeleteDailyTravelNumber;
+import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchDailyTravelNumberRequestDto;
+import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchTouristProductDaliyTravelDateRequestDto;
+import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchTouristProductRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductDaliyTravelDateRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
@@ -77,8 +81,8 @@ public class TouristProductServiceImplement implements TouristProductService {
         List<PostTouristProductDaliyTravelDateRequestDto> daliyTravelDateDtoList = dto.getDaliyTravelDateList();
         StringBuffer stringBuffer = new StringBuffer();
 
-        for (PostTouristProductDaliyTravelDateRequestDto daliTravelDate: daliyTravelDateDtoList) {
-            String touristSpotName = daliTravelDate.getWriteTouristSpotName();
+        for (PostTouristProductDaliyTravelDateRequestDto daliyTravelDate: daliyTravelDateDtoList) {
+            String touristSpotName = daliyTravelDate.getWriteTouristSpotName();
             stringBuffer.append(" → " + touristSpotName);
         }
 
@@ -158,6 +162,100 @@ public class TouristProductServiceImplement implements TouristProductService {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+
+
+    @Override
+    public ResponseEntity<ResponseDto> patchTouristProduct(UserToken userToken, PatchTouristProductRequestDto dto, PatchDailyTravelNumberRequestDto deleteDailyTravelDto) {
+        
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+       
+        int productNumber = dto.getProductNumber();
+        String productTitle = dto.getProductTitle();
+        String productTotalSchedule = dto.getProductTotalSchedule();
+        int productMoney = dto.getProductMoney();
+        List<PatchTouristProductDaliyTravelDateRequestDto> daliyTravelDateDtoList = dto.getDailyTravelDateList();
+
+        
+        StringBuffer stringBuffer = new StringBuffer();
+        String productImageUrl;
+        
+
+        for (PatchTouristProductDaliyTravelDateRequestDto daliyTravelDate: daliyTravelDateDtoList) {
+            String touristSpotName = daliyTravelDate.getWriteTouristSpotName();
+            stringBuffer.append(" → " + touristSpotName);
+
+            int firstSequence = 1;
+            int dailyTravelDateSequence =  daliyTravelDate.getWriteSequence();
+            boolean firstdailyTravelDate = firstSequence == dailyTravelDateSequence;
+
+            if (firstdailyTravelDate) {
+                productImageUrl = daliyTravelDate.getWriteImageUrl();
+            }
+        }
+
+        int firstArrowIndex = 3;
+        String productTourRoute = stringBuffer.substring(firstArrowIndex);
+
+
+        try {
+            TouristProductEntity touristProductEntity = touristProductRepository.findByProductNumber(productNumber);
+            if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
+
+            touristProductEntity.setProductTitle(productTitle);
+            touristProductEntity.setProductTotalSchedule(productTotalSchedule);
+            touristProductEntity.setProductMoney(productMoney);
+            touristProductEntity.setProductTourRoute(productTourRoute);
+
+            for (PatchTouristProductDaliyTravelDateRequestDto daliyTravelDate: daliyTravelDateDtoList) {
+                Integer dailyTravelNumber = daliyTravelDate.getDailyTravelNumber();
+                int touristSpotNumber = daliyTravelDate.getTouristSpotNumber();
+                String dailyTravelDate = daliyTravelDate.getDailyTravelDate();
+                int writeSequence = daliyTravelDate.getWriteSequence();
+                String writeImageUrl = daliyTravelDate.getWriteImageUrl();
+                String writeTouristSpotName = daliyTravelDate.getWriteTouristSpotName();
+                String writeProductAddress = daliyTravelDate.getWriteProductAddress();
+
+                if (dailyTravelNumber == null) {
+                    DailyTravelDateEntity dailyTravelDateEntity = new DailyTravelDateEntity(productNumber, daliyTravelDate);
+                    dailyTravelDateRepository.save(dailyTravelDateEntity);
+                }
+
+                DailyTravelDateEntity dailyTravelDateEntity = dailyTravelDateRepository.findByDailyTravelNumber(dailyTravelNumber);
+
+                dailyTravelDateEntity.setTouristSpotNumber(touristSpotNumber);
+                dailyTravelDateEntity.setDailyTravelDate(dailyTravelDate);
+                dailyTravelDateEntity.setSequence(writeSequence);
+                dailyTravelDateEntity.setWriteImageUrl(writeImageUrl);
+                dailyTravelDateEntity.setWriteTouristSpotName(writeTouristSpotName);
+                dailyTravelDateEntity.setWriteProductAddress(writeProductAddress);
+                
+                dailyTravelDateRepository.save(dailyTravelDateEntity);
+            }
+
+            if (deleteDailyTravelDto.getDeleteDailyTravelNumberList() != null) {
+                List<DeleteDailyTravelNumber> deleteDailyTravelNumberList = deleteDailyTravelDto.getDeleteDailyTravelNumberList();
+
+                for (DeleteDailyTravelNumber deleteDailyTravelNumber: deleteDailyTravelNumberList) {
+                    Integer dailyTravelNumber = deleteDailyTravelNumber.getDailyTravelNumber();
+                    if (dailyTravelNumber == null) break;
+    
+                    DailyTravelDateEntity dailyTravelDateEntity = dailyTravelDateRepository.findByDailyTravelNumber(dailyTravelNumber);
+                    dailyTravelDateRepository.delete(dailyTravelDateEntity);
+                }
+            }
+        
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+
+
+
+        return ResponseMessage.SUCCESS;
     }
     
 }

@@ -59,8 +59,6 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
     public ProductResultSet getLikeyCount();
 
 
-
-
     @Query (
         value = 
         "SELECT " +
@@ -96,7 +94,7 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         "LEFT JOIN Likey AS l " +
         "ON t.product_number = l.likey_product " +
         "GROUP BY t.product_number " +
-        "ORDER BY t.product_write_date, t.product_number DESC",
+        "ORDER BY t.product_write_date DESC, t.product_number DESC",
         nativeQuery = true
         )
     public List<TouristProductListResultSet> getTouristProductList();

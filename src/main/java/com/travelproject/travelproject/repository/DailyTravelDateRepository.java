@@ -33,8 +33,24 @@ public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDat
     public boolean existsByTouristSpotNumber(int touristSpotNumber);
 
 
+    @Query(
+        value = 
+        "SELECT " +
+        "tourist_spot_number AS touristSpotNumber," +
+        "daily_travel_number AS dailyTravelNumber," +
+        "daily_travel_date AS dailyTravelDate," +
+        "sequence AS writeSequence," +
+        "write_image_url AS writeImageUrl," +
+        "write_tourist_spot_name AS writeTouristSpotName," +
+        "write_product_address AS writeProductAddress " +
+        "FROM Dailytraveldate " +
+        "WHERE product_number = ? " +
+        "ORDER BY sequence ASC",
+        nativeQuery = true
+        )
     public List<DailyResultSet> findByProductNumber(int productNumber);
 
+    public DailyTravelDateEntity findByDailyTravelNumber(int dailyTravelNumber);
 }
     
 

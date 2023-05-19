@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchTouristProductDaliyTravelDateRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductDaliyTravelDateRequestDto;
 
 import lombok.AllArgsConstructor;
@@ -37,5 +38,13 @@ public class DailyTravelDateEntity {
         this.writeTouristSpotName = dto.getWriteTouristSpotName();
         this.writeProductAddress = dto.getWriteProductAddress();
     }
-
+    
+    public DailyTravelDateEntity(int productNumber, PatchTouristProductDaliyTravelDateRequestDto dto) {
+        this.touristSpotNumber = dto.getTouristSpotNumber();
+        this.productNumber = productNumber;
+        this.dailyTravelDate = dto.getDailyTravelDate();
+        this.writeImageUrl = dto.getWriteImageUrl();
+        this.writeTouristSpotName = dto.getWriteTouristSpotName();
+        this.sequence = dto.getWriteSequence();
+    }
 }
