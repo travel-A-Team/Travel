@@ -3,7 +3,6 @@ package com.travelproject.travelproject.service;
 import org.springframework.http.ResponseEntity;
 
 import com.travelproject.travelproject.dto.request.plannerBoard.PatchPlannerBoardRequestDto;
-import com.travelproject.travelproject.dto.request.plannerBoard.PatchPlannerTravelSpotRequestDto;
 import com.travelproject.travelproject.dto.request.plannerBoard.PostPlannerBoardRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerListResponseDto;
