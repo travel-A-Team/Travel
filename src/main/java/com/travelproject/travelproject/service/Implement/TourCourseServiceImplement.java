@@ -1,5 +1,6 @@
 package com.travelproject.travelproject.service.Implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import com.travelproject.travelproject.dto.response.touristProduct.GetTouristPro
 import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
 import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
+import com.travelproject.travelproject.entity.listEntity.RegionResultSet;
 import com.travelproject.travelproject.repository.DailyTravelDateRepository;
+import com.travelproject.travelproject.repository.LikeyRepository;
+import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristProductRepository;
 import com.travelproject.travelproject.service.TourCourseService;
 
@@ -23,11 +27,16 @@ public class TourCourseServiceImplement implements TourCourseService {
 
     private TouristProductRepository touristProductRepository;
     private DailyTravelDateRepository dailyTravelDateRepository;
+    private LikeyRepository likeyRepository;
 
     @Autowired
-    public TourCourseServiceImplement(TouristProductRepository touristProductRepository, DailyTravelDateRepository dailyTravelDateRepository) {
+    public TourCourseServiceImplement(
+            TouristProductRepository touristProductRepository,
+            DailyTravelDateRepository dailyTravelDateRepository,
+            LikeyRepository likeyRepository) {
         this.touristProductRepository=touristProductRepository;
         this.dailyTravelDateRepository=dailyTravelDateRepository;
+        this.likeyRepository=likeyRepository;
     }
 
     //! 상품 목록 조회
@@ -58,7 +67,7 @@ public class TourCourseServiceImplement implements TourCourseService {
             if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_PRODUCT_BOARD_NUMBER;
 
             List<DailyResultSet> dailyResultSet = dailyTravelDateRepository.findByProductNumber(productBoardNumber);
-            ProductResultSet productResultSet = touristProductRepository.getLikeyCount();
+            ProductResultSet productResultSet = likeyRepository.getLikeyCount();
             
             body = new GetTouristProductResponseDto(touristProductEntity, productResultSet, dailyResultSet);
             
@@ -70,13 +79,27 @@ public class TourCourseServiceImplement implements TourCourseService {
         return ResponseEntity.status(HttpStatus.OK).body(body); 
     }
 
-    //! 지역, 이름 기준 상품 목록 조회
+    //! 이름 기준 상품 목록 조회
     @Override
-    public ResponseEntity<? super GetTouristProductWriteResponseDto> getTourCourseWriteList(String writeRegion, String writeTouristSpotName) {
+    public ResponseEntity<? super GetTouristProductWriteResponseDto> getTourCourseWriteList(String writeTouristProductName) {
         GetTouristProductWriteResponseDto body = null;
 
         try {
-            
+            //# 요청 매개변수 검증 실패
+            if (writeTouristProductName == null) return ResponseMessage.VAILDATION_FAILED;
+
+            //# 유사한 여행 상품 이름 있는지 확인
+            List<ProductResultSet> productResultSet = touristProductRepository.getTourCourseList();
+            List<ProductResultSet> searchProductList = new ArrayList<>();
+
+            for (int count = 0; count < productResultSet.size(); count++) {
+                if (productResultSet.get(count).getProductTitle().contains(writeTouristProductName)) {
+                    searchProductList.add(productResultSet.get(count));
+                }
+            }
+
+            body = new GetTouristProductWriteResponseDto(searchProductList);
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseMessage.DATABASE_ERROR;

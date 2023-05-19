@@ -15,6 +15,6 @@ public interface TourCourseService {
     public ResponseEntity<? super GetTouristProductResponseDto> getTourCourse(Integer productBoardNumber);
     
     //! 지역, 이름 기준 상품 목록 조회
-    public ResponseEntity<? super GetTouristProductWriteResponseDto> getTourCourseWriteList(String writeRegion, String writeTouristSpotName);
+    public ResponseEntity<? super GetTouristProductWriteResponseDto> getTourCourseWriteList(String writeTouristSpotName);
     
 }

@@ -56,8 +56,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/sign-in").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/notice-board/**", "/api/v1/main/**",
-                        "/api/v1/question-board/**", "/api/v1/product-board/**")
-                .permitAll()
+                        "/api/v1/question-board/**", "/api/v1/product-board/**", "/api/v1/recommend-tourlist-spot/**").permitAll()
                 .antMatchers(HttpMethod.PATCH, "/api/v1/question-board/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/api/v1/question-board/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/v1/planner/planner-form").permitAll()
