@@ -27,6 +27,7 @@ public class DailyTravelDateEntity {
     private String writeImageUrl;
     private String writeTouristSpotName;
     private String writeProductAddress;
+    private int sequence;
 
     public DailyTravelDateEntity(int productNumber, PostTouristProductDaliyTravelDateRequestDto dto) {
         this.touristSpotNumber = dto.getTouristSpotNumber();
