@@ -42,15 +42,19 @@ public class GetTouristProductResponseDto extends ResponseDto{
 
 @Data
 class DailyTravel {
+    private int touristSpotNumber;
     private int dailyTravelNumber;
     private String dailyTravelDate;
+    private int writeSequence;
     private String touristSpotName;
     private String touristSpotImageUrl;
     private String touristSpotAddress;
 
     public DailyTravel(DailyResultSet dailyResultSet) {
+        this.touristSpotNumber = dailyResultSet.getTouristSpotNumber();
         this.dailyTravelNumber = dailyResultSet.getDailyTravelNumber();
         this.dailyTravelDate = dailyResultSet.getDailyTravelDate();
+        this.writeSequence = dailyResultSet.getwriteSequence();
         this.touristSpotName = dailyResultSet.getWriteTouristSpotName();
         this.touristSpotImageUrl = dailyResultSet.getWriteImageUrl();
         this.touristSpotAddress = dailyResultSet.getWriteProductAddress();

@@ -6,13 +6,15 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class PostTouristProductDaliyTravelDateRequestDto {
+public class PatchTouristProductDaliyTravelDateRequestDto {
+    @NotNull
+    private Integer dailyTravelNumber;
     @NotNull
     private Integer touristSpotNumber;
     @NotBlank
-    private String daliyTravelDate;
+    private String dailyTravelDate;
     @NotNull
-    private int sequence;
+    private Integer writeSequence;
     @NotBlank
     private String writeImageUrl;
     @NotBlank
