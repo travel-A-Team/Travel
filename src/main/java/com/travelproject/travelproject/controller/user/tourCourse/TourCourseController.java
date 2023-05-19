@@ -42,14 +42,13 @@ public class TourCourseController {
         return response;
     }
     
-    //# 지역, 이름 기준 상품 목록 조회
-    @GetMapping("/list/{writeRegion}/{writeTouristSpotName}")
+    //# 이름 기준 상품 목록 조회
+    @GetMapping("/list/{writeTouristSpotName}")
     public ResponseEntity<? super GetTouristProductWriteResponseDto> getTourCourseWriteList(
-        @PathVariable("writeRegion") String writeRegion,
         @PathVariable("writeTouristSpotName") String writeTouristSpotName
     ) {
         ResponseEntity<? super GetTouristProductWriteResponseDto> response =
-            tourCourseService.getTourCourseWriteList(writeRegion, writeTouristSpotName);
+            tourCourseService.getTourCourseWriteList(writeTouristSpotName);
         return response;    
     }
 }
