@@ -66,7 +66,7 @@ public class TourCourseServiceImplement implements TourCourseService {
             TouristProductEntity touristProductEntity = touristProductRepository.findByProductNumber(productBoardNumber);
             if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_PRODUCT_BOARD_NUMBER;
 
-            List<DailyResultSet> dailyResultSet = dailyTravelDateRepository.findByProductNumber(productBoardNumber);
+            List<DailyResultSet> dailyResultSet = dailyTravelDateRepository.findProductNumber(productBoardNumber);
             ProductResultSet productResultSet = likeyRepository.getLikeyCount();
             
             body = new GetTouristProductResponseDto(touristProductEntity, productResultSet, dailyResultSet);

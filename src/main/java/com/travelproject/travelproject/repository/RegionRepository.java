@@ -21,4 +21,6 @@ public interface RegionRepository extends JpaRepository<RegionEntity, Integer> {
     )
     public List<RegionResultSet> getRegionList();
 
+    public RegionEntity findByRegionNameContains(String regionName);
+
 }

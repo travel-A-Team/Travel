@@ -59,7 +59,7 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
             String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 
 
-            RegionEntity regionEntity = regionRepository.findByRegionName(writeRegion);
+            RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
             writeRegion = regionEntity.getRegionName();
@@ -155,8 +155,8 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
             String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 
-
-            RegionEntity regionEntity = regionRepository.findByRegionName(writeRegion);
+            
+            RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
             writeRegion = regionEntity.getRegionName();
