@@ -62,17 +62,17 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
     @Query (
         value = 
         "SELECT " +
-        "t.product_number AS productNumber," +
-        "t.product_title AS productTitle," +
-        "t.product_total_schedule AS productTotalSchedule," +
-        "t.product_tour_route AS productTourRoute," +
-        "t.product_money AS productMoney," +
-        "count(l.likey_user_email) AS likeCount " +
-        "FROM Touristproduct AS t " +
-        "LEFT JOIN Likey AS l " +
-        "ON t.product_number = l.likey_product " +
-        "WHERE t.product_number = ? " +
-        "GROUP BY t.product_number",
+        "T.product_number AS productNumber," +
+        "T.product_title AS productTitle," +
+        "T.product_total_schedule AS productTotalSchedule," +
+        "T.product_tour_route AS productTourRoute," +
+        "T.product_money AS productMoney," +
+        "count(L.likey_user_email) AS likeCount " +
+        "FROM Touristproduct AS T " +
+        "LEFT JOIN Likey AS L " +
+        "ON t.product_number = L.likey_product " +
+        "WHERE T.product_number = ? " +
+        "GROUP BY T.product_number",
         nativeQuery = true
         )
     public TouristProductResultSet getTouristProduct(int productNumber);
@@ -82,19 +82,19 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
     @Query(
         value = 
         "SELECT " +
-        "t.product_number AS productNumber," +
-        "t.product_image_url AS productImageUrl," +
-        "t.product_title AS productTitle," +
-        "t.product_total_schedule AS productTotalSchedule," +
-        "t.product_tour_route AS productTourRoute," +
-        "t.product_money AS productMoney," +
-        "count(l.likey_user_email) AS likeCount," +
-        "t.product_write_date AS productWriteDate " +
-        "FROM Touristproduct AS t " +
-        "LEFT JOIN Likey AS l " +
-        "ON t.product_number = l.likey_product " +
-        "GROUP BY t.product_number " +
-        "ORDER BY t.product_write_date DESC, t.product_number DESC",
+        "T.product_number AS productNumber," +
+        "T.product_image_url AS productImageUrl," +
+        "T.product_title AS productTitle," +
+        "T.product_total_schedule AS productTotalSchedule," +
+        "T.product_tour_route AS productTourRoute," +
+        "T.product_money AS productMoney," +
+        "count(L.likey_user_email) AS likeCount," +
+        "T.product_write_date AS productWriteDate " +
+        "FROM Touristproduct AS T " +
+        "LEFT JOIN Likey AS L " +
+        "ON T.product_number = L.likey_product " +
+        "GROUP BY T.product_number " +
+        "ORDER BY T.product_write_date DESC, T.product_number DESC",
         nativeQuery = true
         )
     public List<TouristProductListResultSet> getTouristProductList();
