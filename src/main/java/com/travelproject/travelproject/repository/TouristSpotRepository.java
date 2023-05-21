@@ -21,4 +21,10 @@ public interface TouristSpotRepository extends JpaRepository<TouristSpotEntity, 
         nativeQuery = true
     )
     public List<TouristSpotEntity> getList();
+
+    public List<TouristSpotEntity> findByWriteRegionContains (String region);
+
+    public List<TouristSpotEntity> findByWriteTouristSpotNameContains(String touristSpotName);
+
+    public List<TouristSpotEntity> findByWriteRegionAndWriteTouristSpotNameContains(String region, String touristSpotName);
 }

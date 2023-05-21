@@ -19,4 +19,6 @@ public class PostTouristProductDaliyTravelDateRequestDto {
     private String writeTouristSpotName;
     @NotBlank
     private String writeProductAddress;
+    @NotNull
+    private Integer writeSequence;
 }

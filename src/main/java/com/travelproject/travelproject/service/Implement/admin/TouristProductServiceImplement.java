@@ -9,16 +9,19 @@ import org.springframework.stereotype.Service;
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.common.util.UserTokenAdminRoleValidation;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.DeleteDailyTravelNumber;
-import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchDailyTravelNumberRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchTouristProductDaliyTravelDateRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PatchTouristProductRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductDaliyTravelDateRequestDto;
 import com.travelproject.travelproject.dto.request.admin.touristProduct.PostTouristProductRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
+import com.travelproject.travelproject.dto.response.admin.touristProduct.GetSearchRegionAndTouristSpotNameResultResponseDto;
+import com.travelproject.travelproject.dto.response.admin.touristProduct.GetSearchRegionResultResponseDto;
+import com.travelproject.travelproject.dto.response.admin.touristProduct.GetSearchTouristSpotNameResultResponseDto;
 import com.travelproject.travelproject.dto.response.admin.touristProduct.GetTouristProductFormResponseDto;
 import com.travelproject.travelproject.dto.response.admin.touristProduct.GetTouristProductListResponseDto;
 import com.travelproject.travelproject.dto.response.admin.touristProduct.GetTouristProductResponseDto;
 import com.travelproject.travelproject.entity.DailyTravelDateEntity;
+import com.travelproject.travelproject.entity.LikeyEntity;
 import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
@@ -27,6 +30,7 @@ import com.travelproject.travelproject.entity.listEntity.TouristProductListResul
 import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.DailyTravelDateRepository;
+import com.travelproject.travelproject.repository.LikeyRepository;
 import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristProductRepository;
 import com.travelproject.travelproject.repository.TouristSpotRepository;
@@ -44,6 +48,7 @@ public class TouristProductServiceImplement implements TouristProductService {
     private final RegionRepository regionRepository;
     private final TouristSpotRepository touristSpotRepository;
     private final DailyTravelDateRepository dailyTravelDateRepository;
+    private final LikeyRepository likeyRepository;
 
 
 
@@ -66,10 +71,84 @@ public class TouristProductServiceImplement implements TouristProductService {
             return ResponseMessage.DATABASE_ERROR;
         }
 
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+    @Override
+    public ResponseEntity<? super GetSearchRegionResultResponseDto> getSearchRegionResult(UserToken userToken, String region) {
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if(region == null) return ResponseMessage.VAILDATION_FAILED;
+
+        GetSearchRegionResultResponseDto body = null;
+
+        try {
+            RegionEntity regionEntity = regionRepository.findByRegionName(region);
+            if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
+
+            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByWriteRegionContains(region);
+
+            body = new GetSearchRegionResultResponseDto(touristSpotEntities);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
+
+
+    @Override
+    public ResponseEntity<? super GetSearchTouristSpotNameResultResponseDto> getSearchTouristSpotNameResult(UserToken userToken, String touristSpotName) {
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if (touristSpotName == null) return ResponseMessage.VAILDATION_FAILED;
+
+        GetSearchTouristSpotNameResultResponseDto body = null;
+        try {
+            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByWriteTouristSpotNameContains(touristSpotName);
+
+            body = new GetSearchTouristSpotNameResultResponseDto(touristSpotEntities);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+
+
+    @Override
+    public ResponseEntity<? super GetSearchRegionAndTouristSpotNameResultResponseDto> getSearchRegionAndTouristSpotNameResult(
+            UserToken userToken, String region, String touristSpotName) {
+
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if (region == null && touristSpotName == null) return ResponseMessage.VAILDATION_FAILED;
+
+        GetSearchRegionAndTouristSpotNameResultResponseDto body = null;
+        try {
+            RegionEntity regionEntity = regionRepository.findByRegionName(region);
+            if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
+
+            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByWriteRegionAndWriteTouristSpotNameContains(region, touristSpotName);
+
+            body = new GetSearchRegionAndTouristSpotNameResultResponseDto(touristSpotEntities);
+        
+        } catch (Exception exception) {
+                exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
 
 
     @Override
@@ -129,9 +208,9 @@ public class TouristProductServiceImplement implements TouristProductService {
             TouristProductResultSet touristProductResultSet = touristProductRepository.getTouristProduct(productNumber);
             if (touristProductResultSet == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
-            List<DailyResultSet> dailyResultSetList = dailyTravelDateRepository.findByProductNumber(productNumber);
+            List<DailyTravelDateEntity> dailyTravelDateEntities = dailyTravelDateRepository.findByProductNumber(productNumber);
 
-            body = new GetTouristProductResponseDto(touristProductResultSet, dailyResultSetList);
+            body = new GetTouristProductResponseDto(touristProductResultSet, dailyTravelDateEntities);
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -167,7 +246,7 @@ public class TouristProductServiceImplement implements TouristProductService {
 
 
     @Override
-    public ResponseEntity<ResponseDto> patchTouristProduct(UserToken userToken, PatchTouristProductRequestDto dto, PatchDailyTravelNumberRequestDto deleteDailyTravelDto) {
+    public ResponseEntity<ResponseDto> patchTouristProduct(UserToken userToken, PatchTouristProductRequestDto dto) {
         
         boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
         if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
@@ -221,6 +300,7 @@ public class TouristProductServiceImplement implements TouristProductService {
                 if (dailyTravelNumber == null) {
                     DailyTravelDateEntity dailyTravelDateEntity = new DailyTravelDateEntity(productNumber, daliyTravelDate);
                     dailyTravelDateRepository.save(dailyTravelDateEntity);
+                    continue;
                 }
 
                 DailyTravelDateEntity dailyTravelDateEntity = dailyTravelDateRepository.findByDailyTravelNumber(dailyTravelNumber);
@@ -235,8 +315,8 @@ public class TouristProductServiceImplement implements TouristProductService {
                 dailyTravelDateRepository.save(dailyTravelDateEntity);
             }
 
-            if (deleteDailyTravelDto.getDeleteDailyTravelNumberList() != null) {
-                List<DeleteDailyTravelNumber> deleteDailyTravelNumberList = deleteDailyTravelDto.getDeleteDailyTravelNumberList();
+            if (dto.getDeleteDailyTravelNumberList() != null) {
+                List<DeleteDailyTravelNumber> deleteDailyTravelNumberList = dto.getDeleteDailyTravelNumberList();
 
                 for (DeleteDailyTravelNumber deleteDailyTravelNumber: deleteDailyTravelNumberList) {
                     Integer dailyTravelNumber = deleteDailyTravelNumber.getDailyTravelNumber();
@@ -257,5 +337,37 @@ public class TouristProductServiceImplement implements TouristProductService {
 
         return ResponseMessage.SUCCESS;
     }
+
+
+
+    @Override
+    public ResponseEntity<ResponseDto> deleteTouristProduct(UserToken userToken, Integer productNumber) {
+
+        boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
+        if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
+
+        if (productNumber == null) return ResponseMessage.VAILDATION_FAILED;
+
+        try {
+            TouristProductEntity touristProductEntity = touristProductRepository.findByProductNumber(productNumber);
+            if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
+
+            List<DailyTravelDateEntity> dailyTravelDateEntities = dailyTravelDateRepository.findByProductNumber(productNumber);
+            List<LikeyEntity> likeyEntities =likeyRepository.findByLikeyProduct(productNumber);
+            
+            likeyRepository.deleteAll(likeyEntities);
+            dailyTravelDateRepository.deleteAll(dailyTravelDateEntities);
+            touristProductRepository.delete(touristProductEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+        
+        return ResponseMessage.SUCCESS;
+    }
+
+
+
+ 
     
 }

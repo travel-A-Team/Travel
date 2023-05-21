@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
+import com.travelproject.travelproject.entity.DailyTravelDateEntity;
 import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
 import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
 
@@ -19,13 +20,13 @@ public class GetTouristProductResponseDto extends ResponseDto{
     private int likeCount;
     private List<DailyTravel> dailyTravelList;    
     
-    public GetTouristProductResponseDto(TouristProductResultSet touristProductResultSet, List<DailyResultSet> dailyResultSetList) {
+    public GetTouristProductResponseDto(TouristProductResultSet touristProductResultSet, List<DailyTravelDateEntity> dailyTravelDateEntities) {
         super("SU", "Success");
 
         List<DailyTravel> dailyTravelList = new ArrayList<DailyTravel>();
 
-        for (DailyResultSet dailyResultSet: dailyResultSetList) {
-            DailyTravel dailyTravel = new DailyTravel(dailyResultSet);
+        for (DailyTravelDateEntity dailyTravelDateEntity: dailyTravelDateEntities) {
+            DailyTravel dailyTravel = new DailyTravel(dailyTravelDateEntity);
             dailyTravelList.add(dailyTravel);
         }
 
@@ -50,13 +51,13 @@ class DailyTravel {
     private String touristSpotImageUrl;
     private String touristSpotAddress;
 
-    public DailyTravel(DailyResultSet dailyResultSet) {
-        this.touristSpotNumber = dailyResultSet.getTouristSpotNumber();
-        this.dailyTravelNumber = dailyResultSet.getDailyTravelNumber();
-        this.dailyTravelDate = dailyResultSet.getDailyTravelDate();
-        this.writeSequence = dailyResultSet.getwriteSequence();
-        this.touristSpotName = dailyResultSet.getWriteTouristSpotName();
-        this.touristSpotImageUrl = dailyResultSet.getWriteImageUrl();
-        this.touristSpotAddress = dailyResultSet.getWriteProductAddress();
+    public DailyTravel(DailyTravelDateEntity dailyTravelDateEntity) {
+        this.touristSpotNumber = dailyTravelDateEntity.getTouristSpotNumber();
+        this.dailyTravelNumber = dailyTravelDateEntity.getDailyTravelNumber();
+        this.dailyTravelDate = dailyTravelDateEntity.getDailyTravelDate();
+        this.writeSequence = dailyTravelDateEntity.getSequence();
+        this.touristSpotName = dailyTravelDateEntity.getWriteTouristSpotName();
+        this.touristSpotImageUrl = dailyTravelDateEntity.getWriteImageUrl();
+        this.touristSpotAddress = dailyTravelDateEntity.getWriteProductAddress();
     }
 }

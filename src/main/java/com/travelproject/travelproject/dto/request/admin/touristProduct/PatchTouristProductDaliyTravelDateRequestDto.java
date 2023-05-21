@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class PatchTouristProductDaliyTravelDateRequestDto {
-    @NotNull
+
     private Integer dailyTravelNumber;
     @NotNull
     private Integer touristSpotNumber;

@@ -50,7 +50,7 @@ public class RecommendationTouristSpotServiceImplement  implements Recommendatio
 
             String recommendTouristRegion = FindRegionInAddress.findRegionInAddress(touristSpotAddress);
 
-            RegionEntity regionEntity = regionRepository.findByRegionName(recommendTouristRegion);
+            RegionEntity regionEntity = regionRepository.findByRegionNameContains(recommendTouristRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
             recommendTouristRegion = regionEntity.getRegionName();
@@ -147,7 +147,7 @@ public class RecommendationTouristSpotServiceImplement  implements Recommendatio
 
             String recommendTouristRegion = FindRegionInAddress.findRegionInAddress(recommendTouristAddress);
 
-            RegionEntity regionEntity = regionRepository.findByRegionName(recommendTouristRegion);
+            RegionEntity regionEntity = regionRepository.findByRegionNameContains(recommendTouristRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
             recommendTouristRegion = regionEntity.getRegionName();

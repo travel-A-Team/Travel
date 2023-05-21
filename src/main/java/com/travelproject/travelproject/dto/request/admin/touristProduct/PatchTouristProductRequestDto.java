@@ -19,5 +19,6 @@ public class PatchTouristProductRequestDto {
     private Integer productMoney;
     @NotNull
     private List<PatchTouristProductDaliyTravelDateRequestDto> dailyTravelDateList;
+    private List<DeleteDailyTravelNumber> deleteDailyTravelNumberList;
 }
 

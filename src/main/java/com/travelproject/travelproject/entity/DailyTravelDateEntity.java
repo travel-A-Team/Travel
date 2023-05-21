@@ -37,6 +37,7 @@ public class DailyTravelDateEntity {
         this.writeImageUrl = dto.getWriteImageUrl();
         this.writeTouristSpotName = dto.getWriteTouristSpotName();
         this.writeProductAddress = dto.getWriteProductAddress();
+        this.sequence = dto.getWriteSequence();
     }
     
     public DailyTravelDateEntity(int productNumber, PatchTouristProductDaliyTravelDateRequestDto dto) {
@@ -45,6 +46,7 @@ public class DailyTravelDateEntity {
         this.dailyTravelDate = dto.getDailyTravelDate();
         this.writeImageUrl = dto.getWriteImageUrl();
         this.writeTouristSpotName = dto.getWriteTouristSpotName();
+        this.writeProductAddress = dto.getWriteProductAddress();
         this.sequence = dto.getWriteSequence();
     }
 }

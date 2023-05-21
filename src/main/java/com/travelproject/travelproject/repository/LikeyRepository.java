@@ -23,5 +23,6 @@ public interface LikeyRepository extends JpaRepository<LikeyEntity, LikeyPk>{
         nativeQuery = true
     )
     public ProductResultSet getLikeyCount();
+
     
 }
