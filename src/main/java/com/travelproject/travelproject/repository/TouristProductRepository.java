@@ -49,16 +49,6 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
     )
     public List<ProductResultSet> getTourCourseList();
 
-    @Query(
-        value = 
-        "SELECT " +
-        "count(DISTINCT L.likey_user_email) AS likeyCount " +
-        "FROM Likey L;",
-        nativeQuery = true
-    )
-    public ProductResultSet getLikeyCount();
-
-
     @Query (
         value = 
         "SELECT " +
@@ -76,8 +66,6 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         nativeQuery = true
         )
     public TouristProductResultSet getTouristProduct(int productNumber);
-
-
 
     @Query(
         value = 

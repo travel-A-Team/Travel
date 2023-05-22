@@ -21,20 +21,19 @@ public class GetQuestionResponseDto extends ResponseDto {
     private String questionBoardTitle;
     private String questionBoardContent;
     private String questionBoardDate;
-    // private boolean questionAnswerStatus;
+    private String questionAnswerStatus;
     private List<Comment> commentList;
 
-    public GetQuestionResponseDto(
-        QuestionBoardEntity questionBoardEntity, List<CommentEntity> commentEntities) {
+    public GetQuestionResponseDto(QuestionBoardEntity questionBoardEntity, List<CommentEntity> commentEntities, String localAnswerStatus) {
 
-            super("SU", "SUCCESS");
-            
-            this.questionBoardNumber=questionBoardEntity.getQuestionBoardNumber();
-            this.questionBoardTitle=questionBoardEntity.getQuestionBoardTitle();
-            this.questionBoardContent=questionBoardEntity.getQuestionBoardContent();
-            this.questionBoardDate=questionBoardEntity.getQuestionBoardDate();
-            // this.questionAnswerStatus=questionBoardEntity.isAnswerStatus();
-            this.commentList=Comment.createList(commentEntities);
+        super("SU", "SUCCESS");
+
+        this.questionBoardNumber = questionBoardEntity.getQuestionBoardNumber();
+        this.questionBoardTitle = questionBoardEntity.getQuestionBoardTitle();
+        this.questionBoardContent = questionBoardEntity.getQuestionBoardContent();
+        this.questionBoardDate = questionBoardEntity.getQuestionBoardDate();
+        this.questionAnswerStatus = localAnswerStatus;
+        this.commentList = Comment.createList(commentEntities);
     }
 }
 
@@ -49,14 +48,15 @@ class Comment {
     private String commentWriteTime;
 
     Comment(CommentEntity commentEntity) {
-        this.questionBoardNumber=commentEntity.getQuestionBoardNumber();
-        this.commentEmail=commentEntity.getWriteUserEmail();
-        this.commentContent=commentEntity.getCommentContent();
-        this.commentWriteTime=commentEntity.getCommentWriteTime();
+        this.questionBoardNumber = commentEntity.getQuestionBoardNumber();
+        this.commentEmail = commentEntity.getWriteUserEmail();
+        this.commentContent = commentEntity.getCommentContent();
+        this.commentWriteTime = commentEntity.getCommentWriteTime();
     }
 
     static List<Comment> createList(List<CommentEntity> commentEntities) {
-        List<Comment> commentList = new ArrayList<>(); 
+        List<Comment> commentList = new ArrayList<>();
+
         for (CommentEntity commentEntity : commentEntities) {
             Comment comment = new Comment(commentEntity);
             commentList.add(comment);

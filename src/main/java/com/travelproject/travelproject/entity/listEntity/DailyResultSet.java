@@ -1,6 +1,7 @@
 package com.travelproject.travelproject.entity.listEntity;
 
 public interface DailyResultSet {
+    
     public int getTouristSpotNumber();
     public int getDailyTravelNumber();
     public String getDailyTravelDate();
