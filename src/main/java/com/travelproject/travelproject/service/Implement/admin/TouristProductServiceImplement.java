@@ -208,9 +208,9 @@ public class TouristProductServiceImplement implements TouristProductService {
             TouristProductResultSet touristProductResultSet = touristProductRepository.getTouristProduct(productNumber);
             if (touristProductResultSet == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
-            List<DailyTravelDateEntity> dailyTravelDateEntities = dailyTravelDateRepository.findByProductNumber(productNumber);
+            List<DailyResultSet> dailyResultSetList = dailyTravelDateRepository.getDailyTravelDateList(productNumber);
 
-            body = new GetTouristProductResponseDto(touristProductResultSet, dailyTravelDateEntities);
+            body = new GetTouristProductResponseDto(touristProductResultSet, dailyResultSetList);
 
         } catch (Exception exception) {
             exception.printStackTrace();
