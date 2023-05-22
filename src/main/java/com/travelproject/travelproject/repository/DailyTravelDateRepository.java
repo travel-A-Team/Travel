@@ -48,7 +48,7 @@ public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDat
         "ORDER BY sequence ASC",
         nativeQuery = true
         )
-    public List<DailyResultSet> findProductNumber(int productNumber);
+    public List<DailyResultSet> getDailyTravelDateList(int productNumber);
 
     public List<DailyTravelDateEntity> findByProductNumber(int productNumber);
     public DailyTravelDateEntity findByDailyTravelNumber(int dailyTravelNumber);
