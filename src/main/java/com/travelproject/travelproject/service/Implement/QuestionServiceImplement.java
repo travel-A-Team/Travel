@@ -1,5 +1,6 @@
 package com.travelproject.travelproject.service.Implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,8 @@ import com.travelproject.travelproject.dto.request.questionBoard.PostQuestionBoa
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionListResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionResponseDto;
-import com.travelproject.travelproject.entity.QuestionBoardEntity;
 import com.travelproject.travelproject.entity.CommentEntity;
-import com.travelproject.travelproject.entity.listEntity.QuestionListResultSet;
+import com.travelproject.travelproject.entity.QuestionBoardEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.CommentRepository;
 import com.travelproject.travelproject.repository.QuestionRepository;
@@ -45,9 +45,11 @@ public class QuestionServiceImplement implements QuestionService {
     @Override
     public ResponseEntity<ResponseDto> postQuestionBoard(UserToken userToken, PostQuestionBoardRequestDto dto) {
 
-       String questionBoardWriterEmail = userToken.getEmail();
-        
         try {
+            // //# 토큰 검증
+            if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
+            String questionBoardWriterEmail = userToken.getEmail();
+
             //# 존재하지 않는 유저 오류 반환
             boolean existedUserEmail = userRepository.existsByEmail(questionBoardWriterEmail);
 
@@ -71,10 +73,22 @@ public class QuestionServiceImplement implements QuestionService {
     public ResponseEntity<? super GetQuestionListResponseDto> getQuestionBoardList() {
 
         GetQuestionListResponseDto body = null;
-
         try {
-            List<QuestionListResultSet> resultSet = questionRepository.getQuestionList();
-            body = new GetQuestionListResponseDto(resultSet);
+
+            List<QuestionBoardEntity> resultSet = questionRepository.getQuestionList();
+
+            List<String> localAnswerStatus = new ArrayList<>();
+
+            for (int count = 0; count < resultSet.size(); count++) {
+               Integer answerStatus = resultSet.get(count).getAnswerStatus();
+               if (answerStatus == 0){
+                localAnswerStatus.add("답변 대기");
+               } else {
+                localAnswerStatus.add("답변 완료"); 
+               }
+            }
+            
+            body = new GetQuestionListResponseDto(resultSet,localAnswerStatus);
             
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -89,15 +103,23 @@ public class QuestionServiceImplement implements QuestionService {
     public ResponseEntity<? super GetQuestionResponseDto> getQuestionBoard(Integer questionBoardNumber) {
         
         GetQuestionResponseDto body = null;
+        String localAnswerStatus;
 
         try {
             //# 존재하지 않는 문의사항 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
             if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
 
+                Integer answerStatus = questionBoardEntity.getAnswerStatus();
+                if (answerStatus == 0){
+                    localAnswerStatus = "답변 대기";
+                } else {
+                    localAnswerStatus = "답변 완료"; 
+                }
+
             List<CommentEntity> commentEntities = commentRepository.findByQuestionBoardNumber(questionBoardNumber);
 
-            body = new GetQuestionResponseDto(questionBoardEntity, commentEntities);
+            body = new GetQuestionResponseDto(questionBoardEntity, commentEntities, localAnswerStatus);
            
         } catch (Exception exception) {
             //# 데이터베이스 오류
@@ -113,13 +135,15 @@ public class QuestionServiceImplement implements QuestionService {
     @Override
     public ResponseEntity<ResponseDto> patchQuestionBoard(UserToken userToken, PatchQuestionBoardRequestDto dto) {
         
-        String questionBoardWriterEmail = userToken.getEmail();
-
         Integer questionBoardNumber = dto.getQuestionBoardNumber();
         String questionTitle = dto.getQuestionBoardTitle();
         String questionContent = dto.getQuestionBoardContent();
 
         try {
+            //# 토큰 검증
+            if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
+            String questionBoardWriterEmail = userToken.getEmail();
+
             //# 요청 매개변수 검증 실패
             if (questionBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
@@ -141,6 +165,7 @@ public class QuestionServiceImplement implements QuestionService {
             questionRepository.save(questionBoardEntity);
 
         } catch (Exception exception) {
+            //# 데이터베이스 오류
             exception.printStackTrace();
             return ResponseMessage.DATABASE_ERROR;
         }
@@ -152,25 +177,26 @@ public class QuestionServiceImplement implements QuestionService {
     @Override
     public ResponseEntity<ResponseDto> deleteQuestionBoard(UserToken userToken, Integer questionBoardNumber) {
 
-        String questionBoardWriterEmail = userToken.getEmail();
-        
         try {
-            //# 1. 존재하지 않는 문의사항 번호
+            //# 토큰 검증
+            if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
+            String questionBoardWriterEmail = userToken.getEmail();
+
+            //# 존재하지 않는 문의사항 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
             if (questionBoardEntity == null) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
 
-            //# 2. 존재하지 않는 유저 이메일
+            //# 존재하지 않는 유저 이메일
             boolean existedUserEmail = userRepository.existsByEmail(questionBoardWriterEmail);
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
-            //# 3. 권한 없음
+            //# 권한 없음
             boolean equalWriter = questionBoardEntity.getQuestionBoardWriterEmail().equals(questionBoardWriterEmail);
             if (!equalWriter) return ResponseMessage.NO_PERMISSIONS;
 
             commentRepository.deleteByQuestionBoardNumber(questionBoardNumber);
             questionRepository.delete(questionBoardEntity);
             
-
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseMessage.DATABASE_ERROR;

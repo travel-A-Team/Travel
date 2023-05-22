@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.listEntity.QuestionListResultSet;
+import com.travelproject.travelproject.entity.QuestionBoardEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,13 +18,15 @@ public class GetQuestionListResponseDto extends ResponseDto {
 
     private List<QuestionBoardList> questionList;
 
-    public GetQuestionListResponseDto(List<QuestionListResultSet> resultSet) {
-        super("SU", "SUCCESS");
+    public GetQuestionListResponseDto(List<QuestionBoardEntity> resultSet, List<String> localAnswerStatus) {
+        super("SU", "Success");
 
         List<QuestionBoardList> questionList = new ArrayList<>();
 
-        for (QuestionListResultSet result : resultSet) {
-            QuestionBoardList questionBoardList = new QuestionBoardList(result);
+        for (int count = 0; count < resultSet.size(); count++) {
+            String status = localAnswerStatus.get(count);
+            QuestionBoardEntity entity = resultSet.get(count);
+            QuestionBoardList questionBoardList = new QuestionBoardList(entity, status);
             questionList.add(questionBoardList);
         }
 
@@ -42,13 +44,13 @@ class QuestionBoardList {
     private String questionBoardTitle;
     private String questionBoardWriterEmail;
     private String questionBoardDate;
-    // private boolean answerStatus;
+    private String isAnswerStatus;
 
-    public QuestionBoardList(QuestionListResultSet resultSet) {
-        this.questionBoardNumber=resultSet.getQuestionBoardNumber();
-        this.questionBoardTitle=resultSet.getQuestionBoardTitle();
-        this.questionBoardWriterEmail=resultSet.getQuestionBoardWriterEmail();
-        this.questionBoardDate=resultSet.getQuestionBoardDate();
-        // this.answerStatus=resultSet.getAnswerStatus();
+    public QuestionBoardList(QuestionBoardEntity questionBoardEntity, String localAnswerStatus) {
+        this.questionBoardNumber=questionBoardEntity.getQuestionBoardNumber();
+        this.questionBoardTitle=questionBoardEntity.getQuestionBoardTitle();
+        this.questionBoardWriterEmail=questionBoardEntity.getQuestionBoardWriterEmail();
+        this.questionBoardDate=questionBoardEntity.getQuestionBoardDate();
+        this.isAnswerStatus=localAnswerStatus;
     }
 }
