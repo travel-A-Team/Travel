@@ -23,4 +23,6 @@ public interface QuestionRepository extends JpaRepository<QuestionBoardEntity, I
     )
     public List<QuestionBoardEntity> getQuestionList();
 
+    public boolean existsByQuestionBoardNumber(int questionBoardNumber);
+
 }

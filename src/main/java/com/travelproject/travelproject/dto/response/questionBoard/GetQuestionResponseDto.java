@@ -49,7 +49,6 @@ class Comment {
 
     Comment(CommentEntity commentEntity) {
         this.questionBoardNumber = commentEntity.getQuestionBoardNumber();
-        this.commentEmail = commentEntity.getWriteUserEmail();
         this.commentContent = commentEntity.getCommentContent();
         this.commentWriteTime = commentEntity.getCommentWriteTime();
     }
