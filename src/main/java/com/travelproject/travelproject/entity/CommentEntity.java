@@ -1,11 +1,14 @@
 package com.travelproject.travelproject.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import com.travelproject.travelproject.entity.primaryKey.CommentPk;
+import com.travelproject.travelproject.dto.request.questionBoard.PatchCommentBoardRequestDto;
+import com.travelproject.travelproject.dto.request.questionBoard.PostCommentBoardRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,14 +19,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name = "Comment")
 @Table(name = "Comment")
-@IdClass(CommentPk.class)
 public class CommentEntity {
     
     @Id
     private int questionBoardNumber;
-    @Id
-    private String writeUserEmail;
     private String commentContent;
     private String writeUserName;
     private String commentWriteTime;
+
+    public CommentEntity(String writeUserName, PostCommentBoardRequestDto dto) {
+        Date now = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String commentBoardDate = simpleDateFormat.format(now);
+
+        this.questionBoardNumber=dto.getQuestionBoardNumber();
+        this.commentContent=dto.getCommentContent();
+        this.writeUserName=writeUserName;
+        this.commentWriteTime=commentBoardDate;
+    }
 }

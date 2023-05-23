@@ -1,6 +1,8 @@
 package com.travelproject.travelproject.service.Implement;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +11,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
+import com.travelproject.travelproject.dto.request.questionBoard.PatchCommentBoardRequestDto;
 import com.travelproject.travelproject.dto.request.questionBoard.PatchQuestionBoardRequestDto;
+import com.travelproject.travelproject.dto.request.questionBoard.PostCommentBoardRequestDto;
 import com.travelproject.travelproject.dto.request.questionBoard.PostQuestionBoardRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionListResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionResponseDto;
 import com.travelproject.travelproject.entity.CommentEntity;
 import com.travelproject.travelproject.entity.QuestionBoardEntity;
+import com.travelproject.travelproject.entity.UserEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.CommentRepository;
 import com.travelproject.travelproject.repository.QuestionRepository;
@@ -46,13 +51,12 @@ public class QuestionServiceImplement implements QuestionService {
     public ResponseEntity<ResponseDto> postQuestionBoard(UserToken userToken, PostQuestionBoardRequestDto dto) {
 
         try {
-            // //# 토큰 검증
+            //# 토큰 검증
             if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
             String questionBoardWriterEmail = userToken.getEmail();
 
             //# 존재하지 않는 유저 오류 반환
             boolean existedUserEmail = userRepository.existsByEmail(questionBoardWriterEmail);
-
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
             QuestionBoardEntity questionBoardEntity = new QuestionBoardEntity(questionBoardWriterEmail, dto);
@@ -198,6 +202,108 @@ public class QuestionServiceImplement implements QuestionService {
             questionRepository.delete(questionBoardEntity);
             
         } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseMessage.SUCCESS;
+    }
+
+    //! 댓글 작성
+    @Override
+    public ResponseEntity<ResponseDto> postCommentBoard(UserToken userToken, PostCommentBoardRequestDto dto) {
+        
+        try {
+            //# 관리자 토큰 검증 실패
+            if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
+
+            //# 관리자 이메일 검증
+            String commentBoardAdminEmail = userToken.getEmail();
+            if (commentBoardAdminEmail == null) return ResponseMessage.NOT_EXIST_USER_EMAIL;
+            UserEntity userEntity = userRepository.findByEmail(commentBoardAdminEmail); 
+
+            //# 관리자인지 확인(권한 없음)
+            if (!userToken.getRole().equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+
+            //# 요청 매개변수 검증 실패
+            if (dto == null) return ResponseMessage.VAILDATION_FAILED;
+
+            String adminName = userEntity.getName();
+            CommentEntity commentEntity = new CommentEntity(adminName, dto);
+            commentRepository.save(commentEntity);
+            
+        } catch (Exception exception) {
+            //# DB오류
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseMessage.SUCCESS;
+    }
+
+    //! 댓글 수정
+    @Override
+    public ResponseEntity<ResponseDto> patchCommentBoard(UserToken userToken, PatchCommentBoardRequestDto dto) {
+        
+        Integer questionCommentNumber = dto.getQuestionBoardNumber();
+        String commentContent = dto.getCommentContent();
+
+        try {
+            //# 관리자 토큰 검증 실패
+            if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN; 
+
+            //# 관리자인지 확인(권한 없음)
+            if (!userToken.getRole().equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+
+            //# 요청 매개변수 검증 실패
+            if (questionCommentNumber == null || commentContent == null) return ResponseMessage.VAILDATION_FAILED;
+
+            //# 존재하지 않는 문의사항 번호
+            boolean existedAdminQuestionNumber = questionRepository.existsByQuestionBoardNumber(questionCommentNumber);
+            if (!existedAdminQuestionNumber) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
+
+            Date now = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String commentPatchDate = simpleDateFormat.format(now);
+
+            CommentEntity commentEntity = commentRepository.CommentQuestionNumber(questionCommentNumber);
+            
+            commentEntity.setCommentContent(commentContent);
+            commentEntity.setCommentWriteTime(commentPatchDate);
+
+            commentRepository.save(commentEntity);
+
+        } catch (Exception exception) {
+            //# DB오류
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseMessage.SUCCESS;
+    }
+
+    //! 댓글 삭제
+    @Override
+    public ResponseEntity<ResponseDto> deleteCommentBoard(UserToken userToken, Integer questionBoardNumber) {
+        
+        try {
+            //# 관리자 토큰 검증 실패
+            if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN; 
+
+            //# 관리자인지 확인(권한 없음)
+            if (!userToken.getRole().equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+
+            //# 요청 매개변수 검증 실패
+            if (questionBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
+
+            //# 존재하지 않는 문의사항 번호
+            boolean existedAdminQuestionNumber = questionRepository.existsByQuestionBoardNumber(questionBoardNumber);
+            if (!existedAdminQuestionNumber) return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
+
+            commentRepository.deleteByQuestionBoardNumber(questionBoardNumber);
+
+        } catch (Exception exception) {
+            //# DB오류
             exception.printStackTrace();
             return ResponseMessage.DATABASE_ERROR;
         }

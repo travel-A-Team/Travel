@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
+import com.travelproject.travelproject.dto.request.questionBoard.PatchCommentBoardRequestDto;
 import com.travelproject.travelproject.dto.request.questionBoard.PatchQuestionBoardRequestDto;
+import com.travelproject.travelproject.dto.request.questionBoard.PostCommentBoardRequestDto;
 import com.travelproject.travelproject.dto.request.questionBoard.PostQuestionBoardRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.questionBoard.GetQuestionListResponseDto;
@@ -38,9 +40,9 @@ public class QuestionController {
     @PostMapping("/question-form")
     public ResponseEntity<ResponseDto> postQuestionBoard(
         @AuthenticationPrincipal UserToken userToken,
-        @Valid @RequestBody PostQuestionBoardRequestDto requsetBody
+        @Valid @RequestBody PostQuestionBoardRequestDto requestBody
     ) {
-        ResponseEntity<ResponseDto> response = questionService.postQuestionBoard(userToken, requsetBody);
+        ResponseEntity<ResponseDto> response = questionService.postQuestionBoard(userToken, requestBody);
         return response;
     }
 
@@ -83,4 +85,33 @@ public class QuestionController {
         return response;
     }
 
+    //# 댓글 작성
+    @PostMapping("/comment-form")
+    public ResponseEntity<ResponseDto> postCommentBoard(
+        @AuthenticationPrincipal UserToken userToken,
+        @Valid @RequestBody PostCommentBoardRequestDto requestBody
+    ) {
+        ResponseEntity<ResponseDto> response = questionService.postCommentBoard(userToken, requestBody);
+        return response;
+    }
+
+    //# 댓글 수정
+    @PatchMapping("/comment-board") 
+    public ResponseEntity<ResponseDto> patchCommentBoard(
+        @AuthenticationPrincipal UserToken userToken,
+        @Valid @RequestBody PatchCommentBoardRequestDto requestBody
+    ) {
+        ResponseEntity<ResponseDto> response = questionService.patchCommentBoard(userToken, requestBody);
+        return response;
+    }
+     
+    //# 댓글 삭제
+    @DeleteMapping("/comment-board/{questionBoardNumber}")
+    public ResponseEntity<ResponseDto> deleteCommentBoard(
+        @AuthenticationPrincipal UserToken userToken,
+        @PathVariable("questionBoardNumber") Integer questionBoardNumber
+    ) {
+        ResponseEntity<ResponseDto> response = questionService.deleteCommentBoard(userToken, questionBoardNumber);
+        return response;
+    }
 }

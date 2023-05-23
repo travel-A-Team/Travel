@@ -70,7 +70,7 @@ public class TourRecommendServiceImplement implements TourRecommendService {
 
         try {
             //# 요청 매개변수 검증 실패
-            if (writeRegion == null && writeRecommendSpotName == null) return ResponseMessage.VAILDATION_FAILED;
+            if (writeRegion == null || writeRecommendSpotName == null) return ResponseMessage.VAILDATION_FAILED;
 
             List<RecommendResultSet> recommendResultSets = recommendationTouristSpotRepositroy.getRecommnedList();
 
