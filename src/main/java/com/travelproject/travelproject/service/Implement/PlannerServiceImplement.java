@@ -59,14 +59,22 @@ public class PlannerServiceImplement implements PlannerService {
         int plannerSpotListSize = dto.getPlannerTravelSpotList().size();
 
         try {
+
             if (userToken == null) {
                 return ResponseMessage.NOT_EXIST_USER_TOKEN;
             }
+
+            if (!(userToken.getRole().equals("admin"))){
+                return ResponseMessage.NO_PERMISSIONS;
+            }
+
             String plannerUserEmail = userToken.getEmail();
             boolean existedByEmail = userRepository.existsByEmail(plannerUserEmail);
             if (!existedByEmail) {
                 return ResponseMessage.NOT_EXIST_USER_EMAIL;
             }
+
+            
 
             for (int count = 0; count < plannerSpotListSize; count++) {
                 if (count == 0) {
@@ -226,7 +234,7 @@ public class PlannerServiceImplement implements PlannerService {
 
             PlannerEntity plannerEntity = plannerBoardRepository.findByPlannerNumber(plannerNumber);
             if (plannerEntity == null) {
-                return ResponseMessage.NOT_EXIST_PLANNER_BOARD_NUMBER;
+                return ResponseMessage.NOT_EXIST_PLANNER_NUMBER;
             }
 
             List<PlannerDailyTravelDateEntity> plannerDailyTravelDateEntities = plannerDailyTravelDateRepository
@@ -262,6 +270,11 @@ public class PlannerServiceImplement implements PlannerService {
             if (userToken == null) {
                 return ResponseMessage.NOT_EXIST_USER_TOKEN;
             }
+
+            if (!(userToken.getRole().equals("admin"))){
+                return ResponseMessage.NO_PERMISSIONS;
+            }
+
             String plannerUserEmail = userToken.getEmail();
             PlannerEntity plannerEntity = plannerBoardRepository.findByPlannerNumber(plannerNumber);
             if (plannerEntity == null) {
@@ -362,18 +375,23 @@ public class PlannerServiceImplement implements PlannerService {
             if (userToken == null) {
                 return ResponseMessage.NOT_EXIST_USER_TOKEN;
             }
+
+            if (!(userToken.getRole().equals("admin"))){
+                return ResponseMessage.NO_PERMISSIONS;
+            }
+
             String plannerUserEmail = userToken.getEmail();
             if (plannerNumber == null)
                 return ResponseMessage.VAILDATION_FAILED;
 
             PlannerEntity plannerEntity = plannerBoardRepository.findByPlannerNumber(plannerNumber);
             if (plannerEntity == null)
-                return ResponseMessage.NOT_EXIST_PLANNER_BOARD_NUMBER;
+                return ResponseMessage.NOT_EXIST_PLANNER_NUMBER;
 
             List<PlannerDailyTravelDateEntity> plannerDailyTravelDateEntity = plannerDailyTravelDateRepository
                     .findByPlannerPlannerNumber(plannerNumber);
             if (plannerDailyTravelDateEntity == null)
-                return ResponseMessage.NOT_EXIST_PLANNER_BOARD_NUMBER;
+                return ResponseMessage.NOT_EXIST_PLANNER_NUMBER;
 
             boolean existedUserEmail = userRepository.existsByEmail(plannerUserEmail);
             if (!existedUserEmail)

@@ -21,8 +21,8 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_QUESTION_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NQ", "Non-Existent Question Board Number"));
 
-    public static final ResponseEntity<ResponseDto> NOT_EXIST_PLANNER_BOARD_NUMBER 
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NPB", "Non-Existent Planner Board Number"));
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_PLANNER_NUMBER 
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NPB", "Non-Existent Planner Number"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NNN", "Non-Existent Notice Board Number"));
