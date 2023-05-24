@@ -14,13 +14,18 @@ import com.travelproject.travelproject.dto.request.plannerBoard.PostPlannerBoard
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerListResponseDto;
 import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerResponseDto;
+import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerTouristSpotResponseDto;
+import com.travelproject.travelproject.dto.response.plannerBoard.GetPlannerWriteListResponseDto;
 import com.travelproject.travelproject.entity.PlannerDailyTravelDateEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
 import com.travelproject.travelproject.entity.listEntity.PlannerBoardResultSet;
+import com.travelproject.travelproject.entity.listEntity.PlannerWriteRegionResultSet;
+import com.travelproject.travelproject.entity.listEntity.PlannerWriteSpotResultSet;
 import com.travelproject.travelproject.entity.planner.PlannerEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.PlannerBoardRepository;
 import com.travelproject.travelproject.repository.PlannerDailyTravelDateRepository;
+import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.repository.UserRepository;
 import com.travelproject.travelproject.service.PlannerService;
@@ -32,27 +37,32 @@ public class PlannerServiceImplement implements PlannerService {
     private PlannerBoardRepository plannerBoardRepository;
     private PlannerDailyTravelDateRepository plannerDailyTravelDateRepository;
     private TouristSpotRepository touristSpotRepository;
+    private RegionRepository regionRepository;
     private StringBuilder stringBuilder = new StringBuilder();
     private String plannerTourRouteCollection;
 
     @Autowired
     public PlannerServiceImplement(UserRepository userRepository, PlannerBoardRepository plannerBoardRepository,
             PlannerDailyTravelDateRepository plannerDailyTravelDateRepository,
-            TouristSpotRepository touristSpotRepository) {
+            TouristSpotRepository touristSpotRepository, RegionRepository regionRepository) {
         this.userRepository = userRepository;
         this.plannerBoardRepository = plannerBoardRepository;
         this.plannerDailyTravelDateRepository = plannerDailyTravelDateRepository;
         this.touristSpotRepository = touristSpotRepository;
+        this.regionRepository = regionRepository;
     }
 
     // @ 플래너 작성
     @Override
     public ResponseEntity<ResponseDto> postPlannerBoard(UserToken userToken, PostPlannerBoardRequestDto dto) {
 
-        String plannerUserEmail = userToken.getEmail();
         int plannerSpotListSize = dto.getPlannerTravelSpotList().size();
 
         try {
+            if (userToken == null) {
+                return ResponseMessage.NOT_EXIST_USER_TOKEN;
+            }
+            String plannerUserEmail = userToken.getEmail();
             boolean existedByEmail = userRepository.existsByEmail(plannerUserEmail);
             if (!existedByEmail) {
                 return ResponseMessage.NOT_EXIST_USER_EMAIL;
@@ -98,6 +108,7 @@ public class PlannerServiceImplement implements PlannerService {
             for (int count = 0; count < plannerSpotListSize; count++) {
                 int touristSpotNumber = dto.getPlannerTravelSpotList().get(count)
                         .getTouristSpotWriteTouristSpotNumber();
+                int sequence = dto.getPlannerTravelSpotList().get(count).getSequence();
                 TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(touristSpotNumber);
 
                 if (touristSpotEntity == null)
@@ -107,7 +118,7 @@ public class PlannerServiceImplement implements PlannerService {
 
                 PlannerDailyTravelDateEntity plannerDailyTravelDateEntity = new PlannerDailyTravelDateEntity(
                         plannerNumber,
-                        plannerTravelDate, touristSpotEntity, dto);
+                        plannerTravelDate, sequence, touristSpotEntity, dto);
 
                 plannerDailyTravelDateRepository.save(plannerDailyTravelDateEntity);
             }
@@ -118,6 +129,73 @@ public class PlannerServiceImplement implements PlannerService {
         }
 
         return ResponseMessage.SUCCESS;
+    }
+
+    // @ 플래너 작성 시 지역 이름 리스트, 여행지 리스트 불러오기
+    @Override
+    public ResponseEntity<? super GetPlannerWriteListResponseDto> getWritePlannerBoardList() {
+        GetPlannerWriteListResponseDto body = null;
+
+        try {
+            List<PlannerWriteRegionResultSet> plannerWriteRegionResultSet = regionRepository
+                    .getPlannerWriteRegionList();
+            List<PlannerWriteSpotResultSet> plannerWriteSpotResultSet = touristSpotRepository.getPlannerWriteSpotList();
+            body = new GetPlannerWriteListResponseDto(plannerWriteRegionResultSet, plannerWriteSpotResultSet);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+    // @ 플래너 작성 시 지역 이름으로 여행지 검색
+    @Override
+    public ResponseEntity<? super GetPlannerTouristSpotResponseDto> getSearchRegionNameSpotList(
+            String writeRegion) {
+        GetPlannerTouristSpotResponseDto body = null;
+        try {
+            List<TouristSpotEntity> searchPlannerSpotResult = touristSpotRepository
+                    .findByWriteRegionContains(writeRegion);
+            body = new GetPlannerTouristSpotResponseDto(searchPlannerSpotResult);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+    // @ 플래너 작성 시 여행지 이름으로 여행지 검색
+    @Override
+    public ResponseEntity<? super GetPlannerTouristSpotResponseDto> getSearchTouristSpotNameList(
+            String writeTouristSpotName) {
+        GetPlannerTouristSpotResponseDto body = null;
+        try {
+            List<TouristSpotEntity> searchPlannerSpotResult = touristSpotRepository
+                    .findByWriteTouristSpotNameContains(writeTouristSpotName);
+            body = new GetPlannerTouristSpotResponseDto(searchPlannerSpotResult);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+
+    // @ 플래너 작성 시 여행지 지역, 이름으로 여행지 검색
+    @Override
+    public ResponseEntity<? super GetPlannerTouristSpotResponseDto> getSearchTouristSpotList(String writeRegion,
+            String writeTouristSpotName) {
+        GetPlannerTouristSpotResponseDto body = null;
+        try {
+            List<TouristSpotEntity> searchPlannerSpotResult = touristSpotRepository
+                    .findByWriteRegionAndWriteTouristSpotNameContains(writeRegion, writeTouristSpotName);
+            body = new GetPlannerTouristSpotResponseDto(searchPlannerSpotResult);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
     // @ 플래너 목록
@@ -168,8 +246,6 @@ public class PlannerServiceImplement implements PlannerService {
     @Override
     public ResponseEntity<ResponseDto> patchPlannerBoard(UserToken userToken, PatchPlannerBoardRequestDto dto) {
 
-        String plannerUserEmail = userToken.getEmail();
-
         int plannerNumber = dto.getPlannerNumber();
         String plannerTitle = dto.getPlannerTitle();
         int plannerMoney = dto.getPlannerMoney();
@@ -180,8 +256,13 @@ public class PlannerServiceImplement implements PlannerService {
         String writeImageUrl;
         String writeTouristSpotName;
         String writePlannerAddress;
+        int sequence;
 
         try {
+            if (userToken == null) {
+                return ResponseMessage.NOT_EXIST_USER_TOKEN;
+            }
+            String plannerUserEmail = userToken.getEmail();
             PlannerEntity plannerEntity = plannerBoardRepository.findByPlannerNumber(plannerNumber);
             if (plannerEntity == null) {
                 return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
@@ -235,6 +316,9 @@ public class PlannerServiceImplement implements PlannerService {
             plannerBoardRepository.save(plannerEntity);
             stringBuilder.setLength(0);
 
+            List<PlannerDailyTravelDateEntity> plannerDailyEntities = plannerDailyTravelDateRepository
+                    .findByPlannerPlannerNumber(plannerEntity.getPlannerNumber());
+
             for (int count = 0; count < plannerSpotListSize; count++) {
                 touristSpotWriteTouristSpotNumber = dto.getPlannerTravelSpotList().get(count)
                         .getTouristSpotWriteTouristSpotNumber();
@@ -242,15 +326,24 @@ public class PlannerServiceImplement implements PlannerService {
                 writeImageUrl = dto.getPlannerTravelSpotList().get(count).getWriteImageUrl();
                 writeTouristSpotName = dto.getPlannerTravelSpotList().get(count).getWriteTouristSpotName();
                 writePlannerAddress = dto.getPlannerTravelSpotList().get(count).getWritePlannerAddress();
+                sequence = dto.getPlannerTravelSpotList().get(count).getSequence();
 
-                PlannerDailyTravelDateEntity plannerDailyTravelDateEntity = plannerDailyTravelDateRepository
-                        .findByPlannerDailyNumber(count + 1);
-                plannerDailyTravelDateEntity.setTouristSpotWriteTouristSpotNumber(touristSpotWriteTouristSpotNumber);
-                plannerDailyTravelDateEntity.setPlannerTravelDate(plannerTravelDate);
-                plannerDailyTravelDateEntity.setWriteImageUrl(writeImageUrl);
-                plannerDailyTravelDateEntity.setWriteTouristSpotName(writeTouristSpotName);
-                plannerDailyTravelDateEntity.setWritePlannerAddress(writePlannerAddress);
-                plannerDailyTravelDateRepository.save(plannerDailyTravelDateEntity);
+                if (count < plannerDailyEntities.size()) {
+                    PlannerDailyTravelDateEntity plannerDailyTravelDateEntity = plannerDailyEntities.get(count);
+                    plannerDailyTravelDateEntity
+                            .setTouristSpotWriteTouristSpotNumber(touristSpotWriteTouristSpotNumber);
+                    plannerDailyTravelDateEntity.setPlannerTravelDate(plannerTravelDate);
+                    plannerDailyTravelDateEntity.setWriteImageUrl(writeImageUrl);
+                    plannerDailyTravelDateEntity.setWriteTouristSpotName(writeTouristSpotName);
+                    plannerDailyTravelDateEntity.setWritePlannerAddress(writePlannerAddress);
+                    plannerDailyTravelDateEntity.setSequence(sequence);
+                    plannerDailyTravelDateRepository.save(plannerDailyTravelDateEntity);
+                } else {
+                    PlannerDailyTravelDateEntity addPlannerDailyTravelDateEntity = new PlannerDailyTravelDateEntity(dto,
+                            touristSpotWriteTouristSpotNumber, plannerTravelDate, writeImageUrl, writeTouristSpotName,
+                            writePlannerAddress, sequence);
+                    plannerDailyTravelDateRepository.save(addPlannerDailyTravelDateEntity);
+                }
             }
 
         } catch (Exception exception) {
@@ -265,10 +358,11 @@ public class PlannerServiceImplement implements PlannerService {
     @Override
     public ResponseEntity<ResponseDto> deletePlannerBoard(UserToken userToken, Integer plannerNumber) {
 
-        String plannerUserEmail = userToken.getEmail();
-
         try {
-
+            if (userToken == null) {
+                return ResponseMessage.NOT_EXIST_USER_TOKEN;
+            }
+            String plannerUserEmail = userToken.getEmail();
             if (plannerNumber == null)
                 return ResponseMessage.VAILDATION_FAILED;
 

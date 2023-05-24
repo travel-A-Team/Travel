@@ -18,7 +18,6 @@ import lombok.Setter;
 public class GetMainPageProductDto extends ResponseDto {
 
     private List<TouristProductTopList> productTop3List;
-    // 배너 나중에 해야 됨
 
     public GetMainPageProductDto(List<ProductResultSet> productResultSet, List<LikeyEntity> likeyEntities) {
         super("SU", "SUCCESS");

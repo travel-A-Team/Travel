@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostPlannerTravelSpotRequestDto {
     @NotNull
-    private Integer plannerPlannerNumber;
-    @NotNull
     private Integer touristSpotWriteTouristSpotNumber;
     @NotBlank
     private String plannerTravelDate;
@@ -23,4 +21,6 @@ public class PostPlannerTravelSpotRequestDto {
     private String writeTouristSpotName;
     @NotBlank
     private String writePlannerAddress;
+    @NotNull
+    private Integer sequence;
 }

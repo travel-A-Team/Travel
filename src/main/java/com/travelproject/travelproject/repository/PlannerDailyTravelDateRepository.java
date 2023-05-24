@@ -18,6 +18,8 @@ public interface PlannerDailyTravelDateRepository extends JpaRepository<PlannerD
 
     public boolean existsByPlannerDailyNumber(int plannerDailyNumber);
 
+    public boolean existsBySequence(int sequence);
+
     @Transactional
     void deleteByPlannerPlannerNumber(int plannerPlannerNumber);
 

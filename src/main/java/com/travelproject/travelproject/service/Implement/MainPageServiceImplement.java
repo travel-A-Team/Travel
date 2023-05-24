@@ -8,11 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
+import com.travelproject.travelproject.dto.response.mainPage.GetMainPageBannerDto;
 import com.travelproject.travelproject.dto.response.mainPage.GetMainPageProductDto;
 import com.travelproject.travelproject.dto.response.mainPage.GetMainPageRecommendDto;
+import com.travelproject.travelproject.entity.BannerEntity;
 import com.travelproject.travelproject.entity.LikeyEntity;
 import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
 import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
+import com.travelproject.travelproject.repository.BannerRepository;
 import com.travelproject.travelproject.repository.LikeyRepository;
 import com.travelproject.travelproject.repository.RecommendationTouristSpotRepositroy;
 import com.travelproject.travelproject.repository.TouristProductRepository;
@@ -24,12 +27,35 @@ public class MainPageServiceImplement implements MainPageService {
     private TouristProductRepository touristProductRepository;
     private RecommendationTouristSpotRepositroy recommendationTouristSpotRepositroy;
     private LikeyRepository likeyRepository;
+    private BannerRepository bannerRepository;
 
     @Autowired
-    public MainPageServiceImplement(TouristProductRepository touristProductRepository, RecommendationTouristSpotRepositroy recommendationTouristSpotRepositroy, LikeyRepository likeyRepository) {
-        this.touristProductRepository=touristProductRepository;
-        this.recommendationTouristSpotRepositroy=recommendationTouristSpotRepositroy;
-        this.likeyRepository=likeyRepository;
+    public MainPageServiceImplement(TouristProductRepository touristProductRepository,
+            RecommendationTouristSpotRepositroy recommendationTouristSpotRepositroy, LikeyRepository likeyRepository,
+            BannerRepository bannerRepository) {
+        this.touristProductRepository = touristProductRepository;
+        this.recommendationTouristSpotRepositroy = recommendationTouristSpotRepositroy;
+        this.likeyRepository = likeyRepository;
+        this.bannerRepository = bannerRepository;
+    }
+
+    @Override
+    public ResponseEntity<? super GetMainPageBannerDto> getBannerList() {
+
+        GetMainPageBannerDto body = null;
+
+        try {
+
+            List<BannerEntity> bannerEntities = bannerRepository.getBannerList();
+            body = new GetMainPageBannerDto(bannerEntities);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseMessage.DATABASE_ERROR;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+
     }
 
     // ! Top3 조회
@@ -45,7 +71,7 @@ public class MainPageServiceImplement implements MainPageService {
                 int likeyProduct = productResultSet.get(count).getProductNumber();
                 likeyEntities = likeyRepository.findByLikeyProduct(likeyProduct);
             }
-            
+
             body = new GetMainPageProductDto(productResultSet, likeyEntities);
 
             // Top3 값들 받아서 body에 담아주면 됨
@@ -75,4 +101,5 @@ public class MainPageServiceImplement implements MainPageService {
 
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
+
 }

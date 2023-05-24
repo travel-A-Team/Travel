@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
+import com.travelproject.travelproject.dto.response.mainPage.GetMainPageBannerDto;
 import com.travelproject.travelproject.dto.response.mainPage.GetMainPageProductDto;
 import com.travelproject.travelproject.dto.response.mainPage.GetMainPageRecommendDto;
 import com.travelproject.travelproject.service.MainPageService;
@@ -22,8 +23,13 @@ public class MainPageController {
         this.mainPageService=mainPageService;
     }
 
-    // 이미지 배너 추가해야 되고, 매핑 한페이지니깐 1개로 통일
-
+    //# 이미지 배너 조회
+    @GetMapping("/banner")
+    public ResponseEntity<? super GetMainPageBannerDto> getBannerList() {
+        ResponseEntity<? super GetMainPageBannerDto> response = mainPageService.getBannerList();
+        return response;
+    }
+    
     //# Top 3 여행지코스 상품 목록 조회
     @GetMapping("/product-board-top3")
     public ResponseEntity<? super GetMainPageProductDto> getProductBoardListTop3() {

@@ -1,6 +1,5 @@
 package com.travelproject.travelproject.dto.response.tourRecommend;
 
-import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
