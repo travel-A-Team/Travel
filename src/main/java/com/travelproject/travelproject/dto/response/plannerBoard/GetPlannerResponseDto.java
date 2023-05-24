@@ -41,7 +41,6 @@ public class GetPlannerResponseDto extends ResponseDto {
 @AllArgsConstructor
 class PlannerTravelSpot {
     private int plannerDailyNumber;
-    private int plannerPlannerNumber;
     private String plannerTravelDate;
     private String writeImageUrl;
     private String writeTouristSpotName;
@@ -49,7 +48,6 @@ class PlannerTravelSpot {
 
     PlannerTravelSpot(PlannerDailyTravelDateEntity plannerDailyTravelDateEntity) {
         this.plannerDailyNumber = plannerDailyTravelDateEntity.getPlannerDailyNumber();
-        this.plannerPlannerNumber = plannerDailyTravelDateEntity.getPlannerPlannerNumber();
         this.plannerTravelDate = plannerDailyTravelDateEntity.getPlannerTravelDate();
         this.writeImageUrl = plannerDailyTravelDateEntity.getWriteImageUrl();
         this.writeTouristSpotName = plannerDailyTravelDateEntity.getWriteTouristSpotName();

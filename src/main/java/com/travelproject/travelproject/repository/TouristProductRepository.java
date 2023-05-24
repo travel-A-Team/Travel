@@ -86,4 +86,5 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         nativeQuery = true
         )
     public List<TouristProductListResultSet> getTouristProductList();
+
 }

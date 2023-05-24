@@ -1,16 +1,25 @@
 package com.travelproject.travelproject.controller.user.tourCourse;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
-import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductListResponseDto;
-import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductResponseDto;
-import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductWriteResponseDto;
+import com.travelproject.travelproject.dto.request.questionBoard.PostProductLikeyRequestDto;
+import com.travelproject.travelproject.dto.response.ResponseDto;
+import com.travelproject.travelproject.dto.response.touristproduct.GetTouristProductListResponseDto;
+import com.travelproject.travelproject.dto.response.touristproduct.GetTouristProductResponseDto;
+import com.travelproject.travelproject.dto.response.touristproduct.GetTouristProductWriteResponseDto;
+import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.service.TourCourseService;
 
 @RestController
@@ -50,5 +59,24 @@ public class TourCourseController {
         ResponseEntity<? super GetTouristProductWriteResponseDto> response =
             tourCourseService.getTourCourseWriteList(writeTouristSpotName);
         return response;    
+    }
+
+    @PostMapping("/likey")
+    public ResponseEntity<ResponseDto> postTourCourseLikey(
+        @AuthenticationPrincipal UserToken userToken,
+        @Valid @RequestBody PostProductLikeyRequestDto requestBody 
+    )   {
+        ResponseEntity<ResponseDto> response = tourCourseService.postTourCourseLikey(userToken, requestBody);
+        return response;
+    }
+
+    @DeleteMapping("/likey/{productBoardNumber}")
+    public ResponseEntity<ResponseDto> deleteTourCourseLikey(
+        @AuthenticationPrincipal UserToken userToken,
+        @PathVariable("productBoardNumber") Integer productBoardNumber
+    ) {
+        ResponseEntity<ResponseDto> response =
+            tourCourseService.deleteTourCourseLikey(userToken, productBoardNumber);
+        return response;
     }
 }

@@ -24,5 +24,14 @@ public interface LikeyRepository extends JpaRepository<LikeyEntity, LikeyPk>{
     )
     public ProductResultSet getLikeyCount();
 
+    @Query(
+        value =
+        "SELECT * " +
+        "FROM Likey " +
+        "WHERE likey_product = ? ",
+        nativeQuery = true
+    )
+
+    public LikeyEntity getLikey(int productNumber);
     
 }
