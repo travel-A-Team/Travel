@@ -27,9 +27,6 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_NOTICE_BOARD_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NNN", "Non-Existent Notice Board Number"));
 
-    public static final ResponseEntity<ResponseDto> NOT_EXIST_PRODUCT_BOARD_NUMBER 
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NPN", "Non-Existent Product Board Number"));
-
     public static final ResponseEntity<ResponseDto> NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NW", "Non-Existent Write TouristSpot Number"));
 
@@ -46,7 +43,7 @@ public interface ResponseMessage {
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("SF", "Sign In Failed"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_USER_TOKEN
-    = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseDto("NT", "Non-Existent User Token"));
+    = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDto("NT", "Non-Existent User Token"));
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_USER_EMAIL 
     = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDto("NU", "Non-Existent User Email"));

@@ -70,7 +70,7 @@ public class TourCourseServiceImplement implements TourCourseService {
         try {
             //# 존재하지 않는 상품 번호
             TouristProductEntity touristProductEntity = touristProductRepository.findByProductNumber(productBoardNumber);
-            if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_PRODUCT_BOARD_NUMBER;
+            if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
             List<DailyResultSet> dailyResultSet = dailyTravelDateRepository.getDailyTravelDateList(productBoardNumber);
             ProductResultSet productResultSet = likeyRepository.getLikeyCount();
@@ -114,23 +114,23 @@ public class TourCourseServiceImplement implements TourCourseService {
         return ResponseEntity.status(HttpStatus.OK).body(body); 
     }
 
-    // ! 좋아요 누르기
+    //! 좋아요 누르기
     @Override
     public ResponseEntity<ResponseDto> postTourCourseLikey(UserToken userToken, PostProductLikeyRequestDto dto) {
 
         try{
             // # 토큰 검증
-            if (userToken == null) return ResponseMessage.NOT_EXIST_PRODUCT_BOARD_NUMBER;
+            if (userToken == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
             String productLikeyEmail = userToken.getEmail();
 
             // # 존재하지 않는 유저 오류 반환
             boolean existedUserEmail = userRepository.existsByEmail(productLikeyEmail);
-
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
             LikeyEntity likeyEntity = new LikeyEntity(productLikeyEmail, dto);
             likeyRepository.save(likeyEntity);
+
         } catch (Exception exception) {
             //# 데이터베이스 오류 반환
             exception.printStackTrace();
@@ -141,6 +141,7 @@ public class TourCourseServiceImplement implements TourCourseService {
         return ResponseMessage.SUCCESS;
     }
 
+    //! 좋아요 취소
     @Override
     public ResponseEntity<ResponseDto> deleteTourCourseLikey(UserToken userToken, Integer productBoardNumber) {
     
@@ -155,7 +156,7 @@ public class TourCourseServiceImplement implements TourCourseService {
             
             //# 존재하지 않는 상품 번호
             LikeyEntity likeyEntity = likeyRepository.getLikey(productBoardNumber);
-            if (likeyEntity == null) return ResponseMessage.NOT_EXIST_PRODUCT_BOARD_NUMBER;
+            if (likeyEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
             //# 존재하지 않는 유저 이메일
             boolean existedUserEmail = userRepository.existsByEmail(productLikeyEmail);
@@ -173,6 +174,5 @@ public class TourCourseServiceImplement implements TourCourseService {
         }
 
         return ResponseMessage.SUCCESS;
-    
     }
 }
