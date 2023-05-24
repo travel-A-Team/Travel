@@ -55,14 +55,9 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests()
                 .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/sign-in").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/notice-board/**", "/api/v1/main/**",
-                        "/api/v1/question-board/**", "/api/v1/product-board/**", "/api/v1/recommend-tourlist-spot/**").permitAll()
-                .antMatchers(HttpMethod.PATCH, "/api/v1/question-board/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/api/v1/question-board/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/v1/planner/planner-form").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/planner/**").permitAll()
-                .antMatchers(HttpMethod.PATCH, "/api/v1/planner/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/api/v1/planner/**").permitAll()
+                .antMatchers("/api/v1/notice-board/**", "/api/v1/main/**",
+                 "/api/v1/product-board/**", "/api/v1/recommend-tourlist-spot/**").permitAll() 
+                .antMatchers(HttpMethod.GET, "/api/v1/question-board/list", "/api/v1/question-board/**").permitAll()
                 .anyRequest().authenticated().and()
 
                 // @ ↓ 위에서 만든 FailedAuthenticationEntryPoint클래스를 넣어주면 됨

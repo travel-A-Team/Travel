@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.dto.response.touristproduct;
+package com.travelproject.travelproject.dto.response.touristProduct;
 
 import java.util.ArrayList;
 import java.util.List;

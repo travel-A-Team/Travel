@@ -4,9 +4,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.travelproject.travelproject.dto.request.questionBoard.PostProductLikeyRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.dto.response.touristproduct.GetTouristProductListResponseDto;
-import com.travelproject.travelproject.dto.response.touristproduct.GetTouristProductResponseDto;
-import com.travelproject.travelproject.dto.response.touristproduct.GetTouristProductWriteResponseDto;
+import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductListResponseDto;
+import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductResponseDto;
+import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductWriteResponseDto;
 import com.travelproject.travelproject.provider.UserToken;
 
 public interface TourCourseService {
