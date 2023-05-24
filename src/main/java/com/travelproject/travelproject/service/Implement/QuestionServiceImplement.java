@@ -87,12 +87,12 @@ public class QuestionServiceImplement implements QuestionService {
             List<String> localAnswerStatus = new ArrayList<>();
 
             for (int count = 0; count < resultSet.size(); count++) {
-               Integer answerStatus = resultSet.get(count).getAnswerStatus();
-               if (answerStatus == 0){
-                localAnswerStatus.add("답변 대기");
-               } else {
-                localAnswerStatus.add("답변 완료"); 
-               }
+                Integer answerStatus = resultSet.get(count).getAnswerStatus();
+                if (answerStatus == 0){
+                    localAnswerStatus.add("답변 대기");
+                } else {
+                    localAnswerStatus.add("답변 완료"); 
+                }
             }
             
             body = new GetQuestionListResponseDto(resultSet,localAnswerStatus);
@@ -127,7 +127,7 @@ public class QuestionServiceImplement implements QuestionService {
             List<CommentEntity> commentEntities = commentRepository.findByQuestionBoardNumber(questionBoardNumber);
 
             body = new GetQuestionResponseDto(questionBoardEntity, commentEntities, localAnswerStatus);
-           
+
         } catch (Exception exception) {
             //# 데이터베이스 오류
             exception.printStackTrace();
