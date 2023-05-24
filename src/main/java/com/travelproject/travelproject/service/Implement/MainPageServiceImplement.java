@@ -39,6 +39,7 @@ public class MainPageServiceImplement implements MainPageService {
         this.bannerRepository = bannerRepository;
     }
 
+    //! 배너 조회
     @Override
     public ResponseEntity<? super GetMainPageBannerDto> getBannerList() {
 
@@ -58,7 +59,7 @@ public class MainPageServiceImplement implements MainPageService {
 
     }
 
-    // ! Top3 조회
+    //! Top3 조회
     @Override
     public ResponseEntity<? super GetMainPageProductDto> getProductBoardListTop3() {
         GetMainPageProductDto body = null;
@@ -84,7 +85,7 @@ public class MainPageServiceImplement implements MainPageService {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
-    // ! 추천여행지 3개 조회
+    //! 추천여행지 3개 조회
     @Override
     public ResponseEntity<? super GetMainPageRecommendDto> getRecommendList3() {
         GetMainPageRecommendDto body = null;

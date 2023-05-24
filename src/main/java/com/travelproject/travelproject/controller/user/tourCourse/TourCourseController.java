@@ -61,6 +61,7 @@ public class TourCourseController {
         return response;    
     }
 
+    //# 좋아요 누르기
     @PostMapping("/likey")
     public ResponseEntity<ResponseDto> postTourCourseLikey(
         @AuthenticationPrincipal UserToken userToken,
@@ -70,6 +71,7 @@ public class TourCourseController {
         return response;
     }
 
+    //# 좋아요 취소
     @DeleteMapping("/likey/{productBoardNumber}")
     public ResponseEntity<ResponseDto> deleteTourCourseLikey(
         @AuthenticationPrincipal UserToken userToken,

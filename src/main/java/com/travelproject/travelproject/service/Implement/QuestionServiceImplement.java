@@ -55,6 +55,9 @@ public class QuestionServiceImplement implements QuestionService {
             if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
             String questionBoardWriterEmail = userToken.getEmail();
 
+            //# 관리자인지 확인
+            if (!userToken.getRole().equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+
             //# 존재하지 않는 유저 오류 반환
             boolean existedUserEmail = userRepository.existsByEmail(questionBoardWriterEmail);
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
@@ -148,6 +151,9 @@ public class QuestionServiceImplement implements QuestionService {
             if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
             String questionBoardWriterEmail = userToken.getEmail();
 
+            //# 관리자인지 확인
+            if (!userToken.getRole().equals("admin")) return ResponseMessage.NO_PERMISSIONS;
+
             //# 요청 매개변수 검증 실패
             if (questionBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
@@ -185,6 +191,9 @@ public class QuestionServiceImplement implements QuestionService {
             //# 토큰 검증
             if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
             String questionBoardWriterEmail = userToken.getEmail();
+
+            //# 관리자인지 확인
+            if (!userToken.getRole().equals("admin")) return ResponseMessage.NO_PERMISSIONS;
 
             //# 존재하지 않는 문의사항 번호
             QuestionBoardEntity questionBoardEntity = questionRepository.findByQuestionBoardNumber(questionBoardNumber);
