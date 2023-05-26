@@ -38,9 +38,17 @@ public interface ResponseMessage {
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_REGION_NAME 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NR", "Non-Existent Region Name"));
+    
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_TRANSACTION_ID 
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NTI", "Non-Existent Transaction Id"));
 
     public static final ResponseEntity<ResponseDto> SIGN_IN_FAILED 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("SF", "Sign In Failed"));
+
+    public static final ResponseEntity<ResponseDto> PAYMENT_CANCEL_FAILD
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("CF", "Payment Cancel Failed"));
+
+    
 
     public static final ResponseEntity<ResponseDto> NOT_EXIST_USER_TOKEN
     = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDto("NT", "Non-Existent User Token"));

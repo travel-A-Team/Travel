@@ -131,7 +131,7 @@ public class TouristProductServiceImplement implements TouristProductService {
         boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
         if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
 
-        if (region == null && touristSpotName == null) return ResponseMessage.VAILDATION_FAILED;
+        if (region == null || touristSpotName == null) return ResponseMessage.VAILDATION_FAILED;
 
         GetSearchRegionAndTouristSpotNameResultResponseDto body = null;
         try {

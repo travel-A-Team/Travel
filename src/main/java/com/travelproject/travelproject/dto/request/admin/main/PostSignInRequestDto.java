@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInRequestDto {
+public class PostSignInRequestDto {
     
     @NotBlank
     @Email
