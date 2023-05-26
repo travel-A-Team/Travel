@@ -1,7 +1,9 @@
 package com.travelproject.travelproject.common.constant;
 
 public interface RequestPattern {
-    public static final String ADMIN_MAIN_API = "api/v1/admin";
+    public static final String ADMIN_MAIN_API = "api/v1/admin/main";
+    public static final String ADMIN_USER_API = "api/v1/admin/user";
+    public static final String ADMIN_PAYMENT_API = "api/v1/admin/payment";
     public static final String ADMIN_NOTICE_BOARD_API = "api/v1/admin/notice-board";
     public static final String ADMIN_TOURIST_SPOT_API = "api/v1/admin/tourist-spot";
     public static final String ADMIN_FILE_API = "api/v1/admin/file";

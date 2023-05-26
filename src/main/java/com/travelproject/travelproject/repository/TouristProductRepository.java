@@ -16,9 +16,7 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
 
     public TouristProductEntity findByProductNumber(int productNumber);
     
-    // 상품 관련 쿼리문 적어야 됨
-    // 여행지 코스는 필요없을거 같아서 일단 뺐음
-    // 좋아요 관련된거 찾아야 됨
+    
     @Query(
         value = 
         "SELECT " +
@@ -87,4 +85,12 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         )
     public List<TouristProductListResultSet> getTouristProductList();
 
+    @Query(
+        value = 
+        "SELECT * " +
+        "FROM Touristproduct " +
+        "ORDER BY product_write_date DESC, product_number DESC",
+        nativeQuery = true
+        )
+    public List<TouristProductEntity> getTouristProductListInAdminMainPage();
 }
