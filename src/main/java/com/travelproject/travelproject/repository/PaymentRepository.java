@@ -16,8 +16,8 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Integer>
         value = 
         "SELECT * " +
         "FROM Payment " +
-        "WHERE payment_user_email = ? " +
-        "ORDER BY payment_datetime DESC",
+        "WHERE user_email = ? " +
+        "ORDER BY datetime DESC",
         nativeQuery = true
     )
     public List<PaymentEntity> getPaymentList(String paymentUserEmail);
@@ -26,10 +26,10 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Integer>
     @Query (
         value = 
         "SELECT " +
-        "SUM(payment_amount) AS yearSale " +
+        "SUM(amount) AS yearSale " +
         "FROM Payment " +
-        "WHERE payment_datetime LIKE ? " +
-        "GROUP BY payment_amount",
+        "WHERE datetime LIKE ? " +
+        "GROUP BY amount",
         nativeQuery = true
     )
     public Integer paymentYearTotalSale(String year);
@@ -37,10 +37,10 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Integer>
     @Query (
         value = 
         "SELECT " +
-        "SUM(payment_amount) AS monthSale " +
+        "SUM(amount) AS monthSale " +
         "FROM Payment " +
-        "WHERE payment_datetime LIKE ? " +
-        "GROUP BY payment_amount",
+        "WHERE datetime LIKE ? " +
+        "GROUP BY amount",
         nativeQuery = true
     )
     public Integer paymentMonthTotalSale(String month);
@@ -48,10 +48,10 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Integer>
     @Query (
         value = 
         "SELECT " +
-        "SUM(payment_amount) AS daySale " +
+        "SUM(amount) AS daySale " +
         "FROM Payment " +
-        "WHERE payment_datetime LIKE ? " +
-        "GROUP BY payment_amount",
+        "WHERE datetime LIKE ? " +
+        "GROUP BY amount",
         nativeQuery = true
     )
     public Integer paymentDayTotalSale(String day);
@@ -60,8 +60,10 @@ public interface PaymentRepository extends JpaRepository<PaymentEntity, Integer>
         value = 
         "SELECT * " +
         "FROM Payment " +
-        "ORDER BY payment_datetime DESC",
+        "ORDER BY datetime DESC",
         nativeQuery = true
     )
     public List<PaymentEntity> getPaymentList();
+
+    public boolean existsByTransactionId(String transactionId);
 }

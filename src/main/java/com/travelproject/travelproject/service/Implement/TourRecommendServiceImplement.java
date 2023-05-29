@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.response.tourRecommend.GetRecommendTourListResponseDto;
 import com.travelproject.travelproject.dto.response.tourRecommend.GetRecommendTourResponseDto;
-import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
+import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
 import com.travelproject.travelproject.repository.RecommendationTouristSpotRepositroy;
 import com.travelproject.travelproject.service.TourRecommendService;
 

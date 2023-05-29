@@ -20,26 +20,26 @@ public class PaymentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int paymentNumber;
     private String transactionId;
-    private String paymentOrderNumber;
-    private String paymentUserEmail;
-    private String paymentUserPhoneNumber;
-    private String paymentUserName;
-    private String paymentProductName;
-    private int paymentAmount;
+    private String orderNumber;
+    private String userEmail;
+    private String userPhoneNumber;
+    private String userName;
+    private String productName;
+    private int amount;
     private int taxFreeAmount;
-    private String paymentStatus;
-    private String paymentDatetime;
+    private String status;
+    private String datetime;
 
     public PaymentEntity(String paymentUserEmail, String paymentUserPhoneNumber, String  paymentUserName, PostPaymentRequestDto dto) {
         this.transactionId = dto.getTransactionId();
-        this.paymentOrderNumber = dto.getPaymentOrderNumber();
-        this.paymentUserEmail = paymentUserEmail;
-        this.paymentUserPhoneNumber = paymentUserPhoneNumber;
-        this.paymentUserName = paymentUserName;
-        this.paymentProductName = dto.getPaymentProductName();
-        this.paymentAmount = dto.getPaymentAmount();
+        this.orderNumber = dto.getPaymentOrderNumber();
+        this.userEmail = paymentUserEmail;
+        this.userPhoneNumber = paymentUserPhoneNumber;
+        this.userName = paymentUserName;
+        this.productName = dto.getPaymentProductName();
+        this.amount = dto.getPaymentAmount();
         this.taxFreeAmount = dto.getTaxFreeAmount();
-        this.paymentStatus = "결제 완료";
-        this.paymentDatetime = dto.getPaymentDatetime();
+        this.status = "결제 완료";
+        this.datetime = dto.getPaymentDatetime();
     }
 }

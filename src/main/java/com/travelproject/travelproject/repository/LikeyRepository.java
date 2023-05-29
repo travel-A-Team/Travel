@@ -7,18 +7,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.travelproject.travelproject.entity.LikeyEntity;
-import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
 import com.travelproject.travelproject.entity.primaryKey.LikeyPk;
+import com.travelproject.travelproject.entity.resultSet.ProductResultSet;
 
 @Repository
 public interface LikeyRepository extends JpaRepository<LikeyEntity, LikeyPk>{
     
-    List<LikeyEntity> findByLikeyProduct(int likeyProduct);
+    List<LikeyEntity> findByProductNumber(int likeyProduct);
 
     @Query(
         value = 
         "SELECT " +
-        "count(DISTINCT L.likey_user_email) AS likeyCount " +
+        "count(DISTINCT L.user_email) AS likeyCount " +
         "FROM Likey L;",
         nativeQuery = true
     )
@@ -28,10 +28,9 @@ public interface LikeyRepository extends JpaRepository<LikeyEntity, LikeyPk>{
         value =
         "SELECT * " +
         "FROM Likey " +
-        "WHERE likey_product = ? ",
+        "WHERE product_number = ? ",
         nativeQuery = true
     )
-
     public LikeyEntity getLikey(int productNumber);
     
 }

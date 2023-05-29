@@ -19,6 +19,6 @@ public interface RequestPattern {
 
     public static final String PRODUCT_API = "api/v1/product-board";
 
-    public static final String RECOMMEND_API = "api/v1/recommend-tourlist-spot";
+    public static final String RECOMMEND_API = "api/v1/recommend-tourist-spot";
 
 }

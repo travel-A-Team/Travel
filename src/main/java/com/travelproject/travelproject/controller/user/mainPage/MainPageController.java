@@ -38,7 +38,7 @@ public class MainPageController {
     }
 
     //# 최근 추천 여행지 목록 3개 조회
-    @GetMapping("/recommend-tourlist-spot-top3")
+    @GetMapping("/recommend-tourist-spot-top3")
     public ResponseEntity<? super GetMainPageRecommendDto> getRecommendList3() {
         ResponseEntity<? super GetMainPageRecommendDto> response = mainPageService.getRecommendList3();
         return response;

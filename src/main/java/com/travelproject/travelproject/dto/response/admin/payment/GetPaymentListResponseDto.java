@@ -41,12 +41,12 @@ class Payment {
     private String paymentUserPhoneNumber;
 
     public Payment(PaymentEntity paymentEntity) {
-        this.paymentProductName = paymentEntity.getPaymentProductName();
-        this.paymentAmount = paymentEntity.getPaymentAmount();
-        this.paymentStatus = paymentEntity.getPaymentStatus();
-        this.paymentDatetime = paymentEntity.getPaymentDatetime();
-        this.paymentUserName = paymentEntity.getPaymentUserName();
-        this.paymentUserEmail = paymentEntity.getPaymentUserEmail();
-        this.paymentUserPhoneNumber = paymentEntity.getPaymentUserPhoneNumber();
+        this.paymentProductName = paymentEntity.getProductName();
+        this.paymentAmount = paymentEntity.getAmount();
+        this.paymentStatus = paymentEntity.getStatus();
+        this.paymentDatetime = paymentEntity.getDatetime();
+        this.paymentUserName = paymentEntity.getUserName();
+        this.paymentUserEmail = paymentEntity.getUserEmail();
+        this.paymentUserPhoneNumber = paymentEntity.getUserPhoneNumber();
     }
 }

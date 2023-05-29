@@ -22,12 +22,12 @@ public class GetRecommendationTouristSpotResponseDto extends ResponseDto {
     public GetRecommendationTouristSpotResponseDto(RecommendationTouristSpotEntity recommendationTouristSpotEntity) {
         super("SU", "Success");
 
-        this.recommendTouristNumber = recommendationTouristSpotEntity.getTouristSpotNumber();
-        this.recommendTouristSpotTitle = recommendationTouristSpotEntity.getTouristSpotTitle();
-        this.recommendTouristImageUrl = recommendationTouristSpotEntity.getRecommendTouristSpotImageUrl();
+        this.recommendTouristNumber = recommendationTouristSpotEntity.getRecommendationTouristSpotNumber();
+        this.recommendTouristSpotTitle = recommendationTouristSpotEntity.getTitle();
+        this.recommendTouristImageUrl = recommendationTouristSpotEntity.getImageUrl();
         this.recommendTouristContent = recommendationTouristSpotEntity.getContent();
-        this.recommendTouristAddress = recommendationTouristSpotEntity.getTouristSpotAddress();
-        this.recommendTouristUseTime = recommendationTouristSpotEntity.getTouristSpotUseTime();
-        this.recommendTouristInformation = recommendationTouristSpotEntity.getTouristSpotInformation();
+        this.recommendTouristAddress = recommendationTouristSpotEntity.getAddress();
+        this.recommendTouristUseTime = recommendationTouristSpotEntity.getUseTime();
+        this.recommendTouristInformation = recommendationTouristSpotEntity.getInformation();
     }
 }

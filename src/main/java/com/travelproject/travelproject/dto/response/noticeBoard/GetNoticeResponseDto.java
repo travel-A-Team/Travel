@@ -23,9 +23,9 @@ public class GetNoticeResponseDto extends ResponseDto {
         super("SU", "SUCCESS");
 
         this.noticeBoardNumber = noticeBoardEntity.getNoticeBoardNumber();
-        this.noticeBoardTitle = noticeBoardEntity.getNoticeBoardTitle();
-        this.noticeBoardContent = noticeBoardEntity.getNoticeBoardContent();
-        this.noticeBoardDate = noticeBoardEntity.getNoticeBoardWriteDate();
+        this.noticeBoardTitle = noticeBoardEntity.getTitle();
+        this.noticeBoardContent = noticeBoardEntity.getContent();
+        this.noticeBoardDate = noticeBoardEntity.getWriteDate();
         
     }
 }

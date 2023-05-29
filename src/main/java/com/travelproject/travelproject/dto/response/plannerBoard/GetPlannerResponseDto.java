@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.PlannerDailyTravelDateEntity;
-import com.travelproject.travelproject.entity.planner.PlannerEntity;
+import com.travelproject.travelproject.entity.PlannerEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,10 +26,10 @@ public class GetPlannerResponseDto extends ResponseDto {
     public GetPlannerResponseDto(PlannerEntity plannerEntity,
             List<PlannerDailyTravelDateEntity> plannerDailyTravelDateEntity) {
         super("SU", "Success");
-        this.plannerTitle = plannerEntity.getPlannerTitle();
-        this.totalPlannerTravelSchedule = plannerEntity.getTotalPlannerTravelSchedule();
-        this.plannerTourRoute = plannerEntity.getPlannerTourRoute();
-        this.plannerMoney = plannerEntity.getPlannerMoney();
+        this.plannerTitle = plannerEntity.getTitle();
+        this.totalPlannerTravelSchedule = plannerEntity.getTotalTravelSchedule();
+        this.plannerTourRoute = plannerEntity.getTourRoute();
+        this.plannerMoney = plannerEntity.getMoney();
         this.plannerTravelSpotList = PlannerTravelSpot.createList(plannerDailyTravelDateEntity);
 
     }
@@ -48,10 +48,10 @@ class PlannerTravelSpot {
 
     PlannerTravelSpot(PlannerDailyTravelDateEntity plannerDailyTravelDateEntity) {
         this.plannerDailyNumber = plannerDailyTravelDateEntity.getPlannerDailyNumber();
-        this.plannerTravelDate = plannerDailyTravelDateEntity.getPlannerTravelDate();
-        this.writeImageUrl = plannerDailyTravelDateEntity.getWriteImageUrl();
-        this.writeTouristSpotName = plannerDailyTravelDateEntity.getWriteTouristSpotName();
-        this.writePlannerAddress = plannerDailyTravelDateEntity.getWritePlannerAddress();
+        this.plannerTravelDate = plannerDailyTravelDateEntity.getTravelDate();
+        this.writeImageUrl = plannerDailyTravelDateEntity.getTouristSpotImageUrl();
+        this.writeTouristSpotName = plannerDailyTravelDateEntity.getTouristSpotName();
+        this.writePlannerAddress = plannerDailyTravelDateEntity.getTouristSpotAddress();
     }
 
     static List<PlannerTravelSpot> createList(List<PlannerDailyTravelDateEntity> plannerDailyTravelDateEntities) {

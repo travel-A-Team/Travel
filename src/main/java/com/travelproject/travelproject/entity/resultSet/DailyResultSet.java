@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.listEntity;
+package com.travelproject.travelproject.entity.resultSet;
 
 public interface DailyResultSet {
     
@@ -7,7 +7,7 @@ public interface DailyResultSet {
     public String getDailyTravelDate();
     public int getwriteSequence();
     public String getWriteTouristSpotName();
-    public String getWriteImageUrl();
-    public String getWriteProductAddress();
+    public String getTouristSpotImageUrl();
+    public String getTouristSpotAddress();
     
 }

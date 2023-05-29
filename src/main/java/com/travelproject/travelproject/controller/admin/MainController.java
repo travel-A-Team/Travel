@@ -31,7 +31,7 @@ public class MainController {
     private final String GET_USER_LIST = "user-list";
     private final String GET_PAYMENT_TOTAL_SALE = "payment/total-sale";
     private final String GET_PAYMENT_LIST = "payment-list";
-    private final String GET_TOURIST_PRODUCT_LIST ="tourist-product";
+    private final String GET_TOURIST_PRODUCT_LIST ="tourist-product-list";
     
     @Autowired
     public MainController(MainService adminMainService) {

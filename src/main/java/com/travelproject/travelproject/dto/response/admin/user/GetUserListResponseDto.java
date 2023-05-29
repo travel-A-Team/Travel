@@ -44,6 +44,6 @@ class User {
         this.email = userEntity.getEmail();
         this.birth = userEntity.getBirth();
         this.phoneNumber = userEntity.getPhoneNumber();
-        this.registrationDatetime = userEntity.getRegisterDate();
+        this.registrationDatetime = userEntity.getRegisterDatetime();
     }
 }

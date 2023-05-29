@@ -12,7 +12,7 @@ import com.travelproject.travelproject.entity.PlannerDailyTravelDateEntity;
 
 @Repository
 public interface PlannerDailyTravelDateRepository extends JpaRepository<PlannerDailyTravelDateEntity, Integer>{
-    List<PlannerDailyTravelDateEntity> findByPlannerPlannerNumber(int plannerPlannerNumber);
+    List<PlannerDailyTravelDateEntity> findByPlannerNumber(int plannerNumber);
 
     public PlannerDailyTravelDateEntity findByPlannerDailyNumber(int plannerDailyNumber);
 
@@ -21,7 +21,7 @@ public interface PlannerDailyTravelDateRepository extends JpaRepository<PlannerD
     public boolean existsBySequence(int sequence);
 
     @Transactional
-    void deleteByPlannerPlannerNumber(int plannerPlannerNumber);
+    void deleteByPlannerNumber(int plannerNumber);
 
 
     @Modifying
@@ -30,13 +30,13 @@ public interface PlannerDailyTravelDateRepository extends JpaRepository<PlannerD
         value = 
         "UPDATE " +
         "Plannerdailytraveldate SET " +
-        "write_image_url = ?," +
-        "write_tourist_spot_name = ?," +
-        "write_planner_address = ? " +
-        "WHERE tourist_spot_write_tourist_spot_number = ?",
+        "tourist_spot_image_url = ?," +
+        "tourist_spot_name = ?," +
+        "tourist_spot_address = ? " +
+        "WHERE tourist_spot_number = ?",
         nativeQuery = true
         )
-        public int updateTouristSpot(String writeImageUrl, String writeTouristSpotName, String writePlannerAddress, int touristSpotNumber);
+        public int updateTouristSpot(String touristSpotImageUrl, String touristSpotName, String touristSpotAddress, int touristSpotNumber);
 
-        public boolean existsByTouristSpotWriteTouristSpotNumber(int touristSpotNumber);
+        public boolean existsByTouristSpotNumber(int touristSpotNumber);
 }

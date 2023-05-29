@@ -6,9 +6,9 @@ import javax.persistence.Column;
 
 public class LikeyPk implements Serializable {
     
-    @Column(name = "likey_product")
-    private int likeyProduct;
-    @Column(name = "likey_user_email")
-    private String likeyUserEmail;
+    @Column(name = "product_number")
+    private int productNumber;
+    @Column(name = "user_email")
+    private String userEmail;
     
 }

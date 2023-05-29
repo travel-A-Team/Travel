@@ -38,9 +38,9 @@ class TouristSpotSummary {
 
     public TouristSpotSummary(TouristSpotEntity touristSpotEntity) {
         this.writeTouristSpotNumber = touristSpotEntity.getTouristSpotNumber();
-        this.writeImageUrl = touristSpotEntity.getWriteImageUrl();
-        this.writeTouristSpotName = touristSpotEntity.getWriteTouristSpotName();
-        this.writeTouristSpotAddress = touristSpotEntity.getWriteTouristSpotAddress();
-        this.writeTouristSpotDate = touristSpotEntity.getWriteTouristSpotDate();
+        this.writeImageUrl = touristSpotEntity.getImageUrl();
+        this.writeTouristSpotName = touristSpotEntity.getTouristSpotName();
+        this.writeTouristSpotAddress = touristSpotEntity.getTouristSpotAddress();
+        this.writeTouristSpotDate = touristSpotEntity.getWriteDate();
     }
 }

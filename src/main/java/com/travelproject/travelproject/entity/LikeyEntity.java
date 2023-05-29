@@ -19,12 +19,12 @@ import lombok.NoArgsConstructor;
 public class LikeyEntity {
     
     @Id
-    private int likeyProduct;
+    private int productNumber;
     @Id 
-    private String likeyUserEmail;
+    private String userEmail;
     
     public LikeyEntity(String productLikeyEmail, PostProductLikeyRequestDto dto){
-        this.likeyProduct = dto.getProductBoardNumber();
-        this.likeyUserEmail = productLikeyEmail;
+        this.productNumber = dto.getProductBoardNumber();
+        this.userEmail = productLikeyEmail;
     }
 }

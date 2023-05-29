@@ -42,6 +42,6 @@ class Region {
     private String regionName;
 
     public Region(RegionEntity regionEntity) {
-        this.regionName = regionEntity.getRegionName();
+        this.regionName = regionEntity.getName();
     }
 }

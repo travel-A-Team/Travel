@@ -38,10 +38,10 @@ class PaymentSummary {
     private String paymentDatetime;
 
     public PaymentSummary(PaymentEntity paymentEntity) {
-        this.paymentUserName = paymentEntity.getPaymentUserName();
-        this.paymentProductName = paymentEntity.getPaymentProductName();
-        this.paymentAmount = paymentEntity.getPaymentAmount();
-        this.paymentStatus = paymentEntity.getPaymentStatus();
-        this.paymentDatetime = paymentEntity.getPaymentDatetime();
+        this.paymentUserName = paymentEntity.getUserName();
+        this.paymentProductName = paymentEntity.getProductName();
+        this.paymentAmount = paymentEntity.getAmount();
+        this.paymentStatus = paymentEntity.getStatus();
+        this.paymentDatetime = paymentEntity.getDatetime();
     }
 }

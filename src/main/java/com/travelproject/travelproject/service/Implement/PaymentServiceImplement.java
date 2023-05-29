@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
+import com.travelproject.travelproject.dto.request.payment.PatchPaymentStatusRequestDto;
 import com.travelproject.travelproject.dto.request.payment.PostPaymentRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.payment.GetRefundResponseDto;
@@ -32,7 +33,12 @@ public class PaymentServiceImplement  implements PaymentService{
 
         String userEmail = userToken.getEmail();
 
+        String transactionId = dto.getTransactionId();
+
         try {
+
+            boolean existedTransactionId = paymentRepository.existsByTransactionId(transactionId);
+            if (existedTransactionId) return ResponseMessage.EXIST_TRANSACTION_ID;
 
             boolean existedUserEmail = userRepository.existsByEmail(userEmail);
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
@@ -67,7 +73,7 @@ public class PaymentServiceImplement  implements PaymentService{
             PaymentEntity paymentEntity = paymentRepository.findByTransactionId(transactionId);
             if (paymentEntity == null) return ResponseMessage.NOT_EXIST_TRANSACTION_ID;
 
-            Integer cancelAmount = paymentEntity.getPaymentAmount();
+            Integer cancelAmount = paymentEntity.getAmount();
             Integer cancelTaxFreeAmount = paymentEntity.getTaxFreeAmount();
 
             body = new GetRefundResponseDto(cancelAmount, cancelTaxFreeAmount);
@@ -82,29 +88,32 @@ public class PaymentServiceImplement  implements PaymentService{
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchRefund(UserToken userToken, String transactionId, String status) {
+    public ResponseEntity<ResponseDto> patchRefund(UserToken userToken, PatchPaymentStatusRequestDto dto) {
 
         if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
 
         String userEmail = userToken.getEmail();
-        
-        String cancelSuccess = "CANCEL_PAYMENT";
+        String status = dto.getStatus();
+        String transactionId = dto.getTransactionId();
+        String cancelSuccessMessage = "CANCEL_PAYMENT";
 
-        if (!status.equals(cancelSuccess)) return ResponseMessage.PAYMENT_CANCEL_FAILD;
+        
+
+        if (!status.equals(cancelSuccessMessage)) return ResponseMessage.PAYMENT_CANCEL_FAILD;
 
         try {
 
             PaymentEntity paymentEntity = paymentRepository.findByTransactionId(transactionId);
             if (paymentEntity == null) return ResponseMessage.NOT_EXIST_TRANSACTION_ID;
 
-            String paymentUserEmail  = paymentEntity.getPaymentUserEmail();
+            String paymentUserEmail  = paymentEntity.getUserEmail();
             boolean equalsUserEmail = userEmail.equals(paymentUserEmail);
             if (!equalsUserEmail) return ResponseMessage.NO_PERMISSIONS;
 
-            String paymentStatus = paymentEntity.getPaymentStatus();
+            String paymentStatus = paymentEntity.getStatus();
             paymentStatus = "결제 취소";
 
-            paymentEntity.setPaymentStatus(paymentStatus);
+            paymentEntity.setStatus(paymentStatus);
             paymentRepository.save(paymentEntity);
         } catch (Exception exception) {
             exception.printStackTrace();

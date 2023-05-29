@@ -24,29 +24,30 @@ public class DailyTravelDateEntity {
     private int dailyTravelNumber;
     private int touristSpotNumber;
     private int productNumber;
-    private String dailyTravelDate;
-    private String writeImageUrl;
-    private String writeTouristSpotName;
-    private String writeProductAddress;
+    private String travelDate;
     private int sequence;
+    private String touristSpotImageUrl;
+    private String touristSpotName;
+    private String touristSpotAddress;
+
 
     public DailyTravelDateEntity(int productNumber, PostTouristProductDaliyTravelDateRequestDto dto) {
         this.touristSpotNumber = dto.getTouristSpotNumber();
         this.productNumber = productNumber;
-        this.dailyTravelDate = dto.getDaliyTravelDate();
-        this.writeImageUrl = dto.getWriteImageUrl();
-        this.writeTouristSpotName = dto.getWriteTouristSpotName();
-        this.writeProductAddress = dto.getWriteProductAddress();
+        this.travelDate = dto.getDaliyTravelDate();
+        this.touristSpotImageUrl = dto.getWriteImageUrl();
+        this.touristSpotName = dto.getWriteTouristSpotName();
+        this.touristSpotAddress = dto.getWriteProductAddress();
         this.sequence = dto.getWriteSequence();
     }
     
     public DailyTravelDateEntity(int productNumber, PatchTouristProductDaliyTravelDateRequestDto dto) {
         this.touristSpotNumber = dto.getTouristSpotNumber();
         this.productNumber = productNumber;
-        this.dailyTravelDate = dto.getDailyTravelDate();
-        this.writeImageUrl = dto.getWriteImageUrl();
-        this.writeTouristSpotName = dto.getWriteTouristSpotName();
-        this.writeProductAddress = dto.getWriteProductAddress();
+        this.travelDate = dto.getDailyTravelDate();
+        this.touristSpotImageUrl = dto.getWriteImageUrl();
+        this.touristSpotName = dto.getWriteTouristSpotName();
+        this.touristSpotAddress = dto.getWriteProductAddress();
         this.sequence = dto.getWriteSequence();
     }
 }

@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
         value = 
         "SELECT * " +
         "FROM User " +
-        "ORDER BY register_date DESC",
+        "ORDER BY register_datetime DESC",
          nativeQuery = true
     )
     public List<UserEntity> getUserList();

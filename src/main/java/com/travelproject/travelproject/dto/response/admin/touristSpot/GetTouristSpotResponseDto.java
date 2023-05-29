@@ -19,8 +19,8 @@ public class GetTouristSpotResponseDto  extends ResponseDto{
     public GetTouristSpotResponseDto(TouristSpotEntity touristSpotEntity) {
         super("SU", "Success");
         this.writeTouristSpotNumber = touristSpotEntity.getTouristSpotNumber();
-        this.writeTouristSpotName = touristSpotEntity.getWriteTouristSpotName();
-        this.writeImageUrl = touristSpotEntity.getWriteImageUrl();
-        this.writeTouristSpotAddress = touristSpotEntity.getWriteTouristSpotAddress();
+        this.writeTouristSpotName = touristSpotEntity.getTouristSpotName();
+        this.writeImageUrl = touristSpotEntity.getImageUrl();
+        this.writeTouristSpotAddress = touristSpotEntity.getTouristSpotAddress();
     }
 }

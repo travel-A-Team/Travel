@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.DailyTravelDateEntity;
-import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
-import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.DailyResultSet;
+import com.travelproject.travelproject.entity.resultSet.TouristProductResultSet;
 
 import lombok.Data;
 
@@ -57,7 +57,7 @@ class DailyTravel {
         this.dailyTravelDate = dailyTravelDateSet.getDailyTravelDate();
         this.writeSequence = dailyTravelDateSet.getwriteSequence();
         this.touristSpotName = dailyTravelDateSet.getWriteTouristSpotName();
-        this.touristSpotImageUrl = dailyTravelDateSet.getWriteImageUrl();
-        this.touristSpotAddress = dailyTravelDateSet.getWriteProductAddress();
+        this.touristSpotImageUrl = dailyTravelDateSet.getTouristSpotImageUrl();
+        this.touristSpotAddress = dailyTravelDateSet.getTouristSpotAddress();
     }
 }

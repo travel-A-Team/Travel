@@ -25,23 +25,23 @@ public class TouristProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productNumber;
-    private String productImageUrl;
-    private String productTitle;
-    private String productTourRoute;
-    private int productMoney;
-    private String productTotalSchedule;
-    private String productWriteDate;
+    private String imageUrl;
+    private String title;
+    private String tourRoute;
+    private int money;
+    private String totalSchedule;
+    private String writeDate;
 
     public TouristProductEntity (String productTourRoute, String productImageUrl, PostTouristProductRequestDto dto) {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String productWriteDate = simpleDateFormat.format(date);
 
-        this.productImageUrl = productImageUrl;
-        this.productTitle = dto.getProductTitle();
-        this.productTourRoute = productTourRoute;
-        this.productMoney = dto.getProductMoney();
-        this.productTotalSchedule = dto.getProductTotalSchedule();
-        this.productWriteDate = productWriteDate;
+        this.imageUrl = productImageUrl;
+        this.title = dto.getProductTitle();
+        this.tourRoute = productTourRoute;
+        this.money = dto.getProductMoney();
+        this.totalSchedule = dto.getProductTotalSchedule();
+        this.writeDate = productWriteDate;
     } 
 }

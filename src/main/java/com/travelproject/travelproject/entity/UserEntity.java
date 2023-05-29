@@ -21,6 +21,6 @@ public class UserEntity {
     private String birth;
     private String password;
     private String phoneNumber;
-    private String registerDate;
+    private String registerDatetime;
 
 }

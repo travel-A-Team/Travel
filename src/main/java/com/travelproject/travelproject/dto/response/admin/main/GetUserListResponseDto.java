@@ -39,6 +39,6 @@ class UserSummary {
         this.email = userEntity.getEmail();
         this.name = userEntity.getName();
         this.phoneNumber = userEntity.getPhoneNumber();
-        this.registerDate = userEntity.getRegisterDate();
+        this.registerDate = userEntity.getRegisterDatetime();
     }
 }

@@ -25,9 +25,9 @@ import com.travelproject.travelproject.entity.LikeyEntity;
 import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
-import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
-import com.travelproject.travelproject.entity.listEntity.TouristProductListResultSet;
-import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.DailyResultSet;
+import com.travelproject.travelproject.entity.resultSet.TouristProductListResultSet;
+import com.travelproject.travelproject.entity.resultSet.TouristProductResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.DailyTravelDateRepository;
 import com.travelproject.travelproject.repository.LikeyRepository;
@@ -84,10 +84,10 @@ public class TouristProductServiceImplement implements TouristProductService {
         GetSearchRegionResultResponseDto body = null;
 
         try {
-            RegionEntity regionEntity = regionRepository.findByRegionName(region);
+            RegionEntity regionEntity = regionRepository.findByName(region);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
-            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByWriteRegionContains(region);
+            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByRegionContains(region);
 
             body = new GetSearchRegionResultResponseDto(touristSpotEntities);
 
@@ -110,7 +110,7 @@ public class TouristProductServiceImplement implements TouristProductService {
 
         GetSearchTouristSpotNameResultResponseDto body = null;
         try {
-            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByWriteTouristSpotNameContains(touristSpotName);
+            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByTouristSpotNameContains(touristSpotName);
 
             body = new GetSearchTouristSpotNameResultResponseDto(touristSpotEntities);
             
@@ -135,10 +135,10 @@ public class TouristProductServiceImplement implements TouristProductService {
 
         GetSearchRegionAndTouristSpotNameResultResponseDto body = null;
         try {
-            RegionEntity regionEntity = regionRepository.findByRegionName(region);
+            RegionEntity regionEntity = regionRepository.findByName(region);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
-            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByWriteRegionAndWriteTouristSpotNameContains(region, touristSpotName);
+            List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.findByRegionAndTouristSpotNameContains(region, touristSpotName);
 
             body = new GetSearchRegionAndTouristSpotNameResultResponseDto(touristSpotEntities);
         
@@ -283,10 +283,10 @@ public class TouristProductServiceImplement implements TouristProductService {
             TouristProductEntity touristProductEntity = touristProductRepository.findByProductNumber(productNumber);
             if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
-            touristProductEntity.setProductTitle(productTitle);
-            touristProductEntity.setProductTotalSchedule(productTotalSchedule);
-            touristProductEntity.setProductMoney(productMoney);
-            touristProductEntity.setProductTourRoute(productTourRoute);
+            touristProductEntity.setTitle(productTitle);
+            touristProductEntity.setTotalSchedule(productTotalSchedule);
+            touristProductEntity.setMoney(productMoney);
+            touristProductEntity.setTourRoute(productTourRoute);
 
             for (PatchTouristProductDaliyTravelDateRequestDto daliyTravelDate: daliyTravelDateDtoList) {
                 Integer dailyTravelNumber = daliyTravelDate.getDailyTravelNumber();
@@ -306,11 +306,11 @@ public class TouristProductServiceImplement implements TouristProductService {
                 DailyTravelDateEntity dailyTravelDateEntity = dailyTravelDateRepository.findByDailyTravelNumber(dailyTravelNumber);
 
                 dailyTravelDateEntity.setTouristSpotNumber(touristSpotNumber);
-                dailyTravelDateEntity.setDailyTravelDate(dailyTravelDate);
+                dailyTravelDateEntity.setTravelDate(dailyTravelDate);
                 dailyTravelDateEntity.setSequence(writeSequence);
-                dailyTravelDateEntity.setWriteImageUrl(writeImageUrl);
-                dailyTravelDateEntity.setWriteTouristSpotName(writeTouristSpotName);
-                dailyTravelDateEntity.setWriteProductAddress(writeProductAddress);
+                dailyTravelDateEntity.setTouristSpotImageUrl(writeImageUrl);
+                dailyTravelDateEntity.setTouristSpotName(writeTouristSpotName);
+                dailyTravelDateEntity.setTouristSpotAddress(writeProductAddress);
                 
                 dailyTravelDateRepository.save(dailyTravelDateEntity);
             }
@@ -353,7 +353,7 @@ public class TouristProductServiceImplement implements TouristProductService {
             if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
             List<DailyTravelDateEntity> dailyTravelDateEntities = dailyTravelDateRepository.findByProductNumber(productNumber);
-            List<LikeyEntity> likeyEntities =likeyRepository.findByLikeyProduct(productNumber);
+            List<LikeyEntity> likeyEntities =likeyRepository.findByProductNumber(productNumber);
             
             likeyRepository.deleteAll(likeyEntities);
             dailyTravelDateRepository.deleteAll(dailyTravelDateEntities);

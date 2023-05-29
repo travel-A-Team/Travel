@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.travelproject.travelproject.dto.request.payment.PatchPaymentStatusRequestDto;
 import com.travelproject.travelproject.dto.request.payment.PostPaymentRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.dto.response.payment.GetRefundResponseDto;
@@ -45,13 +46,12 @@ public class PaymentController {
         return response;
     }
 
-    @PatchMapping("refund-status/{transaction-id}/{status}")
+    @PatchMapping("refund-status")
     public ResponseEntity<ResponseDto> patchRefund(
         @AuthenticationPrincipal UserToken userToken,
-        @PathVariable("transaction-id") String transactionId,
-        @PathVariable("status") String status
+        @RequestBody PatchPaymentStatusRequestDto request
     ) {
-        ResponseEntity<ResponseDto> response = paymentService.patchRefund(userToken, transactionId, status);
+        ResponseEntity<ResponseDto> response = paymentService.patchRefund(userToken, request);
         return response;
     }
 }

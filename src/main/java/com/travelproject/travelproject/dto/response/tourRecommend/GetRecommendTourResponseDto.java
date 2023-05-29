@@ -2,7 +2,7 @@ package com.travelproject.travelproject.dto.response.tourRecommend;
 
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
+import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,7 @@ public class GetRecommendTourResponseDto extends ResponseDto {
 
     public GetRecommendTourResponseDto(RecommendResultSet recommendResultSet) {
         super("SU", "SUCCESS");
-        this.touristSpotNumber=recommendResultSet.getTouristSpotNumber();
+        this.touristSpotNumber=recommendResultSet.getRecommendationTouristSpotNumber();
         this.touristSpotTitle=recommendResultSet.getTouristSpotTitle();
         this.recommendTouristSpotImageUrl=recommendResultSet.getRecommendTouristSpotImageUrl();
         this.content=recommendResultSet.getContent();

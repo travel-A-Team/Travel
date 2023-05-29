@@ -25,10 +25,10 @@ public class QuestionBoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int questionBoardNumber;
-    private String questionBoardWriterEmail;
-    private String questionBoardTitle;
-    private String questionBoardContent;
-    private String questionBoardDate;
+    private String writerEmail;
+    private String title;
+    private String content;
+    private String writeDate;
     private Integer answerStatus;
 
     public QuestionBoardEntity(String questionBoardWriterEmail, PostQuestionBoardRequestDto dto) {
@@ -36,9 +36,10 @@ public class QuestionBoardEntity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String questionBoardDate = simpleDateFormat.format(now);
 
-        this.questionBoardWriterEmail=questionBoardWriterEmail;
-        this.questionBoardTitle=dto.getQuestionBoardTitle();
-        this.questionBoardContent=dto.getQuestionBoardContent();
-        this.questionBoardDate=questionBoardDate;
+        this.writerEmail=questionBoardWriterEmail;
+        this.title=dto.getQuestionBoardTitle();
+        this.content=dto.getQuestionBoardContent();
+        this.writeDate=questionBoardDate;
+        this.answerStatus = 0;
     }
 }

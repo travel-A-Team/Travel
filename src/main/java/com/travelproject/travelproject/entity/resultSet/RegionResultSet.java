@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.listEntity;
+package com.travelproject.travelproject.entity.resultSet;
 
 public interface RegionResultSet {
     

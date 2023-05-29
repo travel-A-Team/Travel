@@ -14,10 +14,10 @@ class TouristSpotDto {
 
     public TouristSpotDto(TouristSpotEntity touristSpotEntity) {
         this.touristSpotNumber = touristSpotEntity.getTouristSpotNumber();
-        this.touristSpotImageUrl = touristSpotEntity.getWriteImageUrl();
-        this.touristSpotName = touristSpotEntity.getWriteTouristSpotName();
-        this.touristSpotAddress = touristSpotEntity.getWriteTouristSpotAddress();
-        this.touristSpotRegion = touristSpotEntity.getWriteRegion();
+        this.touristSpotImageUrl = touristSpotEntity.getImageUrl();
+        this.touristSpotName = touristSpotEntity.getTouristSpotName();
+        this.touristSpotAddress = touristSpotEntity.getTouristSpotAddress();
+        this.touristSpotRegion = touristSpotEntity.getRegion();
     }
 }
 

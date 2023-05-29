@@ -37,8 +37,8 @@ class TouristProductSummary {
     private int productAmount;
 
     public TouristProductSummary(TouristProductEntity touristProductEntity) {
-        this.representativeImageUrl = touristProductEntity.getProductImageUrl();
-        this.productTitle = touristProductEntity.getProductTitle();
-        this.productAmount = touristProductEntity.getProductMoney();
+        this.representativeImageUrl = touristProductEntity.getImageUrl();
+        this.productTitle = touristProductEntity.getTitle();
+        this.productAmount = touristProductEntity.getMoney();
     }
 }

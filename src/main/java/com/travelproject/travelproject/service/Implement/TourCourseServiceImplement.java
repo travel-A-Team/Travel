@@ -16,8 +16,8 @@ import com.travelproject.travelproject.dto.response.touristProduct.GetTouristPro
 import com.travelproject.travelproject.dto.response.touristProduct.GetTouristProductWriteResponseDto;
 import com.travelproject.travelproject.entity.LikeyEntity;
 import com.travelproject.travelproject.entity.TouristProductEntity;
-import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
-import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.DailyResultSet;
+import com.travelproject.travelproject.entity.resultSet.ProductResultSet;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.DailyTravelDateRepository;
 import com.travelproject.travelproject.repository.LikeyRepository;
@@ -169,7 +169,7 @@ public class TourCourseServiceImplement implements TourCourseService {
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
             //# 권한 없음
-            boolean equalWriter = likeyEntity.getLikeyUserEmail().equals(productLikeyEmail);
+            boolean equalWriter = likeyEntity.getUserEmail().equals(productLikeyEmail);
             if (!equalWriter) return ResponseMessage.NO_PERMISSIONS;
 
             likeyRepository.delete(likeyEntity);

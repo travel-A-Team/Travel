@@ -166,11 +166,11 @@ public class QuestionServiceImplement implements QuestionService {
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
             //# 권한 없음
-            boolean equalWriter = questionBoardEntity.getQuestionBoardWriterEmail().equals(questionBoardWriterEmail);
+            boolean equalWriter = questionBoardEntity.getWriterEmail().equals(questionBoardWriterEmail);
             if (!equalWriter) return ResponseMessage.NO_PERMISSIONS;
 
-            questionBoardEntity.setQuestionBoardTitle(questionTitle);
-            questionBoardEntity.setQuestionBoardContent(questionContent);
+            questionBoardEntity.setTitle(questionTitle);
+            questionBoardEntity.setContent(questionContent);
 
             questionRepository.save(questionBoardEntity);
 
@@ -204,7 +204,7 @@ public class QuestionServiceImplement implements QuestionService {
             if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
             //# 권한 없음
-            boolean equalWriter = questionBoardEntity.getQuestionBoardWriterEmail().equals(questionBoardWriterEmail);
+            boolean equalWriter = questionBoardEntity.getWriterEmail().equals(questionBoardWriterEmail);
             if (!equalWriter) return ResponseMessage.NO_PERMISSIONS;
 
             commentRepository.deleteByQuestionBoardNumber(questionBoardNumber);
@@ -237,8 +237,10 @@ public class QuestionServiceImplement implements QuestionService {
             //# 요청 매개변수 검증 실패
             if (dto == null) return ResponseMessage.VAILDATION_FAILED;
 
-            String adminName = userEntity.getName();
-            CommentEntity commentEntity = new CommentEntity(adminName, dto);
+            // String adminName = userEntity.getName();
+            // CommentEntity commentEntity = new CommentEntity(adminName, dto);
+            //댓글을 작성한 사용자의 이름이라는 데이터베이스에 존재하는 컬럼이 필요가 없을 거 같아서 삭제했습니다.
+            CommentEntity commentEntity = new CommentEntity(dto);
             commentRepository.save(commentEntity);
             
         } catch (Exception exception) {
@@ -277,8 +279,8 @@ public class QuestionServiceImplement implements QuestionService {
 
             CommentEntity commentEntity = commentRepository.CommentQuestionNumber(questionCommentNumber);
             
-            commentEntity.setCommentContent(commentContent);
-            commentEntity.setCommentWriteTime(commentPatchDate);
+            commentEntity.setContent(commentContent);
+            commentEntity.setWriteDatetime(commentPatchDate);
 
             commentRepository.save(commentEntity);
 

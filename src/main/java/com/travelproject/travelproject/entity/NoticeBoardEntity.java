@@ -24,18 +24,18 @@ public class NoticeBoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int noticeBoardNumber;
-    private String noticeBoardTitle;
-    private String noticeBoardContent;
-    private String noticeBoardWriteDate;
+    private String title;
+    private String content;
+    private String writeDate;
 
     public NoticeBoardEntity(PostNoticeBoardRequestDto dto) {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String noticeBoardWriteDate = simpleDateFormat.format(now);
 
-        this.noticeBoardTitle = dto.getNoticeBoardTitle();
-        this.noticeBoardContent = dto.getNoticeBoardContent();
-        this.noticeBoardWriteDate = noticeBoardWriteDate;
+        this.title = dto.getNoticeBoardTitle();
+        this.content = dto.getNoticeBoardContent();
+        this.writeDate = noticeBoardWriteDate;
 
     }
 

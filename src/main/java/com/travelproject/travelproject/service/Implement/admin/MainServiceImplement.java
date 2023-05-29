@@ -18,7 +18,6 @@ import com.travelproject.travelproject.dto.response.admin.main.GetTouristProduct
 import com.travelproject.travelproject.dto.response.admin.main.GetUserListResponseDto;
 import com.travelproject.travelproject.dto.response.admin.main.PostSignInResponseDto;
 import com.travelproject.travelproject.entity.PaymentEntity;
-import com.travelproject.travelproject.entity.PaymentTotalSaleResultSet;
 import com.travelproject.travelproject.entity.TouristProductEntity;
 import com.travelproject.travelproject.entity.UserEntity;
 import com.travelproject.travelproject.provider.JwtTokenProvider;
