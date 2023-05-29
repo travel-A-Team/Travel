@@ -22,33 +22,33 @@ public class PlannerDailyTravelDateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int plannerDailyNumber;
-    private int plannerPlannerNumber;
-    private int touristSpotWriteTouristSpotNumber;
-    private String plannerTravelDate;
-    private String writeImageUrl;
-    private String writeTouristSpotName;
-    private String writePlannerAddress;
+    private int plannerNumber;
+    private int touristSpotNumber;
+    private String travelDate;
+    private String touristSpotImageUrl;
+    private String touristSpotName;
+    private String touristSpotAddress;
     private int sequence;
 
     public PlannerDailyTravelDateEntity(int plannerNumber, String plannerTravelDate, int sequence,
             TouristSpotEntity touristSpotWriteEntity, PostPlannerBoardRequestDto dto) {
-        this.plannerPlannerNumber = plannerNumber;
-        this.touristSpotWriteTouristSpotNumber = touristSpotWriteEntity.getTouristSpotNumber();
-        this.plannerTravelDate = plannerTravelDate;
-        this.writeImageUrl = touristSpotWriteEntity.getWriteImageUrl();
-        this.writeTouristSpotName = touristSpotWriteEntity.getWriteTouristSpotName();
-        this.writePlannerAddress = touristSpotWriteEntity.getWriteTouristSpotAddress();
+        this.plannerNumber = plannerNumber;
+        this.touristSpotNumber = touristSpotWriteEntity.getTouristSpotNumber();
+        this.travelDate = plannerTravelDate;
+        this.touristSpotImageUrl = touristSpotWriteEntity.getImageUrl();
+        this.touristSpotName = touristSpotWriteEntity.getTouristSpotName();
+        this.touristSpotAddress = touristSpotWriteEntity.getTouristSpotAddress();
         this.sequence = sequence;
 
     }
 
     public PlannerDailyTravelDateEntity(PatchPlannerBoardRequestDto dto, int touristSpotWriteTouristSpotNumber, String plannerTravelDate, String writeImageUrl, String writeTouristSpotName, String writePlannerAddress, int sequence) {
-        this.plannerPlannerNumber = dto.getPlannerNumber();
-        this.touristSpotWriteTouristSpotNumber = touristSpotWriteTouristSpotNumber;
-        this.plannerTravelDate = plannerTravelDate;
-        this.writeImageUrl = writeImageUrl;
-        this.writeTouristSpotName = writeTouristSpotName;
-        this.writePlannerAddress = writePlannerAddress;
+        this.plannerNumber = dto.getPlannerNumber();
+        this.touristSpotNumber = touristSpotWriteTouristSpotNumber;
+        this.travelDate = plannerTravelDate;
+        this.touristSpotImageUrl = writeImageUrl;
+        this.touristSpotName = writeTouristSpotName;
+        this.touristSpotAddress = writePlannerAddress;
         this.sequence = sequence;
 
     }

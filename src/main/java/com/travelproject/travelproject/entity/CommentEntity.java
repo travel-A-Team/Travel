@@ -23,18 +23,16 @@ public class CommentEntity {
     
     @Id
     private int questionBoardNumber;
-    private String commentContent;
-    private String writeUserName;
-    private String commentWriteTime;
+    private String content;
+    private String writeDatetime;
 
-    public CommentEntity(String writeUserName, PostCommentBoardRequestDto dto) {
+    public CommentEntity(PostCommentBoardRequestDto dto) {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String commentBoardDate = simpleDateFormat.format(now);
 
         this.questionBoardNumber=dto.getQuestionBoardNumber();
-        this.commentContent=dto.getCommentContent();
-        this.writeUserName=writeUserName;
-        this.commentWriteTime=commentBoardDate;
+        this.content=dto.getCommentContent();
+        this.writeDatetime=commentBoardDate;
     }
 }

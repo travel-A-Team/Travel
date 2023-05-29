@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
-import com.travelproject.travelproject.entity.listEntity.PlannerWriteSpotResultSet;
+import com.travelproject.travelproject.entity.resultSet.PlannerWriteSpotResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,9 +46,9 @@ class TouristSpot {
     private double longitude;
 
     public TouristSpot(TouristSpotEntity resultSet) {
-        this.writeImageUrl = resultSet.getWriteImageUrl();
-        this.writeTouristSpotName = resultSet.getWriteTouristSpotName();
-        this.writeTouristSpotAddress = resultSet.getWriteTouristSpotAddress();
+        this.writeImageUrl = resultSet.getImageUrl();
+        this.writeTouristSpotName = resultSet.getTouristSpotName();
+        this.writeTouristSpotAddress = resultSet.getTouristSpotAddress();
         this.latitude = resultSet.getLatitude();
         this.longitude = resultSet.getLongitude();
     }

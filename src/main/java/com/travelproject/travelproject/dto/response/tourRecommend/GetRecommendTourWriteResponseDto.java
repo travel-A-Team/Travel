@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
-import com.travelproject.travelproject.entity.listEntity.RegionResultSet;
+import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
+import com.travelproject.travelproject.entity.resultSet.RegionResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

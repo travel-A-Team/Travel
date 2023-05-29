@@ -12,13 +12,9 @@ import com.travelproject.travelproject.entity.NoticeBoardEntity;
 public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, Integer>{
     @Query(
         value = 
-        "SELECT " +
-        "notice_board_number," +
-        "notice_board_title," +
-        "notice_board_content," +
-        "notice_board_write_date " +
+        "SELECT * " +
         "FROM Noticeboard " +
-        "ORDER BY notice_board_write_date DESC, notice_board_number DESC",
+        "ORDER BY write_date DESC, notice_board_number DESC",
         nativeQuery = true
     )
     public List<NoticeBoardEntity> getList();

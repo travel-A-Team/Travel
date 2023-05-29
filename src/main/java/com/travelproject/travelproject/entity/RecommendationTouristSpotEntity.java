@@ -24,28 +24,28 @@ public class RecommendationTouristSpotEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int touristSpotNumber;
-    private String recommendTouristSpotImageUrl; 
-    private String touristSpotTitle; // 여행지 추천 제목
+    private int recommendationTouristSpotNumber;
+    private String imageUrl; 
+    private String title;
     private String content;
-    private String touristSpotAddress;
-    private String touristSpotUseTime;
-    private String touristSpotInformation;
-    private String recommendTouristSpotWriteDate;
-    private String recommendTouristRegion;
+    private String address;
+    private String useTime;
+    private String information;
+    private String writeDate;
+    private String region;
 
     public RecommendationTouristSpotEntity(String recommendTouristRegion, PostRecommendationTouristSpotRequestDto dto) {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String recommendTouristSpotWriteDate = simpleDateFormat.format(now);
+        String writeDate = simpleDateFormat.format(now);
 
-        this.recommendTouristSpotImageUrl = dto.getRecommendTouristImageUrl();
-        this.touristSpotTitle = dto.getRecommendTouristSpotTitle();
+        this.imageUrl = dto.getRecommendTouristImageUrl();
+        this.title = dto.getRecommendTouristSpotTitle();
         this.content = dto.getRecommendTouristContent();
-        this.touristSpotAddress = dto.getRecommendTouristAddress();
-        this.touristSpotUseTime = dto.getRecommendTouristUseTime();
-        this.touristSpotInformation = dto.getRecommendTouristInformation();
-        this.recommendTouristSpotWriteDate = recommendTouristSpotWriteDate;
-        this.recommendTouristRegion = recommendTouristRegion;
+        this.address = dto.getRecommendTouristAddress();
+        this.useTime = dto.getRecommendTouristUseTime();
+        this.information = dto.getRecommendTouristInformation();
+        this.writeDate = writeDate;
+        this.region = recommendTouristRegion;
     }
 }

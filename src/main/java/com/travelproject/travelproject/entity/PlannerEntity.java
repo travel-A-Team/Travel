@@ -1,4 +1,4 @@
-package com.travelproject.travelproject.entity.planner;
+package com.travelproject.travelproject.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,20 +21,20 @@ public class PlannerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int plannerNumber;
-    private String plannerUserEmail;
-    private String plannerImageUrl;
-    private String plannerTitle;
-    private String totalPlannerTravelSchedule;
-    private String plannerTourRoute;
-    private int plannerMoney;
+    private String userEmail;
+    private String imageUrl;
+    private String title;
+    private String totalTravelSchedule;
+    private String tourRoute;
+    private int money;
 
     public PlannerEntity(String plannerUserEmail, PostPlannerBoardRequestDto dto, String plannerTourRouteCollection, String totalPlannerTravelSchedule) {
-        this.plannerUserEmail = plannerUserEmail;
-        this.plannerImageUrl = dto.getPlannerImageUrl();
-        this.plannerTitle = dto.getPlannerTitle();
-        this.totalPlannerTravelSchedule = totalPlannerTravelSchedule;
-        this.plannerTourRoute = plannerTourRouteCollection;
-        this.plannerMoney = dto.getPlannerMoney();
+        this.userEmail = plannerUserEmail;
+        this.imageUrl = dto.getPlannerImageUrl();
+        this.title = dto.getPlannerTitle();
+        this.totalTravelSchedule = totalPlannerTravelSchedule;
+        this.tourRoute = plannerTourRouteCollection;
+        this.money = dto.getPlannerMoney();
     }
 
 }

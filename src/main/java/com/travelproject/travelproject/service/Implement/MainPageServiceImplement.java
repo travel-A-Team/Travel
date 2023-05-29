@@ -13,8 +13,8 @@ import com.travelproject.travelproject.dto.response.mainPage.GetMainPageProductD
 import com.travelproject.travelproject.dto.response.mainPage.GetMainPageRecommendDto;
 import com.travelproject.travelproject.entity.BannerEntity;
 import com.travelproject.travelproject.entity.LikeyEntity;
-import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
-import com.travelproject.travelproject.entity.listEntity.RecommendResultSet;
+import com.travelproject.travelproject.entity.resultSet.ProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
 import com.travelproject.travelproject.repository.BannerRepository;
 import com.travelproject.travelproject.repository.LikeyRepository;
 import com.travelproject.travelproject.repository.RecommendationTouristSpotRepositroy;
@@ -70,7 +70,7 @@ public class MainPageServiceImplement implements MainPageService {
 
             for (int count = 0; count < productResultSet.size(); count++) {
                 int likeyProduct = productResultSet.get(count).getProductNumber();
-                likeyEntities = likeyRepository.findByLikeyProduct(likeyProduct);
+                likeyEntities = likeyRepository.findByProductNumber(likeyProduct);
             }
 
             body = new GetMainPageProductDto(productResultSet, likeyEntities);

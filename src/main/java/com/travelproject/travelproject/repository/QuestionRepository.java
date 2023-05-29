@@ -18,7 +18,7 @@ public interface QuestionRepository extends JpaRepository<QuestionBoardEntity, I
         "SELECT * " +
         "FROM Questionboard " +
         "GROUP BY question_board_number " +
-        "ORDER BY question_board_date DESC, question_board_number DESC;",
+        "ORDER BY write_date DESC, question_board_number DESC;",
         nativeQuery = true
     )
     public List<QuestionBoardEntity> getQuestionList();

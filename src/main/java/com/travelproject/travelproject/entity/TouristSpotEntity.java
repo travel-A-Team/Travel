@@ -24,26 +24,26 @@ public class TouristSpotEntity {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private int touristSpotNumber;
-    private String writeTouristSpotAddress;
-    private String writeImageUrl;
-    private String writeTouristSpotName;
-    private String writeRegion;
+    private String touristSpotAddress;
+    private String imageUrl;
+    private String touristSpotName;
+    private String region;
     private double latitude;
     private double longitude;
-    private String writeTouristSpotDate;
+    private String writeDate;
 
     public TouristSpotEntity(String writeRegion, PostTouristSpotRequestDto dto) {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String writeTouristSpotDate = simpleDateFormat.format(now);
 
-        this.writeTouristSpotAddress = dto.getWriteTouristSpotAddress();
-        this.writeImageUrl = dto.getWriteImageUrl();
-        this.writeTouristSpotName = dto.getWriteTouristSpotName();
-        this.writeRegion = writeRegion;
+        this.touristSpotAddress = dto.getWriteTouristSpotAddress();
+        this.imageUrl = dto.getWriteImageUrl();
+        this.touristSpotName = dto.getWriteTouristSpotName();
+        this.region = writeRegion;
         this.latitude = dto.getLatitude();
         this.longitude = dto.getLongitude();
-        this.writeTouristSpotDate = writeTouristSpotDate;
+        this.writeDate = writeTouristSpotDate;
     }
 
 

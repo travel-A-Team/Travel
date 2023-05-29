@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.ProductResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

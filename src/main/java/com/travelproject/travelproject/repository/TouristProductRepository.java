@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.travelproject.travelproject.entity.TouristProductEntity;
-import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
-import com.travelproject.travelproject.entity.listEntity.TouristProductListResultSet;
-import com.travelproject.travelproject.entity.listEntity.TouristProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.ProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.TouristProductListResultSet;
+import com.travelproject.travelproject.entity.resultSet.TouristProductResultSet;
 
 @Repository
 public interface TouristProductRepository extends JpaRepository<TouristProductEntity, Integer>{
@@ -21,13 +21,13 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         value = 
         "SELECT " +
         "T.product_number AS productNumber," +
-        "T.product_title AS productTitle," +
-        "T.product_image_url AS productImageUrl," +
-        "T.product_money AS productMoney," +
-        "count(DISTINCT L.likey_user_email) AS likeyCount " +
+        "T.title AS productTitle," +
+        "T.image_url AS productImageUrl," +
+        "T.money AS productMoney," +
+        "count(DISTINCT L.user_email) AS likeyCount " +
         "FROM Touristproduct T, User U, Likey L " +
-        "WHERE T.product_number = L.likey_product " +
-        "AND L.likey_user_email = U.email " +
+        "WHERE T.product_number = L.product_number " +
+        "AND L.user_email = U.email " +
         "GROUP BY T.product_number " +
         "ORDER BY productNumber DESC " +
         "LIMIT 3;",
@@ -38,10 +38,10 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
     @Query(
         value = 
         "SELECT " +
-        "T.product_title AS productTitle," +
-        "T.product_image_url AS productImageUrl," +
-        "T.product_money AS productMoney," +
-        "T.product_tour_route AS productTourRoute " +
+        "T.title AS productTitle," +
+        "T.image_url AS productImageUrl," +
+        "T.money AS productMoney," +
+        "T.tour_route AS productTourRoute " +
         "FROM Touristproduct T;",
         nativeQuery = true
     )
@@ -51,14 +51,14 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         value = 
         "SELECT " +
         "T.product_number AS productNumber," +
-        "T.product_title AS productTitle," +
-        "T.product_total_schedule AS productTotalSchedule," +
-        "T.product_tour_route AS productTourRoute," +
-        "T.product_money AS productMoney," +
-        "count(L.likey_user_email) AS likeCount " +
+        "T.title AS productTitle," +
+        "T.total_schedule AS productTotalSchedule," +
+        "T.tour_route AS productTourRoute," +
+        "T.money AS productMoney," +
+        "count(L.user_email) AS likeCount " +
         "FROM Touristproduct AS T " +
         "LEFT JOIN Likey AS L " +
-        "ON t.product_number = L.likey_product " +
+        "ON t.product_number = L.product_number " +
         "WHERE T.product_number = ? " +
         "GROUP BY T.product_number",
         nativeQuery = true
@@ -69,18 +69,18 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         value = 
         "SELECT " +
         "T.product_number AS productNumber," +
-        "T.product_image_url AS productImageUrl," +
-        "T.product_title AS productTitle," +
-        "T.product_total_schedule AS productTotalSchedule," +
-        "T.product_tour_route AS productTourRoute," +
-        "T.product_money AS productMoney," +
-        "count(L.likey_user_email) AS likeCount," +
-        "T.product_write_date AS productWriteDate " +
+        "T.image_url AS productImageUrl," +
+        "T.title AS productTitle," +
+        "T.total_schedule AS productTotalSchedule," +
+        "T.tour_route AS productTourRoute," +
+        "T.money AS productMoney," +
+        "count(L.user_email) AS likeCount," +
+        "T.write_date AS productWriteDate " +
         "FROM Touristproduct AS T " +
         "LEFT JOIN Likey AS L " +
-        "ON T.product_number = L.likey_product " +
+        "ON T.product_number = L.product_number " +
         "GROUP BY T.product_number " +
-        "ORDER BY T.product_write_date DESC, T.product_number DESC",
+        "ORDER BY T.write_date DESC, T.product_number DESC",
         nativeQuery = true
         )
     public List<TouristProductListResultSet> getTouristProductList();
@@ -89,7 +89,7 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         value = 
         "SELECT * " +
         "FROM Touristproduct " +
-        "ORDER BY product_write_date DESC, product_number DESC",
+        "ORDER BY write_date DESC, product_number DESC",
         nativeQuery = true
         )
     public List<TouristProductEntity> getTouristProductListInAdminMainPage();

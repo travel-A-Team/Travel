@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.listEntity.PlannerWriteRegionResultSet;
-import com.travelproject.travelproject.entity.listEntity.PlannerWriteSpotResultSet;
+import com.travelproject.travelproject.entity.RegionEntity;
+import com.travelproject.travelproject.entity.TouristSpotEntity;
+import com.travelproject.travelproject.entity.resultSet.PlannerWriteRegionResultSet;
+import com.travelproject.travelproject.entity.resultSet.PlannerWriteSpotResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,22 +22,22 @@ public class GetPlannerWriteListResponseDto extends ResponseDto {
 
     private List<TouristSpot> touristSpotList;
 
-    public GetPlannerWriteListResponseDto(List<PlannerWriteRegionResultSet> plannerWriteRegionResultSet,
-            List<PlannerWriteSpotResultSet> plannerWriteSpotResultSet) {
+    public GetPlannerWriteListResponseDto(List<RegionEntity> regionEntities,
+            List<TouristSpotEntity> touristSpotEntities) {
 
         super("SU", "Success");
 
         List<Region> regionList = new ArrayList<>();
         List<TouristSpot> touristSpotList = new ArrayList<>();
 
-        for (PlannerWriteRegionResultSet result : plannerWriteRegionResultSet) {
-            Region region = new Region(result);
+        for (RegionEntity regionEntity : regionEntities) {
+            Region region = new Region(regionEntity);
             regionList.add(region);
 
         }
 
-        for (PlannerWriteSpotResultSet result : plannerWriteSpotResultSet) {
-            TouristSpot touristSpot = new TouristSpot(result);
+        for (TouristSpotEntity touristSpotEntity : touristSpotEntities) {
+            TouristSpot touristSpot = new TouristSpot(touristSpotEntity);
             touristSpotList.add(touristSpot);
 
         }
@@ -53,8 +55,8 @@ public class GetPlannerWriteListResponseDto extends ResponseDto {
 class Region {
     private String regionName;
 
-    public Region(PlannerWriteRegionResultSet resultSet) {
-        this.regionName = resultSet.getRegionName();
+    public Region(RegionEntity regionEntity) {
+        this.regionName = regionEntity.getName();
     }
 }
 
@@ -70,11 +72,11 @@ class TouristSpot {
     private double latitude;
     private double longitude;
 
-    public TouristSpot(PlannerWriteSpotResultSet resultSet) {
-        this.writeImageUrl = resultSet.getWriteImageUrl();
-        this.writeTouristSpotName = resultSet.getWriteTouristSpotName();
-        this.writeTouristSpotAddress = resultSet.getWriteTouristSpotAddress();
-        this.latitude = resultSet.getLatitude();
-        this.longitude = resultSet.getLongitude();
+    public TouristSpot(TouristSpotEntity touristSpotEntity) {
+        this.writeImageUrl = touristSpotEntity.getImageUrl();
+        this.writeTouristSpotName = touristSpotEntity.getTouristSpotName();
+        this.writeTouristSpotAddress = touristSpotEntity.getTouristSpotAddress();
+        this.latitude = touristSpotEntity.getLatitude();
+        this.longitude = touristSpotEntity.getLongitude();
     }
 }

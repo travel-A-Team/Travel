@@ -44,7 +44,7 @@ class NoticeBoardList {
 
     public NoticeBoardList(NoticeBoardEntity noticeBoardEntity) {
         this.noticeBoardNumber=noticeBoardEntity.getNoticeBoardNumber();
-        this.noticeBoardTitle=noticeBoardEntity.getNoticeBoardTitle();
-        this.noticeBoardDate=noticeBoardEntity.getNoticeBoardWriteDate();
+        this.noticeBoardTitle=noticeBoardEntity.getTitle();
+        this.noticeBoardDate=noticeBoardEntity.getWriteDate();
     }
 }

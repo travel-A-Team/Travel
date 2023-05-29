@@ -34,15 +34,18 @@ public class GetPaymentListResponseDto  extends ResponseDto{
 class Payment {
     private String transactionId;
     private String paymentProductName;
+    private int paymentOrderNumber;
     private String paymentStatus;
     private int paymentAmount;
     private String paymentDatetime;
 
     public Payment(PaymentEntity paymentEntity) {
+        String paymentOrderNumber = paymentEntity.getOrderNumber();
         this.transactionId = paymentEntity.getTransactionId();
-        this.paymentProductName = paymentEntity.getPaymentUserName();
-        this.paymentStatus = paymentEntity.getPaymentStatus();
-        this.paymentAmount = paymentEntity.getPaymentAmount();
-        this.paymentDatetime = paymentEntity.getPaymentDatetime();
+        this.paymentProductName = paymentEntity.getUserName();
+        this.paymentOrderNumber = Integer.parseInt(paymentOrderNumber);
+        this.paymentStatus = paymentEntity.getStatus();
+        this.paymentAmount = paymentEntity.getAmount();
+        this.paymentDatetime = paymentEntity.getDatetime();
     }
 }

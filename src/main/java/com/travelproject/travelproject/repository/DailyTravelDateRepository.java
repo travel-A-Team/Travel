@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.travelproject.travelproject.entity.DailyTravelDateEntity;
-import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
+import com.travelproject.travelproject.entity.resultSet.DailyResultSet;
 
 @Repository
 public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDateEntity, Integer>{
@@ -22,13 +22,13 @@ public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDat
         "UPDATE " +
         "Dailytraveldate "+
         "SET "+
-        "write_image_url = ?," +
-        "write_tourist_spot_name = ?," +
-        "write_product_address = ? " +
+        "tourist_spot_image_url = ?," +
+        "tourist_spot_name = ?," +
+        "tourist_spot_address = ? " +
         "WHERE tourist_spot_number = ?", 
         nativeQuery = true
         )
-    public int updateTouristSpot(String writeImageUrl,  String writeTouristSpotName,  String writeProductAddress,  int touristSpotNumber);
+    public int updateTouristSpot(String touristSpotImageUrl,  String touristSpotName,  String touristSpotAddress,  int touristSpotNumber);
 
     public boolean existsByTouristSpotNumber(int touristSpotNumber);
 
@@ -37,11 +37,11 @@ public interface DailyTravelDateRepository  extends JpaRepository<DailyTravelDat
         "SELECT " +
         "tourist_spot_number AS touristSpotNumber," +
         "daily_travel_number AS dailyTravelNumber," +
-        "daily_travel_date AS dailyTravelDate," +
+        "travel_date AS dailyTravelDate," +
         "sequence AS writeSequence," +
-        "write_image_url AS writeImageUrl," +
-        "write_tourist_spot_name AS writeTouristSpotName," +
-        "write_product_address AS writeProductAddress " +
+        "tourist_spot_image_url AS touristSpotImageUrl," +
+        "tourist_spot_name AS writeTouristSpotName," +
+        "tourist_spot_address AS touristSpotAddress " +
         "FROM Dailytraveldate " +
         "WHERE product_number = ? " +
         "ORDER BY sequence ASC",

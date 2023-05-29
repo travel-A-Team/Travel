@@ -45,15 +45,15 @@ public class RecommendationTouristSpotServiceImplement  implements Recommendatio
         String touristSpotAddress = dto.getRecommendTouristAddress();
 
         try {
-            boolean existedTouristSpotAddress = recommendationTouristSpotRepositroy.existsByTouristSpotAddress(touristSpotAddress);
+            boolean existedTouristSpotAddress = recommendationTouristSpotRepositroy.existsByAddress(touristSpotAddress);
             if (existedTouristSpotAddress) return ResponseMessage.EXIST_RECOMMENDATION_TOURIST_SPOT_ADDRESS;
 
             String recommendTouristRegion = FindRegionInAddress.findRegionInAddress(touristSpotAddress);
 
-            RegionEntity regionEntity = regionRepository.findByRegionNameContains(recommendTouristRegion);
+            RegionEntity regionEntity = regionRepository.findByNameContains(recommendTouristRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
-            recommendTouristRegion = regionEntity.getRegionName();
+            recommendTouristRegion = regionEntity.getName();
 
             RecommendationTouristSpotEntity recommendationTouristSpotEntity = new RecommendationTouristSpotEntity(recommendTouristRegion, dto);
             recommendationTouristSpotRepositroy.save(recommendationTouristSpotEntity);
@@ -80,7 +80,7 @@ public class RecommendationTouristSpotServiceImplement  implements Recommendatio
         GetRecommendationTouristSpotResponseDto body = null;
 
         try {
-            RecommendationTouristSpotEntity recommendationTouristSpotEntity = recommendationTouristSpotRepositroy.findByTouristSpotNumber(recommendTouristNumber);
+            RecommendationTouristSpotEntity recommendationTouristSpotEntity = recommendationTouristSpotRepositroy.findByRecommendationTouristSpotNumber(recommendTouristNumber);
             if (recommendationTouristSpotEntity == null) return ResponseMessage.NOT_EXIST_RECOMMENDATION_TOURIST_SPOT_NUMBER;
 
             body = new GetRecommendationTouristSpotResponseDto(recommendationTouristSpotEntity);
@@ -133,33 +133,33 @@ public class RecommendationTouristSpotServiceImplement  implements Recommendatio
 
     
         try {
-            RecommendationTouristSpotEntity recommendationTouristSpotEntity = recommendationTouristSpotRepositroy.findByTouristSpotNumber(recommendTouristNumber);
+            RecommendationTouristSpotEntity recommendationTouristSpotEntity = recommendationTouristSpotRepositroy.findByRecommendationTouristSpotNumber(recommendTouristNumber);
             if (recommendationTouristSpotEntity == null) return ResponseMessage.NOT_EXIST_RECOMMENDATION_TOURIST_SPOT_NUMBER;
-            String touristSpotAddress = recommendationTouristSpotEntity.getTouristSpotAddress();
+            String touristSpotAddress = recommendationTouristSpotEntity.getAddress();
 
             boolean equalRecommendTouristAddress = recommendTouristAddress.equals(touristSpotAddress);
 
             if (!equalRecommendTouristAddress) {
-                boolean existedTouristSpotAddress = recommendationTouristSpotRepositroy.existsByTouristSpotAddress(recommendTouristAddress);
+                boolean existedTouristSpotAddress = recommendationTouristSpotRepositroy.existsByAddress(recommendTouristAddress);
                 if (existedTouristSpotAddress) return ResponseMessage.EXIST_RECOMMENDATION_TOURIST_SPOT_ADDRESS;
             }
             
 
             String recommendTouristRegion = FindRegionInAddress.findRegionInAddress(recommendTouristAddress);
 
-            RegionEntity regionEntity = regionRepository.findByRegionNameContains(recommendTouristRegion);
+            RegionEntity regionEntity = regionRepository.findByNameContains(recommendTouristRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
-            recommendTouristRegion = regionEntity.getRegionName();
+            recommendTouristRegion = regionEntity.getName();
 
 
-            recommendationTouristSpotEntity.setTouristSpotTitle(recommendTouristSpotTitle);
-            recommendationTouristSpotEntity.setRecommendTouristSpotImageUrl(recommendTouristImageUrl);
+            recommendationTouristSpotEntity.setTitle(recommendTouristSpotTitle);
+            recommendationTouristSpotEntity.setImageUrl(recommendTouristImageUrl);
             recommendationTouristSpotEntity.setContent(recommendTouristContent);
-            recommendationTouristSpotEntity.setTouristSpotAddress(recommendTouristAddress);
-            recommendationTouristSpotEntity.setRecommendTouristRegion(recommendTouristRegion);
-            recommendationTouristSpotEntity.setTouristSpotUseTime(recommendTouristUseTime);
-            recommendationTouristSpotEntity.setTouristSpotInformation(recommendTouristInformation);
+            recommendationTouristSpotEntity.setAddress(recommendTouristAddress);
+            recommendationTouristSpotEntity.setRegion(recommendTouristRegion);
+            recommendationTouristSpotEntity.setUseTime(recommendTouristUseTime);
+            recommendationTouristSpotEntity.setInformation(recommendTouristInformation);
 
             recommendationTouristSpotRepositroy.save(recommendationTouristSpotEntity);
 
@@ -182,7 +182,7 @@ public class RecommendationTouristSpotServiceImplement  implements Recommendatio
         if (recommendTouristNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
         try {
-            RecommendationTouristSpotEntity recommendationTouristSpotEntity = recommendationTouristSpotRepositroy.findByTouristSpotNumber(recommendTouristNumber);
+            RecommendationTouristSpotEntity recommendationTouristSpotEntity = recommendationTouristSpotRepositroy.findByRecommendationTouristSpotNumber(recommendTouristNumber);
             if (recommendationTouristSpotEntity == null) return ResponseMessage.NOT_EXIST_RECOMMENDATION_TOURIST_SPOT_NUMBER;
 
             recommendationTouristSpotRepositroy.delete(recommendationTouristSpotEntity);

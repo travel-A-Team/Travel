@@ -111,8 +111,8 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
             NoticeBoardEntity noticeBoardEntity = noticeBoardRepository.findByNoticeBoardNumber(noticeBoardNumber);
             if (noticeBoardEntity == null) return ResponseMessage.NOT_EXIST_NOTICE_BOARD_NUMBER;
 
-            noticeBoardEntity.setNoticeBoardTitle(noticeBoardTitle);
-            noticeBoardEntity.setNoticeBoardContent(noticeBoardContent);
+            noticeBoardEntity.setTitle(noticeBoardTitle);
+            noticeBoardEntity.setContent(noticeBoardContent);
 
             noticeBoardRepository.save(noticeBoardEntity);
 

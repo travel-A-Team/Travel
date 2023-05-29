@@ -52,17 +52,17 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
         try {            
             //*  존재하는 주소
-            boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByWriteTouristSpotAddress(writeTouristSpotAddress);
+            boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByTouristSpotAddress(writeTouristSpotAddress);
             if (existedWriteTouristSpotAddress) return ResponseMessage.EXIST_WRITE_TOURIST_SPOT_ADDRESS;
 
 
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
             String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 
 
-            RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
+            RegionEntity regionEntity = regionRepository.findByNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
-            writeRegion = regionEntity.getRegionName();
+            writeRegion = regionEntity.getName();
 
             //* 데이터베이스에 저장하기
             TouristSpotEntity touristSpotEntity = new TouristSpotEntity(writeRegion, dto);
@@ -143,11 +143,11 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
 
             //* 존재하는 여행지 주소 반환
             
-            String touristSpotAddress = touristSpotEntity.getWriteTouristSpotAddress();
+            String touristSpotAddress = touristSpotEntity.getTouristSpotAddress();
             boolean equalWriteTouristSpotAddress = writeTouristSpotAddress.equals(touristSpotAddress);
 
             if(!equalWriteTouristSpotAddress) {
-                boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByWriteTouristSpotAddress(writeTouristSpotAddress);
+                boolean existedWriteTouristSpotAddress = touristSpotRepository.existsByTouristSpotAddress(writeTouristSpotAddress);
                 if (existedWriteTouristSpotAddress) return ResponseMessage.EXIST_WRITE_TOURIST_SPOT_ADDRESS;
             }
 
@@ -156,15 +156,15 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
             //* 입력 받은 주소에서 여행지 지역 이름 구하기
             String writeRegion = FindRegionInAddress.findRegionInAddress(writeTouristSpotAddress); 
             
-            RegionEntity regionEntity = regionRepository.findByRegionNameContains(writeRegion);
+            RegionEntity regionEntity = regionRepository.findByNameContains(writeRegion);
             if (regionEntity == null) return ResponseMessage.NOT_EXIST_REGION_NAME;
 
-            writeRegion = regionEntity.getRegionName();
+            writeRegion = regionEntity.getName();
 
-            touristSpotEntity.setWriteTouristSpotName(writeTouristSpotName);
-            touristSpotEntity.setWriteImageUrl(writeImageUrl);
-            touristSpotEntity.setWriteTouristSpotAddress(writeTouristSpotAddress);
-            touristSpotEntity.setWriteRegion(writeRegion);
+            touristSpotEntity.setTouristSpotName(writeTouristSpotName);
+            touristSpotEntity.setImageUrl(writeImageUrl);
+            touristSpotEntity.setTouristSpotAddress(writeTouristSpotAddress);
+            touristSpotEntity.setRegion(writeRegion);
 
             
             touristSpotRepository.save(touristSpotEntity);
@@ -174,7 +174,7 @@ public class TouristSpotServiceImplement  implements TouristSpotService{
                 dailyTravelDateRepository.updateTouristSpot(writeImageUrl, writeTouristSpotName, writeTouristSpotAddress, writeTouristSpotNumber);
             }
 
-            boolean existedPlannerTouristSpotNumber = plannerDailyTravelDateRepository.existsByTouristSpotWriteTouristSpotNumber(writeTouristSpotNumber);
+            boolean existedPlannerTouristSpotNumber = plannerDailyTravelDateRepository.existsByTouristSpotNumber(writeTouristSpotNumber);
             if (existedPlannerTouristSpotNumber) {
                 plannerDailyTravelDateRepository.updateTouristSpot(writeImageUrl, writeTouristSpotName, writeTouristSpotAddress, writeTouristSpotNumber);
             }

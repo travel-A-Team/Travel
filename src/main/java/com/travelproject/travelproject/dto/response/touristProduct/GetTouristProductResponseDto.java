@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.TouristProductEntity;
-import com.travelproject.travelproject.entity.listEntity.DailyResultSet;
-import com.travelproject.travelproject.entity.listEntity.ProductResultSet;
+import com.travelproject.travelproject.entity.resultSet.DailyResultSet;
+import com.travelproject.travelproject.entity.resultSet.ProductResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +29,10 @@ public class GetTouristProductResponseDto extends ResponseDto {
             (TouristProductEntity touristProductEntity, ProductResultSet productResultSet, 
             List<DailyResultSet> dailyResultSet) {
         super("SU", "SUCCESS");
-        this.productTitle=touristProductEntity.getProductTitle();
-        this.productTourRoute=touristProductEntity.getProductTourRoute();
-        this.productMoney=touristProductEntity.getProductMoney();
-        this.productTotalSchedule=touristProductEntity.getProductTotalSchedule();
+        this.productTitle=touristProductEntity.getTitle();
+        this.productTourRoute=touristProductEntity.getTourRoute();
+        this.productMoney=touristProductEntity.getMoney();
+        this.productTotalSchedule=touristProductEntity.getTotalSchedule();
         this.likeyCount=productResultSet.getLikeyCount();
         this.productDailyList=ProductDailyList.createList(dailyResultSet);
     }
@@ -53,8 +53,8 @@ class ProductDailyList {
         this.dailyTravelNumber=dailyResultSet.getDailyTravelNumber();
         this.dailyTravelDate=dailyResultSet.getDailyTravelDate();
         this.writeTouristSpotName=dailyResultSet.getWriteTouristSpotName();
-        this.writeImageUrl=dailyResultSet.getWriteImageUrl();
-        this.writeProductAddress=dailyResultSet.getWriteProductAddress();
+        this.writeImageUrl=dailyResultSet.getTouristSpotImageUrl();
+        this.writeProductAddress=dailyResultSet.getTouristSpotAddress();
     }
 
     static List<ProductDailyList> createList(List<DailyResultSet> dailyResultSet) {

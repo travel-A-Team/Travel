@@ -29,9 +29,9 @@ public class GetQuestionResponseDto extends ResponseDto {
         super("SU", "SUCCESS");
 
         this.questionBoardNumber = questionBoardEntity.getQuestionBoardNumber();
-        this.questionBoardTitle = questionBoardEntity.getQuestionBoardTitle();
-        this.questionBoardContent = questionBoardEntity.getQuestionBoardContent();
-        this.questionBoardDate = questionBoardEntity.getQuestionBoardDate();
+        this.questionBoardTitle = questionBoardEntity.getTitle();
+        this.questionBoardContent = questionBoardEntity.getContent();
+        this.questionBoardDate = questionBoardEntity.getWriteDate();
         this.questionAnswerStatus = localAnswerStatus;
         this.commentList = Comment.createList(commentEntities);
     }
@@ -43,14 +43,13 @@ public class GetQuestionResponseDto extends ResponseDto {
 @AllArgsConstructor
 class Comment {
     private int questionBoardNumber;
-    private String commentEmail;
     private String commentContent;
     private String commentWriteTime;
 
     Comment(CommentEntity commentEntity) {
         this.questionBoardNumber = commentEntity.getQuestionBoardNumber();
-        this.commentContent = commentEntity.getCommentContent();
-        this.commentWriteTime = commentEntity.getCommentWriteTime();
+        this.commentContent = commentEntity.getContent();
+        this.commentWriteTime = commentEntity.getWriteDatetime();
     }
 
     static List<Comment> createList(List<CommentEntity> commentEntities) {

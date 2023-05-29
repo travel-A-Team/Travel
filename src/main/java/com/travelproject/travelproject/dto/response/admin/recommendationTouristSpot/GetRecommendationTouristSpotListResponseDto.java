@@ -43,10 +43,10 @@ class RecommendationTouristSpotSummary {
     private String recommendTouristWriteDate;
 
     public RecommendationTouristSpotSummary(RecommendationTouristSpotEntity recommendationTouristSpotEntity) {
-        this.recommendTouristNumber = recommendationTouristSpotEntity.getTouristSpotNumber();
-        this.recommendTouristSpotTitle = recommendationTouristSpotEntity.getTouristSpotTitle();
-        this.recommendTouristImageUrl = recommendationTouristSpotEntity.getRecommendTouristSpotImageUrl();
+        this.recommendTouristNumber = recommendationTouristSpotEntity.getRecommendationTouristSpotNumber();
+        this.recommendTouristSpotTitle = recommendationTouristSpotEntity.getTitle();
+        this.recommendTouristImageUrl = recommendationTouristSpotEntity.getImageUrl();
         this.recommendTouristContent = recommendationTouristSpotEntity.getContent();
-        this.recommendTouristWriteDate = recommendationTouristSpotEntity.getRecommendTouristSpotWriteDate();
+        this.recommendTouristWriteDate = recommendationTouristSpotEntity.getWriteDate();
     }
 }

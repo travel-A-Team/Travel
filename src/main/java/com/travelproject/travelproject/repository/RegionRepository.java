@@ -6,28 +6,31 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.travelproject.travelproject.entity.RegionEntity;
-import com.travelproject.travelproject.entity.listEntity.RegionResultSet;
-import com.travelproject.travelproject.entity.listEntity.PlannerWriteRegionResultSet;
+import com.travelproject.travelproject.entity.resultSet.PlannerWriteRegionResultSet;
+import com.travelproject.travelproject.entity.resultSet.RegionResultSet;
 
 public interface RegionRepository extends JpaRepository<RegionEntity, Integer> {
 
-    public RegionEntity findByRegionName(String regionName);
+    public RegionEntity findByName(String regionName);
 
     @Query(
         value = 
         "SELECT " +
-        "R.region_name AS regionName " +
-        "FROM Region R;",
+        "name AS regionName " +
+        "FROM Region;",
         nativeQuery = true
     )
     public List<RegionResultSet> getRegionList();
 
-    public RegionEntity findByRegionNameContains(String regionName);
+    public RegionEntity findByNameContains(String regionName);
 
-    @Query(value = "SELECT " +
-    "region_name AS regionName " +
-    "FROM Region " +
-    "ORDER BY region_number DESC", nativeQuery = true)
-
-public List<PlannerWriteRegionResultSet> getPlannerWriteRegionList();
+    @Query(
+        value =
+        "SELECT " +
+        "name AS regionName " +
+        "FROM Region " +
+        "ORDER BY region_number DESC", 
+        nativeQuery = true
+    )
+    public List<PlannerWriteRegionResultSet> getPlannerWriteRegionList();
 }

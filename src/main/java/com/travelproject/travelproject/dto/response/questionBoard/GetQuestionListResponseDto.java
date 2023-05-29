@@ -48,9 +48,9 @@ class QuestionBoardList {
 
     public QuestionBoardList(QuestionBoardEntity questionBoardEntity, String localAnswerStatus) {
         this.questionBoardNumber=questionBoardEntity.getQuestionBoardNumber();
-        this.questionBoardTitle=questionBoardEntity.getQuestionBoardTitle();
-        this.questionBoardWriterEmail=questionBoardEntity.getQuestionBoardWriterEmail();
-        this.questionBoardDate=questionBoardEntity.getQuestionBoardDate();
+        this.questionBoardTitle=questionBoardEntity.getTitle();
+        this.questionBoardWriterEmail=questionBoardEntity.getWriterEmail();
+        this.questionBoardDate=questionBoardEntity.getWriteDate();
         this.isAnswerStatus=localAnswerStatus;
     }
 }

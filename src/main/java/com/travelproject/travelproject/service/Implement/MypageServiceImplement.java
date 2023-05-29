@@ -11,6 +11,7 @@ import com.travelproject.travelproject.dto.response.myPage.GetPaymentListRespons
 import com.travelproject.travelproject.entity.PaymentEntity;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.PaymentRepository;
+import com.travelproject.travelproject.repository.UserRepository;
 import com.travelproject.travelproject.service.MyPageService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class MypageServiceImplement implements MyPageService {
 
     private final PaymentRepository paymentRepository;
+    private final UserRepository userRepository;
 
     @Override
     public ResponseEntity<? super GetPaymentListResponseDto> getPaymentList(UserToken userToken) {
@@ -30,6 +32,10 @@ public class MypageServiceImplement implements MyPageService {
 
         String userEmail = userToken.getEmail();
         try {
+
+            boolean existedUserEmail = userRepository.existsByEmail(userEmail);
+            if (!existedUserEmail) return ResponseMessage.NOT_EXIST_USER_EMAIL;
+
             List<PaymentEntity> paymentEntities = paymentRepository.getPaymentList(userEmail);
             body = new GetPaymentListResponseDto(paymentEntities);
 

@@ -15,5 +15,5 @@ public class RegionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int regionNumber;
-    private String regionName;
+    private String name;
 }
