@@ -122,9 +122,6 @@ public class TourCourseServiceImplement implements TourCourseService {
             // # 토큰 검증
             if (userToken == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
 
-            // # 유저 검증
-            if (!(userToken.getRole().equals("admin"))) return ResponseMessage.NO_PERMISSIONS;
-
             String productLikeyEmail = userToken.getEmail();
 
             // # 존재하지 않는 유저 오류 반환
@@ -153,9 +150,6 @@ public class TourCourseServiceImplement implements TourCourseService {
             //# 토큰 검증
             if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
             String productLikeyEmail = userToken.getEmail();
-
-            //# 유저 검증
-            if (!(userToken.getRole().equals("admin"))) return ResponseMessage.NO_PERMISSIONS;
 
             //# 요청 매개변수 검증 실패
             if (productBoardNumber == null) return ResponseMessage.VAILDATION_FAILED;
