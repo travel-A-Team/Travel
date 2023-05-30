@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
+import com.travelproject.travelproject.entity.RecommendationTouristSpotEntity;
 import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
 
 import lombok.AllArgsConstructor;
@@ -18,12 +19,12 @@ public class GetRecommendTourListResponseDto extends ResponseDto {
     private List<RecommendTourSpotList> recommendTourSpot;
 
     public GetRecommendTourListResponseDto(
-        List<RecommendResultSet> recommendResultSet) {
+        List<RecommendationTouristSpotEntity> recommendResultSet) {
         super("SU", "SUCCESS");
 
         List<RecommendTourSpotList> recommendTourSpot = new ArrayList<>();
 
-        for (RecommendResultSet result : recommendResultSet) {
+        for (RecommendationTouristSpotEntity result : recommendResultSet) {
             RecommendTourSpotList recommendTourSpotList = new RecommendTourSpotList(result);
             recommendTourSpot.add(recommendTourSpotList);
         } 
@@ -40,9 +41,9 @@ class RecommendTourSpotList {
     private String touristspotTitle;
     private String content;
 
-    public RecommendTourSpotList(RecommendResultSet resultSet) {
-        this.recommendTouristspotImageUrl=resultSet.getRecommendTouristSpotImageUrl();
-        this.touristspotTitle=resultSet.getTouristSpotTitle();
+    public RecommendTourSpotList(RecommendationTouristSpotEntity resultSet) {
+        this.recommendTouristspotImageUrl=resultSet.getImageUrl();
+        this.touristspotTitle=resultSet.getTitle();
         this.content=resultSet.getContent();
     }
 }
