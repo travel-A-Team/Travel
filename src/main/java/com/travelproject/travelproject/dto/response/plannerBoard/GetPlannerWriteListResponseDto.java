@@ -6,8 +6,6 @@ import java.util.List;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.RegionEntity;
 import com.travelproject.travelproject.entity.TouristSpotEntity;
-import com.travelproject.travelproject.entity.resultSet.PlannerWriteRegionResultSet;
-import com.travelproject.travelproject.entity.resultSet.PlannerWriteSpotResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

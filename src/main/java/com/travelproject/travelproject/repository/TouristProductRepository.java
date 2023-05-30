@@ -29,7 +29,7 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         "WHERE T.product_number = L.product_number " +
         "AND L.user_email = U.email " +
         "GROUP BY T.product_number " +
-        "ORDER BY productNumber DESC " +
+        "ORDER BY likeyCount DESC " +
         "LIMIT 3;",
         nativeQuery = true  
     )
@@ -42,7 +42,8 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         "T.image_url AS productImageUrl," +
         "T.money AS productMoney," +
         "T.tour_route AS productTourRoute " +
-        "FROM Touristproduct T;",
+        "FROM Touristproduct T " +
+        "ORDER BY write_date DESC, product_number DESC ",
         nativeQuery = true
     )
     public List<ProductResultSet> getTourCourseList();

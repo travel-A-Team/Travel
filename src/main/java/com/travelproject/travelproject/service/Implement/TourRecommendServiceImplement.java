@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.response.tourRecommend.GetRecommendTourListResponseDto;
 import com.travelproject.travelproject.dto.response.tourRecommend.GetRecommendTourResponseDto;
+import com.travelproject.travelproject.entity.RecommendationTouristSpotEntity;
 import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
 import com.travelproject.travelproject.repository.RecommendationTouristSpotRepositroy;
 import com.travelproject.travelproject.service.TourRecommendService;
@@ -30,7 +31,7 @@ public class TourRecommendServiceImplement implements TourRecommendService {
         GetRecommendTourListResponseDto body = null;
 
         try {
-            List<RecommendResultSet> recommendResultSets = recommendationTouristSpotRepositroy.getRecommnedList();
+            List<RecommendationTouristSpotEntity> recommendResultSets = recommendationTouristSpotRepositroy.getRecommendationTouristSpotList();
 
             body = new GetRecommendTourListResponseDto(recommendResultSets);
             
@@ -51,9 +52,11 @@ public class TourRecommendServiceImplement implements TourRecommendService {
             //# 요청 매개변수 검증 실패
             if (touristSpotNumber == null) return ResponseMessage.VAILDATION_FAILED;
 
-            List<RecommendResultSet> recommendResultSet = recommendationTouristSpotRepositroy.getRecommendTour();
+            //# DB에서 받아온 엔터티 검증
+            RecommendationTouristSpotEntity recommendEntity = recommendationTouristSpotRepositroy.findByRecommendationTouristSpotNumber(touristSpotNumber);
+            if (recommendEntity == null) return ResponseMessage.NOT_EXIST_RECOMMENDATION_TOURIST_SPOT_NUMBER;
             
-            body = new GetRecommendTourResponseDto(recommendResultSet.get(touristSpotNumber - 1));
+            body = new GetRecommendTourResponseDto(recommendEntity);
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -72,7 +75,7 @@ public class TourRecommendServiceImplement implements TourRecommendService {
             //# 요청 매개변수 검증 실패
             if (writeRegion == null || writeRecommendSpotName == null) return ResponseMessage.VAILDATION_FAILED;
 
-            List<RecommendResultSet> recommendResultSets = recommendationTouristSpotRepositroy.getRecommnedList();
+            List<RecommendationTouristSpotEntity> recommendResultSets = recommendationTouristSpotRepositroy.findByRegionAndTitleContains(writeRegion, writeRecommendSpotName);
 
             body = new GetRecommendTourListResponseDto(recommendResultSets);
             

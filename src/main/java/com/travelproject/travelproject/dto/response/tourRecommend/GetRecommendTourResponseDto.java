@@ -2,7 +2,7 @@ package com.travelproject.travelproject.dto.response.tourRecommend;
 
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.entity.resultSet.RecommendResultSet;
+import com.travelproject.travelproject.entity.RecommendationTouristSpotEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,15 +20,15 @@ public class GetRecommendTourResponseDto extends ResponseDto {
     private String touristSpotUseTime;
     private String touristSpotInformation;
 
-    public GetRecommendTourResponseDto(RecommendResultSet recommendResultSet) {
+    public GetRecommendTourResponseDto(RecommendationTouristSpotEntity recommendResultSet) {
         super("SU", "SUCCESS");
         this.touristSpotNumber=recommendResultSet.getRecommendationTouristSpotNumber();
-        this.touristSpotTitle=recommendResultSet.getTouristSpotTitle();
-        this.recommendTouristSpotImageUrl=recommendResultSet.getRecommendTouristSpotImageUrl();
+        this.touristSpotTitle=recommendResultSet.getTitle();
+        this.recommendTouristSpotImageUrl=recommendResultSet.getImageUrl();
         this.content=recommendResultSet.getContent();
-        this.touristSpotAddress=recommendResultSet.getTouristSpotAddress();
-        this.touristSpotUseTime=recommendResultSet.getTouristSpotUseTime();
-        this.touristSpotInformation=recommendResultSet.getTouristSpotInformation();
+        this.touristSpotAddress=recommendResultSet.getAddress();
+        this.touristSpotUseTime=recommendResultSet.getUseTime();
+        this.touristSpotInformation=recommendResultSet.getInformation();
 
     }
 }

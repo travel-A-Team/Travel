@@ -38,31 +38,6 @@ public interface RecommendationTouristSpotRepositroy extends JpaRepository<Recom
     )
     public List<RecommendationTouristSpotEntity> getRecommendationTouristSpotList();
 
-    @Query(
-        value = 
-        "SELECT " +
-        "recommendation_tourist_spot_number AS recommendationTouristSpotNumber,"  +
-        "title AS touristSpotTitle," +
-        "image_url AS recommendTouristSpotImageUrl," +
-        "content," + 
-        "address AS touristSpotAddress," +
-        "use_time AS touristSpotUseTime," +
-        "information AS touristSpotInformation " +
-        "FROM Recommendationtouristspot " +
-        "ORDER BY recommendationTouristSpotNumber;",
-        nativeQuery = true
-    )
-    public List<RecommendResultSet> getRecommendTour();
-
-    @Query(
-        value = 
-        "SELECT " +
-        "image_url AS recommendTouristspotImageUrl," +
-        "title AS touristSpotTitle," +
-        "content " +
-        "FROM Recommendationtouristspot;",
-        nativeQuery = true
-    )
-    public List<RecommendResultSet> getRecommnedList();
+    public List<RecommendationTouristSpotEntity> findByRegionAndTitleContains(String writeRegion, String writeRecommendSpotName);
     
 }

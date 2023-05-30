@@ -10,4 +10,6 @@ public interface RecommendResultSet {
     public String getTouristSpotUseTime();
     public String getTouristSpotInformation();
 
+    public String getRecommendTouristRegion();
+
 }
