@@ -65,17 +65,11 @@ public class PlannerServiceImplement implements PlannerService {
                 return ResponseMessage.NOT_EXIST_USER_TOKEN;
             }
 
-            if (!(userToken.getRole().equals("admin"))){
-                return ResponseMessage.NO_PERMISSIONS;
-            }
-
             String plannerUserEmail = userToken.getEmail();
             boolean existedByEmail = userRepository.existsByEmail(plannerUserEmail);
             if (!existedByEmail) {
                 return ResponseMessage.NOT_EXIST_USER_EMAIL;
             }
-
-            
 
             for (int count = 0; count < plannerSpotListSize; count++) {
                 if (count == 0) {
@@ -273,10 +267,6 @@ public class PlannerServiceImplement implements PlannerService {
                 return ResponseMessage.NOT_EXIST_USER_TOKEN;
             }
 
-            if (!(userToken.getRole().equals("admin"))){
-                return ResponseMessage.NO_PERMISSIONS;
-            }
-
             String plannerUserEmail = userToken.getEmail();
             PlannerEntity plannerEntity = plannerBoardRepository.findByPlannerNumber(plannerNumber);
             if (plannerEntity == null) {
@@ -376,10 +366,6 @@ public class PlannerServiceImplement implements PlannerService {
         try {
             if (userToken == null) {
                 return ResponseMessage.NOT_EXIST_USER_TOKEN;
-            }
-
-            if (!(userToken.getRole().equals("admin"))){
-                return ResponseMessage.NO_PERMISSIONS;
             }
 
             String plannerUserEmail = userToken.getEmail();

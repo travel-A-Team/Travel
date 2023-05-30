@@ -16,11 +16,7 @@ public class PostPlannerTravelSpotRequestDto {
     @NotBlank
     private String plannerTravelDate;
     @NotBlank
-    private String writeImageUrl;
-    @NotBlank
     private String writeTouristSpotName;
-    @NotBlank
-    private String writePlannerAddress;
     @NotNull
     private Integer sequence;
 }
