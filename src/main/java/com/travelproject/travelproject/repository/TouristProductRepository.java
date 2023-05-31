@@ -94,4 +94,14 @@ public interface TouristProductRepository extends JpaRepository<TouristProductEn
         nativeQuery = true
         )
     public List<TouristProductEntity> getTouristProductListInAdminMainPage();
+
+    @Query(
+        value = 
+        "SELECT * " +
+        "FROM Touristproduct "  +
+        "WHERE product_number = ?",
+        nativeQuery = true
+    )
+    public TouristProductEntity getUserLikeProduct(int productNumber);
 }
+

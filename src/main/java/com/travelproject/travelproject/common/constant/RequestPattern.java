@@ -21,4 +21,7 @@ public interface RequestPattern {
 
     public static final String RECOMMEND_API = "api/v1/recommend-tourist-spot";
 
+    public static final String AUTH_API  = "api/v1/user";
+    public static final String MY_PAGE_API  = "api/v1/user/mypage";
+    public static final String MY_PAGE_CREDIT_API  = "api/v1/user/mypage-credit";
 }

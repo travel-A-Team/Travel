@@ -56,8 +56,12 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/WriteTravelImageFile/**", "/api/v1/admin/main/sign-in").permitAll()
                 .antMatchers("/api/v1/notice-board/**", "/api/v1/main/**",
-                "/api/v1/product-board/**", "/api/v1/recommend-tourlist-spot/**").permitAll() 
-                .antMatchers(HttpMethod.GET, "/api/v1/question-board/list", "/api/v1/question-board/**", "/api/v1/planner/planner-form/**").permitAll()
+                 "/api/v1/product-board/**", "/api/v1/recommend-tourist-spot/**").permitAll() 
+                .antMatchers(HttpMethod.GET, "/api/v1/question-board/list", "/api/v1/question-board/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/v1/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/user/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/user/mypage/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/v1/user/mypage/**").permitAll()
                 .anyRequest().authenticated().and()
 
                 // @ ↓ 위에서 만든 FailedAuthenticationEntryPoint클래스를 넣어주면 됨
