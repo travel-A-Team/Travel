@@ -68,6 +68,7 @@ public class FindPasswordServiceImplement implements FindPasswordService {
     //* 임시 비밀번호 전송
     private void sendEmailWithTemporaryPassword(String email, String temporaryPassword) {
         SimpleMailMessage message = new SimpleMailMessage();
+        // 실제 네이버 메일 작성 바람
         message.setFrom("example@naver.com");
         message.setTo(email);
         message.setSubject("임시 비밀번호 발급");
