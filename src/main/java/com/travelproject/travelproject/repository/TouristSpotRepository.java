@@ -11,7 +11,10 @@ import com.travelproject.travelproject.entity.TouristSpotEntity;
 @Repository
 public interface TouristSpotRepository extends JpaRepository<TouristSpotEntity, Integer> {
     public boolean existsByTouristSpotAddress(String writeTouristSpotAddress);
+
     public TouristSpotEntity findByTouristSpotNumber(int writeTouristSpotNumber);
+
+    public boolean existsByTouristSpotNumber(int writeTouristSpotNumber);
 
     @Query(
         value = 

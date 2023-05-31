@@ -45,6 +45,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
             }
 
             UserToken userToken = jwtTokenProvider.validate(jwt);
+            
+            if (userToken == null) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
 
             AbstractAuthenticationToken authenticationToken = 
                 new UsernamePasswordAuthenticationToken(userToken, null, AuthorityUtils.NO_AUTHORITIES);
