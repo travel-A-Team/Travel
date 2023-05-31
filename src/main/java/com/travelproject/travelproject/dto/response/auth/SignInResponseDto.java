@@ -1,6 +1,7 @@
 package com.travelproject.travelproject.dto.response.auth;
 
 import com.travelproject.travelproject.dto.response.ResponseDto;
+import com.travelproject.travelproject.entity.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,10 +16,15 @@ public class SignInResponseDto extends ResponseDto {
     private int expirationDate;
 
 
-    public SignInResponseDto(String token) {
+    public SignInResponseDto(UserEntity userEntity, String token) {
         super("SU", "Success");
         this.token = token;
         this.expirationDate = 3600;
     }
 
+    public SignInResponseDto(String token) {
+        super("SU", "Success");
+        this.token = token;
+        this.expirationDate = 3600;
+    }
 }

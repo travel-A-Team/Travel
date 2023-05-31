@@ -33,4 +33,6 @@ public interface LikeyRepository extends JpaRepository<LikeyEntity, LikeyPk>{
     )
     public LikeyEntity getLikey(int productNumber);
     
+    public List<LikeyEntity> findByUserEmail(String userEmail);
+
 }
