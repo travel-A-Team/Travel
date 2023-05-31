@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.travelproject.travelproject.dto.request.auth.FindEmailRequestDto;
-import com.travelproject.travelproject.dto.request.auth.PasswordChangeRequestDto;
+import com.travelproject.travelproject.dto.request.auth.GetFindEmailRequestDto;
+import com.travelproject.travelproject.dto.request.auth.PatchPasswordChangeRequestDto;
 import com.travelproject.travelproject.dto.request.auth.SignUpRequestDto;
-import com.travelproject.travelproject.dto.response.myPage.UserProfileResponseDto;
+import com.travelproject.travelproject.dto.response.myPage.GetUserProfileResponseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,19 +43,19 @@ public class UserEntity {
     }
 
 
-    public UserEntity(FindEmailRequestDto dto) {
+    public UserEntity(GetFindEmailRequestDto dto) {
         this.name = dto.getUserName();
         this.phoneNumber = dto.getUserPhonenumber();
     }
 
-    public UserEntity(UserProfileResponseDto dto) {
+    public UserEntity(GetUserProfileResponseDto dto) {
         this.name = dto.getName();
         this.email = dto.getEmail();
         this.birth = dto.getBirth();
         this.phoneNumber = dto.getPhoneNumber();
     }
 
-    public UserEntity(PasswordChangeRequestDto dto) {
+    public UserEntity(PatchPasswordChangeRequestDto dto) {
         this.password = dto.getOldPassword();
     }
     

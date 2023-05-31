@@ -8,9 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
-import com.travelproject.travelproject.dto.request.auth.PasswordChangeRequestDto;
+import com.travelproject.travelproject.dto.request.auth.PatchPasswordChangeRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.dto.response.auth.PasswordChangeResponseDto;
 import com.travelproject.travelproject.entity.UserEntity;
 import com.travelproject.travelproject.repository.UserRepository;
 import com.travelproject.travelproject.service.PasswordChangeService;
@@ -26,9 +25,7 @@ public class PasswordChangeServiceImplement implements PasswordChangeService {
 
     
     @Override
-    public ResponseEntity<ResponseDto> changePassword(String email, PasswordChangeRequestDto dto) {
-
-        PasswordChangeResponseDto body = null;
+    public ResponseEntity<ResponseDto> changePassword(String email, PatchPasswordChangeRequestDto dto) {
 
         // 사용자 이메일을 기반으로 UserEntity를 조회
         UserEntity user = userRepository.findByEmail(email);
@@ -51,7 +48,7 @@ public class PasswordChangeServiceImplement implements PasswordChangeService {
         userRepository.save(user);
 
         
-        return ResponseEntity.status(HttpStatus.OK).body(body);
+        return ResponseMessage.SUCCESS;
     }
 }
 

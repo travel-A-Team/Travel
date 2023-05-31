@@ -51,6 +51,9 @@ public interface ResponseMessage {
     public static final ResponseEntity<ResponseDto> NOT_EXIST_TRANSACTION_ID 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NTI", "Non-Existent Transaction Id"));
 
+    public static final ResponseEntity<ResponseDto> NOT_EXIST_USER
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NEU", "Non-Existent User"));
+
     public static final ResponseEntity<ResponseDto> PASSWORDCHECK_ERROR
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("PM", "Password Mismatch"));
 
@@ -61,7 +64,7 @@ public interface ResponseMessage {
     = ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDto("NEP", "Non-Existent Phone Number"));
 
     public static final ResponseEntity<ResponseDto> NOT_EQUAL_PASSWORD
-    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NEU", "Non-Existent User Password"));
+    = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("NEUP", "Non-Existent User Password"));
 
     public static final ResponseEntity<ResponseDto> SIGN_IN_FAILED 
     = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseDto("SF", "Sign In Failed"));

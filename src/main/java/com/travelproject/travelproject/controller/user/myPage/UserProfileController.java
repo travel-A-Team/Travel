@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.travelproject.travelproject.common.constant.RequestPattern;
 import com.travelproject.travelproject.dto.response.myPage.GetProductLikeResponseDto;
-import com.travelproject.travelproject.dto.response.myPage.UserProfileResponseDto;
+import com.travelproject.travelproject.dto.response.myPage.GetUserProfileResponseDto;
 import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.service.MyPageService;
 
@@ -22,10 +22,10 @@ public class UserProfileController {
     private final MyPageService myPageService;
 
     @GetMapping("/profile")
-    public ResponseEntity<? super UserProfileResponseDto> getUserProfile(
+    public ResponseEntity<? super GetUserProfileResponseDto> getUserProfile(
         @AuthenticationPrincipal UserToken userToken
     ) {
-        ResponseEntity<? super UserProfileResponseDto> response = myPageService.getUserProfile(userToken);
+        ResponseEntity<? super GetUserProfileResponseDto> response = myPageService.getUserProfile(userToken);
         return response;
     }
 

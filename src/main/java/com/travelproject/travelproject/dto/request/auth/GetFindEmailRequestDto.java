@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class FindEmailRequestDto {
+public class GetFindEmailRequestDto {
     
     @NotBlank
     private String userName;

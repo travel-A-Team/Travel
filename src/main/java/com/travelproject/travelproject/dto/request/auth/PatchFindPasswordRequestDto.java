@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class FindPasswordRequestDto {
+public class PatchFindPasswordRequestDto {
     
     @NotBlank
     @Email

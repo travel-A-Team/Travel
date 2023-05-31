@@ -9,11 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
-import com.travelproject.travelproject.dto.request.auth.FindEmailRequestDto;
+import com.travelproject.travelproject.dto.request.auth.GetFindEmailRequestDto;
 import com.travelproject.travelproject.dto.request.auth.SignInRequestDto;
 import com.travelproject.travelproject.dto.request.auth.SignUpRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
-import com.travelproject.travelproject.dto.response.auth.FindEmailResponseDto;
+import com.travelproject.travelproject.dto.response.auth.GetFindEmailResponseDto;
 import com.travelproject.travelproject.dto.response.auth.SignInResponseDto;
 import com.travelproject.travelproject.entity.UserEntity;
 import com.travelproject.travelproject.provider.JwtTokenProvider;
@@ -41,10 +41,10 @@ public class AuthServiceImplement implements AuthService{
     
     // 이메일 찾기
     @Override
-    public ResponseEntity<ResponseDto> getUserEmail (FindEmailRequestDto dto) {
+    public ResponseEntity<ResponseDto> getUserEmail (GetFindEmailRequestDto dto) {
         String userName = dto.getUserName();
         String userPhoneNumber = dto.getUserPhonenumber();
-        FindEmailResponseDto body = null;
+        GetFindEmailResponseDto body = null;
 
         try {
             // 존재하지 않는 이름
@@ -57,7 +57,7 @@ public class AuthServiceImplement implements AuthService{
 
             UserEntity findEntity = userRepository.findByNameAndPhoneNumber(userName, userPhoneNumber);
 
-            body = new FindEmailResponseDto(findEntity.getEmail());
+            body = new GetFindEmailResponseDto(findEntity.getEmail());
         
         } catch (Exception exception) {
             exception.printStackTrace();
