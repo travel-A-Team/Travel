@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.travelproject.travelproject.filter.JwtAuthenticationFilter;
 
-//# authenticationEntryPoint안에 들어갈 클래스(여기에서만 쓰임)
 class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
@@ -29,10 +28,10 @@ class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write("{\"code\": \"AF\", \"message\": \"Authentication Failed\"}");
-        // @ "를 문자열로 인식하기 위해
     }
 
 }
+
 
 @EnableWebSecurity
 @Configuration

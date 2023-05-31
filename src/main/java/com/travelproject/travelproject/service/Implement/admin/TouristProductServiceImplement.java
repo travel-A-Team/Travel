@@ -156,7 +156,7 @@ public class TouristProductServiceImplement implements TouristProductService {
         
         boolean adminRole = UserTokenAdminRoleValidation.adminRoleValidation(userToken);
         if (!adminRole) return ResponseMessage.NO_PERMISSIONS;
-
+        
         List<PostTouristProductDaliyTravelDateRequestDto> daliyTravelDateDtoList = dto.getDaliyTravelDateList();
         StringBuffer stringBuffer = new StringBuffer();
 
@@ -173,14 +173,21 @@ public class TouristProductServiceImplement implements TouristProductService {
 
         try {
 
+            for (PostTouristProductDaliyTravelDateRequestDto daliyTravelDateDto: daliyTravelDateDtoList) {
+                int touristSpotNumber = daliyTravelDateDto.getTouristSpotNumber();
+    
+                boolean existedTouristSpotNumber = touristSpotRepository.existsByTouristSpotNumber(touristSpotNumber);
+                if (!existedTouristSpotNumber) return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
+            }
+
             TouristProductEntity touristProductEntity = new TouristProductEntity(productTourRoute, productImageUrl, dto);
             touristProductRepository.save(touristProductEntity);
     
             int productNumber = touristProductEntity.getProductNumber();
     
     
-            for (PostTouristProductDaliyTravelDateRequestDto daliTravelDateDto: daliyTravelDateDtoList) {
-                DailyTravelDateEntity dailyTravelDateEntity = new DailyTravelDateEntity(productNumber, daliTravelDateDto);
+            for (PostTouristProductDaliyTravelDateRequestDto daliyTravelDateDto: daliyTravelDateDtoList) {
+                DailyTravelDateEntity dailyTravelDateEntity = new DailyTravelDateEntity(productNumber, daliyTravelDateDto);
                 dailyTravelDateRepository.save(dailyTravelDateEntity);
             }
             
@@ -256,12 +263,11 @@ public class TouristProductServiceImplement implements TouristProductService {
         String productTotalSchedule = dto.getProductTotalSchedule();
         int productMoney = dto.getProductMoney();
         List<PatchTouristProductDaliyTravelDateRequestDto> daliyTravelDateDtoList = dto.getDailyTravelDateList();
-
-        
         StringBuffer stringBuffer = new StringBuffer();
         String productImageUrl;
         
 
+        
         for (PatchTouristProductDaliyTravelDateRequestDto daliyTravelDate: daliyTravelDateDtoList) {
             String touristSpotName = daliyTravelDate.getWriteTouristSpotName();
             stringBuffer.append(" → " + touristSpotName);
@@ -280,8 +286,16 @@ public class TouristProductServiceImplement implements TouristProductService {
 
 
         try {
+
             TouristProductEntity touristProductEntity = touristProductRepository.findByProductNumber(productNumber);
             if (touristProductEntity == null) return ResponseMessage.NOT_EXIST_TOURIST_PRODUCT_NUMBER;
+
+            for (PatchTouristProductDaliyTravelDateRequestDto daliyTravelDateDto: daliyTravelDateDtoList) {
+                int touristSpotNumber = daliyTravelDateDto.getTouristSpotNumber();
+    
+                boolean existedTouristSpotNumber = touristSpotRepository.existsByTouristSpotNumber(touristSpotNumber);
+                if (!existedTouristSpotNumber) return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
+            }
 
             touristProductEntity.setTitle(productTitle);
             touristProductEntity.setTotalSchedule(productTotalSchedule);
