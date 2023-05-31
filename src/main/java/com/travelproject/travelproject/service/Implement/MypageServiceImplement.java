@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.response.myPage.GetPaymentListResponseDto;
 import com.travelproject.travelproject.dto.response.myPage.GetProductLikeResponseDto;
-import com.travelproject.travelproject.dto.response.myPage.UserProfileResponseDto;
+import com.travelproject.travelproject.dto.response.myPage.GetUserProfileResponseDto;
 import com.travelproject.travelproject.entity.LikeyEntity;
 import com.travelproject.travelproject.entity.PaymentEntity;
 import com.travelproject.travelproject.entity.TouristProductEntity;
@@ -60,16 +60,16 @@ public class MypageServiceImplement implements MyPageService {
     }
     
     @Override
-    public ResponseEntity<? super UserProfileResponseDto> getUserProfile(UserToken userToken) {
+    public ResponseEntity<? super GetUserProfileResponseDto> getUserProfile(UserToken userToken) {
         if(userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
         String userEmail = userToken.getEmail();
-        UserProfileResponseDto body = null;
+        GetUserProfileResponseDto body = null;
 
         try {
             UserEntity userEntity = userRepository.findByEmail(userEmail);
             if(userEntity == null) return ResponseMessage.NOT_EXIST_USER_EMAIL;
 
-            body = new UserProfileResponseDto(userEntity);
+            body = new GetUserProfileResponseDto(userEntity);
 
 
         } catch (Exception exception) {

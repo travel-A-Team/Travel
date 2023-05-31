@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class PasswordChangeRequestDto {
+public class PatchPasswordChangeRequestDto {
     
     @NotBlank
     @Length(min = 8, max = 20)

@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 
-public class FindEmailResponseDto extends ResponseDto{
+public class GetFindEmailResponseDto extends ResponseDto{
     
     private String userEmail;
 
-    public FindEmailResponseDto(String email) {
+    public GetFindEmailResponseDto(String email) {
         super("SU", "Success");
         this.userEmail = email;
     }
