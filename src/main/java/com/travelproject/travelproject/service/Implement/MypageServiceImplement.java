@@ -59,6 +59,7 @@ public class MypageServiceImplement implements MyPageService {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
     
+    //* 유저 프로필 조회
     @Override
     public ResponseEntity<? super GetUserProfileResponseDto> getUserProfile(UserToken userToken) {
         if(userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
