@@ -54,9 +54,5 @@ public class UserEntity {
         this.birth = dto.getBirth();
         this.phoneNumber = dto.getPhoneNumber();
     }
-
-    public UserEntity(PatchPasswordChangeRequestDto dto) {
-        this.password = dto.getOldPassword();
-    }
     
 }

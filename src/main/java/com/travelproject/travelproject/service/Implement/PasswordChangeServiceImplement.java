@@ -1,7 +1,5 @@
 package com.travelproject.travelproject.service.Implement;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +9,7 @@ import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.request.auth.PatchPasswordChangeRequestDto;
 import com.travelproject.travelproject.dto.response.ResponseDto;
 import com.travelproject.travelproject.entity.UserEntity;
+import com.travelproject.travelproject.provider.UserToken;
 import com.travelproject.travelproject.repository.UserRepository;
 import com.travelproject.travelproject.service.PasswordChangeService;
 
@@ -25,16 +24,15 @@ public class PasswordChangeServiceImplement implements PasswordChangeService {
 
     
     @Override
-    public ResponseEntity<ResponseDto> changePassword(String email, PatchPasswordChangeRequestDto dto) {
+    public ResponseEntity<ResponseDto> changePassword(UserToken userToken, PatchPasswordChangeRequestDto dto) {
 
-        // 사용자 이메일을 기반으로 UserEntity를 조회
-        UserEntity user = userRepository.findByEmail(email);
-        if (user == null) {
-            return ResponseMessage.NOT_EXIST_USER_EMAIL;
-        }
+        if (userToken == null) return ResponseMessage.NOT_EXIST_USER_TOKEN;
+
+        String userEmail = userToken.getEmail();
+        UserEntity user = userRepository.findByEmail(userEmail);
 
         // 이전 비밀번호 확인
-        if (!passwordEncoder.matches(dto.getOldPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(dto.getUserPassword(), user.getPassword())) {
             return ResponseMessage.NOT_EQUAL_PASSWORD;
         }
 

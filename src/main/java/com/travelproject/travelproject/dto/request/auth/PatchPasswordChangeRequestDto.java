@@ -16,7 +16,7 @@ public class PatchPasswordChangeRequestDto {
     
     @NotBlank
     @Length(min = 8, max = 20)
-    private String oldPassword;
+    private String userPassword;
 
     @NotBlank
     private String newPassword;

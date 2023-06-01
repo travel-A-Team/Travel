@@ -33,5 +33,5 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
      public UserEntity findByEmailAndPhoneNumber(String email, String phoneNumner);
  
      //! 비밀번호 변경 시 사용
-     public UserEntity findByPassword(String password);
+     public UserEntity findByPassword(String oldPassword);
 }
