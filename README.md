@@ -81,7 +81,7 @@
 * 목록 및 상세 조회
 
 ## 📃 개발 문서
- >[1. ERD 그래프](https://www.notion.so/ERD-3126a4efbb894a73a660bb9db2539b22)<br/>
+ >[1. ERD 그래프](https://www.figma.com/file/8EvZmDsIEGZoXFUfHU2syL/DBML-Table-(Community)?type=whiteboard&t=8NWWPPDTmQYexMxI-1)<br/>
  [2. 시스템 개요](https://www.notion.so/b8b4769a937f4fda9a947db82b3a42ff) <br/>
  [3. 개발자원 명세서](https://www.notion.so/7139ca71e052434eac0805cc02d07b9a)   
  [4. 요구사항 명세서](https://www.notion.so/cc03bc5b995a4b63bbbcacf5540e0d89)   
