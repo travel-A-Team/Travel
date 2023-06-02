@@ -86,5 +86,4 @@
  [3. 개발자원 명세서](https://www.notion.so/7139ca71e052434eac0805cc02d07b9a)   
  [4. 요구사항 명세서](https://www.notion.so/cc03bc5b995a4b63bbbcacf5540e0d89)   
  [5. 인프라스트럭처 다이어그램]()   
- [6. DB 다이어그램]()   
- [7. 인터페이스 명세서](https://www.notion.so/API-161669ae6d4e46bb9c3d37dd1059c675)   
+ [6. 인터페이스 명세서](https://www.notion.so/API-161669ae6d4e46bb9c3d37dd1059c675)   
