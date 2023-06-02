@@ -1,7 +1,7 @@
 # 🍀 SpringBoot-Project
 국내 여행지 예매 및 일정 관리 시스템
 
-## 🔎 Skills
+## 🔎 사용 기술
 <div>
   <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white"/>
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white"/>
@@ -15,13 +15,19 @@
   <img src="https://img.shields.io/badge/MYSQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
 </div>
 
-## ⚙️ Tool
+## ⚙️ 개발 환경
 <div>
   <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white"/>
 </div>
 
 ## 📖 프로젝트 소개
 국내 여행지 코스, 추천 여행지 관리를 효율적으로 수행하고, 사용자들이 쉽게 여행지 코스 예매, 여행지 추천 장소 보기 및 여행 일정 작성을 할 수 있도록 하는 사이트입니다.
+
+## 🧑‍🤝‍🧑 멤버 구성
+* 정하은 : 관리자 페이지, 결제 서버 및 데이터베이스 설계, 구축 및 관리
+* 김종학 : 플래너, 메인 페이지 서버 및 데이터베이스 구축 및 관리
+* 최하록 : 여행지 추천, 여행지 상품(코스), 공지사항, 문의사항 서버 및 데이터베이스 구축 및 관리
+* 이류관 : 회원가입, 로그인, 마이페이지 작업 및 테스트
 
 ## 🕰️ 개발 기간
 * 23.04.19 - 23.06.07 <br/><br/>
@@ -63,7 +69,7 @@
 * 목록 및 상세 조회
 * 지역, 이름 기준 추천 여행지 조회
 
-#### 여행지 상품
+#### 여행지 상품(코스)
 * 목록 및 상세 조회
 * 이름 기준 상품 목록 조회
 * 좋아요 누르기 및 취소 기능
