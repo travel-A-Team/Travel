@@ -18,6 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetTouristProductResponseDto extends ResponseDto {
+    private int productNumber;
     private String productTitle;
     private String productTourRoute;
     private int productMoney;
@@ -29,6 +30,7 @@ public class GetTouristProductResponseDto extends ResponseDto {
             (TouristProductEntity touristProductEntity, ProductResultSet productResultSet, 
             List<DailyResultSet> dailyResultSet) {
         super("SU", "SUCCESS");
+        this.productNumber = touristProductEntity.getProductNumber();
         this.productTitle=touristProductEntity.getTitle();
         this.productTourRoute=touristProductEntity.getTourRoute();
         this.productMoney=touristProductEntity.getMoney();
