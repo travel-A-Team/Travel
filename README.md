@@ -88,8 +88,8 @@
 
 ## 📃 개발 문서
  >[1. ERD 그래프](https://www.figma.com/file/8EvZmDsIEGZoXFUfHU2syL/DBML-Table-(Community)?type=whiteboard&t=8NWWPPDTmQYexMxI-1)<br/>
- [2. 시스템 개요](https://www.notion.so/b8b4769a937f4fda9a947db82b3a42ff) <br/>
- [3. 개발자원 명세서](https://www.notion.so/7139ca71e052434eac0805cc02d07b9a)   
- [4. 요구사항 명세서](https://www.notion.so/cc03bc5b995a4b63bbbcacf5540e0d89)   
- [5. 인프라스트럭처 다이어그램]()   
- [6. 인터페이스 명세서](https://www.notion.so/API-161669ae6d4e46bb9c3d37dd1059c675)   
+ [2. 시스템 개요](https://bristle-astrodon-113.notion.site/b8b4769a937f4fda9a947db82b3a42ff?pvs=4) <br/>
+ [3. 개발자원 명세서](https://bristle-astrodon-113.notion.site/7139ca71e052434eac0805cc02d07b9a?pvs=4)   
+ [4. 요구사항 명세서](https://bristle-astrodon-113.notion.site/cc03bc5b995a4b63bbbcacf5540e0d89?pvs=4)   
+ [5. 인프라스트럭처 다이어그램](https://bristle-astrodon-113.notion.site/4eeafb15587d4b83a8deff95e305385f?pvs=4)   
+ [6. 인터페이스 명세서](https://bristle-astrodon-113.notion.site/API-161669ae6d4e46bb9c3d37dd1059c675?pvs=4)   
