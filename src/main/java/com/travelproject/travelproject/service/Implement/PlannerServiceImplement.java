@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.travelproject.travelproject.common.constant.ResponseMessage;
 import com.travelproject.travelproject.dto.request.plannerBoard.PatchPlannerBoardRequestDto;
@@ -28,8 +29,6 @@ import com.travelproject.travelproject.repository.RegionRepository;
 import com.travelproject.travelproject.repository.TouristSpotRepository;
 import com.travelproject.travelproject.repository.UserRepository;
 import com.travelproject.travelproject.service.PlannerService;
-
-
 
 @Service
 public class PlannerServiceImplement implements PlannerService {
@@ -100,9 +99,11 @@ public class PlannerServiceImplement implements PlannerService {
             }
 
             String totalPlannerTravelSchedule = minDate + " ~ " + maxDate;
-
+            TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(
+                    dto.getPlannerTravelSpotList().get(0).getTouristSpotWriteTouristSpotNumber());
+            String imageUrl = touristSpotEntity.getImageUrl();
             PlannerEntity plannerEntity = new PlannerEntity(plannerUserEmail, dto, plannerTourRouteCollection,
-                    totalPlannerTravelSchedule);
+                    totalPlannerTravelSchedule, imageUrl);
             plannerBoardRepository.save(plannerEntity);
             stringBuilder.setLength(0);
 
@@ -112,7 +113,7 @@ public class PlannerServiceImplement implements PlannerService {
                 int touristSpotNumber = dto.getPlannerTravelSpotList().get(count)
                         .getTouristSpotWriteTouristSpotNumber();
                 int sequence = dto.getPlannerTravelSpotList().get(count).getSequence();
-                TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(touristSpotNumber);
+                touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(touristSpotNumber);
 
                 if (touristSpotEntity == null)
                     return ResponseMessage.NOT_EXIST_WRITE_TOURIST_SPOT_NUMBER;
@@ -143,7 +144,7 @@ public class PlannerServiceImplement implements PlannerService {
 
             List<RegionEntity> regionEntities = regionRepository.findAll();
             List<TouristSpotEntity> touristSpotEntities = touristSpotRepository.getList();
-            
+
             body = new GetPlannerWriteListResponseDto(regionEntities, touristSpotEntities);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -250,11 +251,13 @@ public class PlannerServiceImplement implements PlannerService {
     @Override
     public ResponseEntity<ResponseDto> patchPlannerBoard(UserToken userToken, PatchPlannerBoardRequestDto dto) {
 
+        String imageUrl;
         int plannerNumber = dto.getPlannerNumber();
         String plannerTitle = dto.getPlannerTitle();
         int plannerMoney = dto.getPlannerMoney();
         int plannerSpotListSize = dto.getPlannerTravelSpotList().size();
 
+        int plannerDailySpotNumber;
         int touristSpotWriteTouristSpotNumber;
         String plannerTravelDate;
         String writeImageUrl;
@@ -270,7 +273,7 @@ public class PlannerServiceImplement implements PlannerService {
             String plannerUserEmail = userToken.getEmail();
             PlannerEntity plannerEntity = plannerBoardRepository.findByPlannerNumber(plannerNumber);
             if (plannerEntity == null) {
-                return ResponseMessage.NOT_EXIST_QUESTION_BOARD_NUMBER;
+                return ResponseMessage.NOT_EXIST_PLANNER_NUMBER;
             }
 
             boolean existedUserEmail = userRepository.existsByEmail(plannerUserEmail);
@@ -312,7 +315,10 @@ public class PlannerServiceImplement implements PlannerService {
                 }
             }
             plannerTourRouteCollection = stringBuilder.toString();
-
+            TouristSpotEntity touristSpotEntity = touristSpotRepository.findByTouristSpotNumber(
+                    dto.getPlannerTravelSpotList().get(0).getTouristSpotWriteTouristSpotNumber());
+            imageUrl = touristSpotEntity.getImageUrl();
+            plannerEntity.setImageUrl(imageUrl);
             plannerEntity.setTitle(plannerTitle);
             plannerEntity.setTotalTravelSchedule(totalPlannerTravelSchedule);
             plannerEntity.setMoney(plannerMoney);
@@ -325,29 +331,33 @@ public class PlannerServiceImplement implements PlannerService {
                     .findByPlannerNumber(plannerEntity.getPlannerNumber());
 
             for (int count = 0; count < plannerSpotListSize; count++) {
+                plannerDailySpotNumber = dto.getPlannerTravelSpotList().get(count)
+                        .getPlannerDailySpotNumber();
                 touristSpotWriteTouristSpotNumber = dto.getPlannerTravelSpotList().get(count)
                         .getTouristSpotWriteTouristSpotNumber();
+                touristSpotEntity = touristSpotRepository
+                        .findByTouristSpotNumber(touristSpotWriteTouristSpotNumber);
                 plannerTravelDate = dto.getPlannerTravelSpotList().get(count).getPlannerTravelDate();
-                writeImageUrl = dto.getPlannerTravelSpotList().get(count).getWriteImageUrl();
-                writeTouristSpotName = dto.getPlannerTravelSpotList().get(count).getWriteTouristSpotName();
-                writePlannerAddress = dto.getPlannerTravelSpotList().get(count).getWritePlannerAddress();
+                writeImageUrl = touristSpotEntity.getImageUrl();
+                writeTouristSpotName = touristSpotEntity.getTouristSpotName();
+                writePlannerAddress = touristSpotEntity.getTouristSpotAddress();
                 sequence = dto.getPlannerTravelSpotList().get(count).getSequence();
 
                 if (count < plannerDailyEntities.size()) {
-                    PlannerDailyTravelDateEntity plannerDailyTravelDateEntity = plannerDailyEntities.get(count);
-                    plannerDailyTravelDateEntity
-                            .setTouristSpotNumber(touristSpotWriteTouristSpotNumber);
-                    plannerDailyTravelDateEntity.setTravelDate(plannerTravelDate);
-                    plannerDailyTravelDateEntity.setTouristSpotImageUrl(writeImageUrl);
-                    plannerDailyTravelDateEntity.setTouristSpotName(writeTouristSpotName);
-                    plannerDailyTravelDateEntity.setTouristSpotAddress(writePlannerAddress);
-                    plannerDailyTravelDateEntity.setSequence(sequence);
-                    plannerDailyTravelDateRepository.save(plannerDailyTravelDateEntity);
+                    plannerDailyTravelDateRepository.updatePlannerDaily(touristSpotWriteTouristSpotNumber,
+                            plannerTravelDate, writeImageUrl, writeTouristSpotName, writePlannerAddress, sequence,
+                            plannerNumber, plannerDailySpotNumber);
                 } else {
                     PlannerDailyTravelDateEntity addPlannerDailyTravelDateEntity = new PlannerDailyTravelDateEntity(dto,
                             touristSpotWriteTouristSpotNumber, plannerTravelDate, writeImageUrl, writeTouristSpotName,
                             writePlannerAddress, sequence);
                     plannerDailyTravelDateRepository.save(addPlannerDailyTravelDateEntity);
+                }
+            }
+            if (dto.getDeleteDailySpotNumberList() != null) {
+                for (int count = 0; count < dto.getDeleteDailySpotNumberList().size(); count++) {
+                    int dailyNumber = dto.getDeleteDailySpotNumberList().get(count).getPlannerDailySpotNumber();
+                    plannerDailyTravelDateRepository.deleteByPlannerDailyNumber(dailyNumber);
                 }
             }
 

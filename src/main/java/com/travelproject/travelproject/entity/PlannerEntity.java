@@ -28,9 +28,9 @@ public class PlannerEntity {
     private String tourRoute;
     private int money;
 
-    public PlannerEntity(String plannerUserEmail, PostPlannerBoardRequestDto dto, String plannerTourRouteCollection, String totalPlannerTravelSchedule) {
+    public PlannerEntity(String plannerUserEmail, PostPlannerBoardRequestDto dto, String plannerTourRouteCollection, String totalPlannerTravelSchedule, String imageUrl) {
         this.userEmail = plannerUserEmail;
-        this.imageUrl = dto.getPlannerImageUrl();
+        this.imageUrl = imageUrl;
         this.title = dto.getPlannerTitle();
         this.totalTravelSchedule = totalPlannerTravelSchedule;
         this.tourRoute = plannerTourRouteCollection;

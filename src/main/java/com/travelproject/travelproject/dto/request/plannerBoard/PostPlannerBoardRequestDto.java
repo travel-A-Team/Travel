@@ -23,8 +23,6 @@ public class PostPlannerBoardRequestDto extends ResponseDto {
     private String plannerTitle;
     @NotNull
     private Integer plannerMoney;
-    @NotBlank
-    private String plannerImageUrl;
     @NotNull
     private List<PostPlannerTravelSpotRequestDto> plannerTravelSpotList;
 }
