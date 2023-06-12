@@ -23,6 +23,9 @@ public interface PlannerDailyTravelDateRepository extends JpaRepository<PlannerD
     @Transactional
     void deleteByPlannerNumber(int plannerNumber);
 
+    @Transactional
+    void deleteByPlannerDailyNumber(int plannerDailyNumber);
+
 
     @Modifying
     @Transactional
@@ -39,4 +42,23 @@ public interface PlannerDailyTravelDateRepository extends JpaRepository<PlannerD
         public int updateTouristSpot(String touristSpotImageUrl, String touristSpotName, String touristSpotAddress, int touristSpotNumber);
 
         public boolean existsByTouristSpotNumber(int touristSpotNumber);
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query(
+        value = 
+        "UPDATE " +
+        "Plannerdailytraveldate SET " +
+        "tourist_spot_number = ?," +
+        "travel_date = ?," +
+        "tourist_spot_image_url = ?," +
+        "tourist_spot_name = ?," +
+        "tourist_spot_address = ?," +
+        "sequence = ? " +
+        "WHERE planner_number = ? " +
+        "AND planner_daily_number = ?",
+        nativeQuery = true
+        )
+        public int updatePlannerDaily(int touristSpotNumber, String travelDate, String spotImageUrl, String spotName, String spotAddress, int sequence, int plannerNumber, int plannerDailyNuber);
+    
 }

@@ -11,16 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatchPlannerTravelSpotRequestDto {
+    private int plannerDailySpotNumber;
     @NotNull
     private int touristSpotWriteTouristSpotNumber;
     @NotBlank
     private String plannerTravelDate;
     @NotBlank
-    private String writeImageUrl;
-    @NotBlank
     private String writeTouristSpotName;
-    @NotBlank
-    private String writePlannerAddress;
     @NotBlank
     private int sequence;
 }
